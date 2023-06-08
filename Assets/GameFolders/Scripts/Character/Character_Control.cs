@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Timers;
+using UnityEngine.InputSystem;
 
 public class Character_Control : MonoBehaviour
 {
@@ -35,8 +37,6 @@ public class Character_Control : MonoBehaviour
         _animator = GetComponent<Animator>();
         _transform = GetComponent<Transform>();
         cursor();
-
-
     }
 
     private void OnDrawGizmosSelected()
@@ -49,6 +49,12 @@ public class Character_Control : MonoBehaviour
 
     void Update()
     {
+        if(speed < 0.1f && grounded)
+        {
+
+        }
+
+
         if (grounded)
         {
             _animator.SetBool("Grounded", true);
@@ -89,7 +95,7 @@ public class Character_Control : MonoBehaviour
 
             _characterControl.Move(movedtoirection.normalized * speed * Time.deltaTime);
 
-            if (Input.GetButton("Fire1"))
+            if (Keyboard.current.leftShiftKey.isPressed)
             {
                 _characterControl.Move(movedtoirection.normalized * (speed * 2) * Time.deltaTime);
 
@@ -101,17 +107,23 @@ public class Character_Control : MonoBehaviour
                 _animator.SetBool("Running", false);
             }
 
+            if (Input.GetButtonDown("Jump") && grounded)
+            {
+                jump();
+            }
+
         }
         else
         {
             _animator.SetFloat("Speed", 0f);
         }
 
-
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump();
+
         }
+
     }
 
     void cursor()
@@ -126,5 +138,13 @@ public class Character_Control : MonoBehaviour
 
         _animator.SetBool("Jump", true);
 
+        StartCoroutine(JumpTimeOut());
+    }
+
+    IEnumerator JumpTimeOut()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        _animator.SetBool("Jump", false);
     }
 }
