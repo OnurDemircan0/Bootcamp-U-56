@@ -3,33 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
+using StarterAssets;
+using UnityEngine.UI;
+
 
 public class Aim : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] float AimSensitivity;
+    [SerializeField] float NormalSensitivity;
+    [SerializeField] RawImage CrossHair;
+    [SerializeField] LayerMask AimRayLayerMask;
+    [SerializeField] GameObject RayCastDebug;
 
-    public bool aim;
 
-    public void OnAim(InputValue value)
+    StarterAssetsInputs assetsInputs;
+    ThirdPersonController thirdPerson;
+    private void Start()
     {
-        AimInput(value.isPressed);  //This function checks if the Aim Value is pressed and sends that result to the AimInput Function
-        Debug.Log("Pressed");
-    }
-    
-    public void AimInput(bool newAimState) //This Function sets the aim bool above, to the new AimState we have give
-    {
-        aim = newAimState; 
+        assetsInputs = GetComponent<StarterAssetsInputs>();
+        thirdPerson = GetComponent<ThirdPersonController>();
     }
 
     private void Update()
     {
-        if(aim)
+        if(assetsInputs.aim)
         {
             virtualCamera.gameObject.SetActive(true);
+            thirdPerson.SetSensitivity(AimSensitivity);
+            CrossHair.gameObject.SetActive(true);
+            RayCastCrossHair();
         }
         else
         {
             virtualCamera.gameObject.SetActive(false);
+            thirdPerson.SetSensitivity(NormalSensitivity);
+            CrossHair.gameObject.SetActive(false);
         }
+    }
+
+    void RayCastCrossHair()
+    {
+        Vector2 ScreenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+        Ray ray = Camera.main.ScreenPointToRay(ScreenCenter);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, AimRayLayerMask))
+        { RayCastDebug.transform.position = raycastHit.point; }
     }
 }
