@@ -77,6 +77,10 @@ namespace StarterAssets
 
         public float CameraSensitivity = 1f;
 
+        public bool RotateAim = true;
+
+        public bool IsAim = false;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -263,7 +267,11 @@ namespace StarterAssets
                     RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                if(RotateAim)
+                {
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
+                
             }
 
 
@@ -274,7 +282,7 @@ namespace StarterAssets
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
-            if (_hasAnimator)
+            if (_hasAnimator && !IsAim)
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
@@ -286,6 +294,10 @@ namespace StarterAssets
             CameraSensitivity = NewSensitivity;
         }
 
+        public void SetRotateAim(bool NewRotateAim)
+        {
+            RotateAim = NewRotateAim;
+        }
         private void JumpAndGravity()
         {
             if (Grounded)
