@@ -219,6 +219,14 @@ namespace StarterAssets
 
         private void Move()
         {
+            if(IsAim && (_input.move.x > 0f || _input.move.x < 0f || _input.move.y < 0f))
+            {
+                SprintSpeed = 2.0f;
+            }
+            else
+            {
+                SprintSpeed = 5.335f;
+            }
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 

@@ -89,6 +89,7 @@ public class ThirdPersonShooterController : MonoBehaviour
 
         if(assetsInputs.shoot)
         {
+            animator.SetBool("Shooting", true);
             if(hitTransform != null)
             {
                 if (hitTransform.transform.GetComponent<Hit_Target>() != null)
@@ -101,6 +102,11 @@ public class ThirdPersonShooterController : MonoBehaviour
                     AimIdleTriggered = true;
                 }
             }
+            
+        }
+        else
+        {
+            animator.SetBool("Shooting", false);
         }
 
         // Silahýn Prjectile Atmasý Ýçin
@@ -113,11 +119,25 @@ public class ThirdPersonShooterController : MonoBehaviour
         //    assetsInputs.shoot = false;
         //}
 
-
+        void AimJump()
+        {
+            if (assetsInputs.jump)
+            {
+                animator.SetBool("Jump Aim", true);
+               // animator.SetLayerWeight(2, Mathf.Lerp(animator.GetLayerWeight(2), 1f, Time.deltaTime * 10f));
+            }
+            else if(!assetsInputs.jump)
+            {
+                animator.SetBool("Jump Aim", false);
+               // animator.SetLayerWeight(2, Mathf.Lerp(animator.GetLayerWeight(2), 0f, Time.deltaTime * 10f));
+            }
+            
+        }
         void AýmAnim()
         {
             if(ýsAiming)
             {
+                AimJump();
                 thirdPerson.IsAim = true;
                 animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
                 if (assetsInputs.move.x == 0f && assetsInputs.move.y == 0f)
@@ -125,6 +145,7 @@ public class ThirdPersonShooterController : MonoBehaviour
                     OnWalk = false;
                     OnSprint = false;
                     animator.SetBool("ToMove", false);
+                    animator.SetBool("WalkBackAim", false);
 
                     if (AimWalkTriggered && !OnWalk)
                     {
@@ -141,17 +162,19 @@ public class ThirdPersonShooterController : MonoBehaviour
 
                     }
                 }
-                else if (assetsInputs.sprint && (assetsInputs.move.x > 0f || assetsInputs.move.y > 0f) && !AimSprintTriggered && AimIdleTriggered && !OnWalk && !OnSprint && !AimWalkTriggered)
+                else if (assetsInputs.sprint && (assetsInputs.move.x > 0f || assetsInputs.move.y > 0f) && !AimSprintTriggered && AimIdleTriggered && !OnWalk && !OnSprint && !AimWalkTriggered && thirdPerson.SprintSpeed == 5.335f)
                 {
+                    animator.SetBool("WalkBackAim", false);
                     animator.SetBool("ToMove", false);
                     Debug.Log("Here");
                     SprintAimAnim();
                 }
                 else if (assetsInputs.move.y > 0f)
                 {
+                    animator.SetBool("WalkBackAim", false);
                     animator.SetBool("ToMove", false);
                     OnWalk = true;
-                    if (assetsInputs.sprint)
+                    if (assetsInputs.sprint && thirdPerson.SprintSpeed == 5.335f)
                     {
                         OnSprint = true;
 
@@ -178,9 +201,15 @@ public class ThirdPersonShooterController : MonoBehaviour
                         TriggeredAimWalk();
                     }
                 }
+                else if(assetsInputs.move.y < 0f)
+                {
+                    animator.SetBool("WalkBackAim", true);
+                    animator.SetBool("ToMove", false);
+                }
                 else if (assetsInputs.move.x < 0f || assetsInputs.move.x > 0f)
                 {
                     animator.SetBool("ToMove", true);
+                    animator.SetBool("WalkBackAim", false);
                     if (assetsInputs.move.x < 0f)
                     {
                         animator.SetFloat("AimMove", -1f);
