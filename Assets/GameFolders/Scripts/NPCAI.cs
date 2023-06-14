@@ -7,7 +7,7 @@ public class NPCAI : MonoBehaviour
 {
 
     [SerializeField] private GameObject destinationPoint;
-    private NavMeshAgent _agent;
+    public NavMeshAgent _agent;
     // Start is called before the first frame update
     void Start()
     {
