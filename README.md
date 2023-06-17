@@ -19,7 +19,7 @@ adındaki robotumuz, hastalığa neden olan virüsleri damar yolu üzerinden çe
 * Ürün Hedefi 1: İnsanlara boş zamanlarında eğlenmeleri için anında açıp oynayabilcekleri eğlenceli ve konsept anlamında sağlam
        ve öz bir oyun çıkartmak.
        
-* Ürün Hedefi 2: Oyuncuyu insan vücudu ve anatomisini hakkında basitleştirilmiş ve oyunadığı yerde konu hakkında genel bir 
+* Ürün Hedefi 2: Oyuncuyu insan vücudu ve anatomisini hakkında basitleştirilmiş ve oynadığı yerde konu hakkında genel bir 
        fikir sahibi etmek.
        
 ## Product BackLog Sprint 1
@@ -40,4 +40,28 @@ adındaki robotumuz, hastalığa neden olan virüsleri damar yolu üzerinden çe
 * Daily Scrum: Daily Scrum toplantılarımız Genellikle Discorda sesli kanal üzerinden gerçekleşmiştir. Ama bunun yanında Whatsapp Grubumuzda vardır. [Daily Scrum File](https://drive.google.com/file/d/1482t4A-Iwyq-ha79APHP4zzc_vZ9ZrRc/view?usp=sharing)
 * Sprint Board ScreenShotları: ![Sprnt](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/5c232b71-6154-4a28-bc59-31efea738b09)![BurnDown Chart](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/db2fd445-a74f-4381-9133-f186768fffc2)
 
-* Ürün Durumu: Ekran Görüntüleri:
+* Ürün Durumu: Ekran Görüntüleri:![Germ](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/79b45434-4f82-4d70-861c-90a944db18fd)
+
+![Damar Yolu Surf](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/c0c07b9d-3f10-4729-8768-6e4eae81977e)
+
+
+
+
+https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/de61c189-da5f-4cf6-afc5-890fd537c0da
+
+
+
+
+
+
+
+
+* Sprint Review: Her kişiye atanan görevlerden çoğu verilen sürelerde başarılı bir şekilde bittirilmiştir. Karekter hareketleri tamamlanmış, Enemy AI Scripti hazırlanmış, Damar modelimiz bitmiş ve Surf Mekaniğimiz çalışır biçimdedir.
+
+NOT: Surf Mekaniğinde çıkan geç bir gelişmeden dolayı görev tamamlama süresinde küçük bir aksanma yaşanmıştır.
+
+* Sprint Retrospective:
+* Fikir konusunda kararsızlıklar görevlerde değişimlere neden olmuştur.
+* Fikirlerimiz ve konuştuklarımızda yeterince detaylı olmaz isek yanlış anlaşılmaya neden olacağımız fark edilmiştir.
+* Toplantı ve Daily Scrum için katılamayan olursa kısa notlar ile konuşulan konulardan haberdar etme kararı alınmıştır.
+
