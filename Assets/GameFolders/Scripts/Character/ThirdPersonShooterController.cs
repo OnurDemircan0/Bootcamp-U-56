@@ -6,21 +6,29 @@ using UnityEngine.InputSystem;
 using StarterAssets;
 using UnityEngine.UI;
 
-
 public class ThirdPersonShooterController : MonoBehaviour
 {
+    [Range(-100f, 100f)]
+    public float rotationPercentage;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] float AimSensitivity;
     [SerializeField] float NormalSensitivity;
     [SerializeField] RawImage CrossHair;
     [SerializeField] LayerMask AimRayLayerMask;
     [SerializeField] GameObject RayCastDebug;
+    [SerializeField] GameObject RayCastDebugChild;
     [SerializeField] GameObject pfBulletProjectile;
     [SerializeField] GameObject bulletInstantiateLocation;
     [SerializeField] GameObject VFXhitTarget;
     [SerializeField] GameObject VFXhitOther;
+    [SerializeField] Transform muzzleAim;
+
+    [SerializeField] int DesiredInstanceAmount = 3;
 
     [SerializeField] private float interpolationDuration = 0.3f;
+
+    [SerializeField] private float interpolationDuration2 = 0.15f;
+
     private float interpolationTimer = 0f;
 
     StarterAssetsInputs assetsInputs;
@@ -32,17 +40,44 @@ public class ThirdPersonShooterController : MonoBehaviour
     bool OnWalk;
     bool OnSprint;
     bool AimIdleTriggered;
+    bool IK_on = false;
+    public bool ýsShooting = false;
+
+    int c = 0;
+    int co = 0;
 
     Animator animator;
+
+    AimIK aimIK;
+
+    GameObject[] TargetInstances = null;
+    GameObject[] OtherHitInstances = null;
+
+    private Transform CharacterTransform;
+
+    public float rotationSpeed = 5f;
+    bool functionInProgress = false;
     private void Start()
     {
         assetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPerson = GetComponent<ThirdPersonController>();
         animator = GetComponent<Animator>();
+        aimIK = GetComponent<AimIK>();
+        CharacterTransform = GetComponent<Transform>();
     }
 
     private void Update()
     {
+        if(ýsAiming || ýsShooting)
+        {
+            SetIkWeightON();
+        }
+        else
+        {
+            SetIkWeightOFF();
+        }
+
+
         Vector3 WorldAimPoint = Vector3.zero;
 
         Vector2 ScreenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -52,6 +87,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         {
             WorldAimPoint = raycastHit.point;
             hitTransform = raycastHit.transform;
+            RayCastDebug.transform.position = raycastHit.point;
         }
 
         if (assetsInputs.aim)
@@ -70,6 +106,7 @@ public class ThirdPersonShooterController : MonoBehaviour
             ýsAiming = true;
 
             AýmAnim();
+
         }
 
 
@@ -89,23 +126,82 @@ public class ThirdPersonShooterController : MonoBehaviour
 
         if(assetsInputs.shoot)
         {
+            ýsShooting = true;
             animator.SetBool("Shooting", true);
-            if(hitTransform != null)
+            RotateToBack(RayCastDebug.transform, 80f);
+
+            if (hitTransform != null)
             {
                 if (hitTransform.transform.GetComponent<Hit_Target>() != null)
                 {
-                    Instantiate(VFXhitTarget, raycastHit.point , Quaternion.identity);
+                    if ((TargetInstances == null || TargetInstances.Length < DesiredInstanceAmount))
+                    {
+                        Instantiate(VFXhitTarget, raycastHit.point, Quaternion.identity);
+                        TargetInstances = GameObject.FindGameObjectsWithTag("VFXtarget");
+                    }
+                    else
+                    {
+                        if (c == (DesiredInstanceAmount))
+                        {
+                            c = 0;
+                        
+                        }
+
+                        TargetInstances = GameObject.FindGameObjectsWithTag("VFXtarget");
+
+                        TargetInstances[c].SetActive(false);
+
+                        TargetInstances[c].transform.position = raycastHit.point;
+                        TargetInstances[c].SetActive(true);
+                        c++;
+                    }
                 }
                 else
                 {
-                    Instantiate(VFXhitOther, raycastHit.point , Quaternion.identity);
-                    AimIdleTriggered = true;
+                    if ((OtherHitInstances == null || OtherHitInstances.Length < DesiredInstanceAmount))
+                    {
+                        Instantiate(VFXhitOther, raycastHit.point, Quaternion.identity);
+                        OtherHitInstances = GameObject.FindGameObjectsWithTag("VFXother");
+                    }
+                    else
+                    {
+                        if (co == (DesiredInstanceAmount))
+                        {
+                            co = 0;
+
+                        }
+
+                        OtherHitInstances = GameObject.FindGameObjectsWithTag("VFXother");
+
+                        OtherHitInstances[co].SetActive(false);
+
+                        OtherHitInstances[co].transform.position = raycastHit.point;
+                        OtherHitInstances[co].SetActive(true);
+                        co++;
+                    }
                 }
+                
+
             }
-            
+
+
+            //if(hitTransform != null)
+            //{
+            //    if (hitTransform.transform.GetComponent<Hit_Target>() != null)
+            //    {
+            //        Instantiate(VFXhitTarget, raycastHit.point , Quaternion.identity);
+            //    }
+            //    else
+            //    {
+            //        Instantiate(VFXhitOther, raycastHit.point , Quaternion.identity);
+            //        AimIdleTriggered = true;
+            //    }
+            //}
+
         }
         else
         {
+            ýsShooting = false;
             animator.SetBool("Shooting", false);
         }
 
@@ -166,7 +262,6 @@ public class ThirdPersonShooterController : MonoBehaviour
                 {
                     animator.SetBool("WalkBackAim", false);
                     animator.SetBool("ToMove", false);
-                    Debug.Log("Here");
                     SprintAimAnim();
                 }
                 else if (assetsInputs.move.y > 0f)
@@ -240,7 +335,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         void SprintAimAnimOnWalk()
         {
             interpolationTimer += Time.deltaTime;
-            float t = Mathf.Clamp01(interpolationTimer / interpolationDuration);
+            float t = Mathf.Clamp01(interpolationTimer / (interpolationDuration));
 
             animator.SetFloat("Speed", Mathf.Lerp(0.66f, 1f, t));
 
@@ -273,7 +368,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         void WalkAimAnim()
         {
             interpolationTimer += Time.deltaTime;
-            float t = Mathf.Clamp01(interpolationTimer / interpolationDuration);
+            float t = Mathf.Clamp01(interpolationTimer / (interpolationDuration));
 
             animator.SetFloat("Speed", Mathf.Lerp(0f, 0.66f, t));
 
@@ -291,7 +386,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         void ReturnToWalk()
         {
             interpolationTimer += Time.deltaTime;
-            float t = Mathf.Clamp01(interpolationTimer / interpolationDuration);
+            float t = Mathf.Clamp01(interpolationTimer / (interpolationDuration));
 
             animator.SetFloat("Speed", Mathf.Lerp(1f, 0.66f, t));
 
@@ -327,7 +422,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         void ReturnToIdle()
         {
             interpolationTimer += Time.deltaTime;
-            float t = Mathf.Clamp01(interpolationTimer / interpolationDuration);
+            float t = Mathf.Clamp01(interpolationTimer / (interpolationDuration));
 
             animator.SetFloat("Speed", Mathf.Lerp(0.66f, 0f, t));
 
@@ -345,6 +440,98 @@ public class ThirdPersonShooterController : MonoBehaviour
         {
             animator.SetFloat("Speed", 0.66f);
         }
+    }
+
+    void RotateToBack(Transform Target, float AngleLimit)
+    {
+        Vector3 CharacterDirection = CharacterTransform.forward;
+        Vector3 TargetDirection = Target.position - CharacterTransform.position;
+
+        float TargetAngle = Vector3.Angle(CharacterDirection, TargetDirection);
+        if (TargetAngle > AngleLimit)
+        {
+
+
+            // if(Vector3.Cross(MuzzleDirection, TargetDirection).y >= 0)
+            // {
+            //     while(TargetAngle > 0)
+            //     {
+            //         float rotationAmount = rotationSpeed * Time.deltaTime;
+            //         CharacterTransform.Rotate(Vector3.up, rotationAmount);
+            //         TargetAngle = Vector3.Angle(MuzzleDirection, TargetDirection);
+            //     }
+            // }
+            // else
+            // {
+            //     while(TargetAngle > 0)
+            //     {
+            //         float rotationAmount = rotationSpeed * Time.deltaTime;
+            //         CharacterTransform.Rotate(Vector3.up, -rotationAmount);
+            //         TargetAngle = Vector3.Angle(MuzzleDirection, TargetDirection);
+            //
+            //     }
+            // }
+            //
+            Quaternion targetRotation;
+
+            if (Vector3.Cross(CharacterDirection, TargetDirection).y >= 0)
+            {
+                Debug.Log("OnRight");
+                targetRotation = Quaternion.LookRotation(RayCastDebugChild.transform.position - CharacterTransform.position);
+                targetRotation.x = 0f;
+                targetRotation.z = 0f;
+                rotationSpeed = 2f;
+
+            }
+            else
+            {
+                targetRotation = Quaternion.LookRotation(TargetDirection);
+                targetRotation.x = 0f;
+                targetRotation.z = 0f;
+                rotationSpeed = 0.5f;
+            }
+          
+           Quaternion newRotation = Quaternion.Lerp(CharacterTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+          
+           CharacterTransform.rotation = newRotation;
+        }
+    }
+    void SetIkWeightON()
+    {
+        if(!IK_on)
+        {
+            interpolationTimer += Time.deltaTime;
+            float t = Mathf.Clamp01(interpolationTimer / (interpolationDuration2));
+
+            aimIK.Weight = Mathf.Lerp(0f, 0.8f, t);
+
+            if (t >= 1f)
+            {
+                interpolationTimer = 0f;
+                IK_on = true;
+            }
+
+        }
+        
+    }
+
+    void SetIkWeightOFF()
+    {
+        if(IK_on)
+        {
+            interpolationTimer += Time.deltaTime;
+            float t = Mathf.Clamp01(interpolationTimer / (interpolationDuration));
+
+            aimIK.Weight = Mathf.Lerp(aimIK.Weight, 0f, t);
+
+            if (t >= 1f)
+            {
+                interpolationTimer = 0f;
+                IK_on = false;
+            }
+            
+        }
+       
     }
 
 }
