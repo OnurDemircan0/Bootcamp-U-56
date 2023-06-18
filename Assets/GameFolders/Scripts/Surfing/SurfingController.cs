@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 using PathCreation;
 
@@ -9,13 +10,19 @@ public class SurfingController : MonoBehaviour
 {
     public PathCreator pathCreator;
     public EndOfPathInstruction end;
-    float dstTravelled;
+    [SerializeField] private float dstTravelled;
 
-    [SerializeField] private float startPoint;
+    [SerializeField] private Image imageBlack;
+
+
+
+    //[SerializeField] private float startPoint;
 
 
 
     public float speed = 5.0f;
+    public float maxSpeed = 50.0f;
+    public float speedAcceleration = 0.25f;
     public float rotationSpeed = 100.0f;
     public float horizontalSpeed = 2.0f;
     public float verticalSpeed = 2.0f;
@@ -24,6 +31,10 @@ public class SurfingController : MonoBehaviour
     public float alyuvarRotationMaxiumValueY = 15.0f;
 
     public float maxDistanceFromPathPoint = 1.0f;
+
+    public float finishPoint = 1025.0f;
+    public float certainFinishPoint = 1065.0f;
+    public float blackoutSpeed = 0.1f;
 
     
 
@@ -67,7 +78,7 @@ public class SurfingController : MonoBehaviour
         Debug.Log("startRotationValueY: " + startRotationValueY);
 
 
-        dstTravelled = startPoint;
+        //dstTravelled = startPoint;
 
         //transform.position = pathCreator.path.GetPoint(0);
 
@@ -168,6 +179,24 @@ public class SurfingController : MonoBehaviour
 
     private void followPath()
     {
+        if(dstTravelled > 780 && speed < maxSpeed)
+        {
+            speed += speedAcceleration * Time.deltaTime;
+        }
+        else if (speed >= maxSpeed)
+        {
+            speed = maxSpeed;
+        }
+
+        if(dstTravelled >= finishPoint)
+        {
+            imageBlack.color = new Color(0, 0, 0, imageBlack.color.a + blackoutSpeed * Time.deltaTime);
+        }
+        if (dstTravelled >= certainFinishPoint)
+        {
+            imageBlack.color = new Color(0, 0, 0, 1);
+        }
+
         dstTravelled += speed * Time.deltaTime;
         //transform.position = pathCreator.path.GetPointAtDistance(dstTravelled, end);
 
@@ -213,10 +242,54 @@ public class SurfingController : MonoBehaviour
 
 
 
-
+        /*
         transform.position = new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x + xDistanceFromPathPoint2
             , pathCreator.path.GetPointAtDistance(dstTravelled, end).y + yDistanceFromPathPoint2
             , pathCreator.path.GetPointAtDistance(dstTravelled, end).z);
+        */
+
+
+        
+        transform.position = new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).y
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).z);
+
+        transform.position += new Vector3(transform.right.x * xDistanceFromPathPoint2,
+            transform.right.y * xDistanceFromPathPoint2, 
+            transform.right.z * xDistanceFromPathPoint2);
+
+        transform.position += new Vector3(transform.forward.x * yDistanceFromPathPoint2,
+            transform.forward.y * yDistanceFromPathPoint2,
+            transform.forward.z * yDistanceFromPathPoint2);
+
+        //transform.position += transform.right; 
+
+        //Debug.Log("transform.right: " + transform.right);
+
+
+
+        /*
+        Vector3 newPosition = new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x + xDistanceFromPathPoint2
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).y + yDistanceFromPathPoint2
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).z);
+        transform.Translate(newPosition * Time.deltaTime, Space.World);
+        */
+
+        /*
+        transform.Translate(new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x + xDistanceFromPathPoint2
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).z * -1 * Time.deltaTime
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).y + yDistanceFromPathPoint2), Space.Self);
+        */
+
+        /*
+        transform.Translate(new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x + xDistanceFromPathPoint2
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).z * -1  / speed
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).y + yDistanceFromPathPoint2) * Time.deltaTime, Space.Self);
+        */
+
+
+
+
 
         /*
         transform.position = new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x + inputHorizontal * maxDistanceFromPathPoint
@@ -226,7 +299,7 @@ public class SurfingController : MonoBehaviour
 
 
         Debug.Log("Character Rotatinon: " + transform.rotation.eulerAngles);
-        Debug.Log("Rotatinon: " + pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles);
+        Debug.Log("Path Rotatinon: " + pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles);
         //transform.rotation = pathCreator.path.GetRotationAtDistance(dstTravelled, end);
 
         //transform.rotation = Quaternion.Euler(new Vector3(270,0,0));
