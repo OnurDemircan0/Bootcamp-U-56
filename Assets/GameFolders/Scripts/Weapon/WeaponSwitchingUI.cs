@@ -17,7 +17,7 @@ public class WeaponSwitchingUI : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetAxis("Mouse ScrollWheel") != 0)
+        if(currentSelectedWeapon != WeaponSwitching.selectedWeapon)
         {
             currentSelectedWeapon = WeaponSwitching.selectedWeapon;
             _animator.SetTrigger("WeaponChanged");

@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
+  m_Color: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1435,7 +1435,7 @@ Animator:
   m_GameObject: {fileID: 1920961422}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8089e5b7610130749bd2d40335a83236, type: 2}
+  m_Controller: {fileID: 9100000, guid: 658fec4b67533fe4290591e01beb6b72, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1680,7 +1680,7 @@ Animator:
   m_GameObject: {fileID: 2024815878}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3671fd0d6165fae48a523504f3f0223d, type: 2}
+  m_Controller: {fileID: 9100000, guid: dd82c1acb86f4a247bb94eb71814512b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
