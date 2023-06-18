@@ -11,6 +11,8 @@ public class SurfingController : MonoBehaviour
     public EndOfPathInstruction end;
     float dstTravelled;
 
+    [SerializeField] private float startPoint;
+
 
 
     public float speed = 5.0f;
@@ -63,6 +65,9 @@ public class SurfingController : MonoBehaviour
 
         Debug.Log("startRotationValueX: " + startRotationValueX);
         Debug.Log("startRotationValueY: " + startRotationValueY);
+
+
+        dstTravelled = startPoint;
 
         //transform.position = pathCreator.path.GetPoint(0);
 
