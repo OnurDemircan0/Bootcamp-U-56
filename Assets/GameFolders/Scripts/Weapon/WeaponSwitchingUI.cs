@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSwitchingAnimation : MonoBehaviour
+public class WeaponSwitchingUI : MonoBehaviour
 {
     private Animator _animator;
 
@@ -19,10 +19,9 @@ public class WeaponSwitchingAnimation : MonoBehaviour
     {
         if(currentSelectedWeapon != WeaponSwitching.selectedWeapon)
         {
-            Debug.Log("girdi");
             currentSelectedWeapon = WeaponSwitching.selectedWeapon;
-            _animator.SetInteger("SelectedWeapon", currentSelectedWeapon);
             _animator.SetTrigger("WeaponChanged");
+            _animator.SetInteger("SelectedWeapon", currentSelectedWeapon);
         }
     }
 }
