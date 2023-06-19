@@ -58,7 +58,7 @@ https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/de61c189-da5f-4c
 
 * Sprint Review: Her kişiye atanan görevlerden çoğu verilen sürelerde başarılı bir şekilde bittirilmiştir. Karekter hareketleri tamamlanmış, Enemy AI Scripti hazırlanmış, Damar modelimiz bitmiş ve Surf Mekaniğimiz çalışır biçimdedir.
 
-NOT: Surf Mekaniğinde çıkan geç bir gelişmeden dolayı görev tamamlama süresinde küçük bir aksanma yaşanmıştır.
+* Sprint NOT: Surf Mekaniğinde çıkan geç bir gelişmeden dolayı görev tamamlama süresinde küçük bir aksanma yaşanmıştır.
 
 * Sprint Retrospective:
 * Fikir konusunda kararsızlıklar görevlerde değişimlere neden olmuştur.
