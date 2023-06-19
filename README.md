@@ -60,7 +60,7 @@ https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/de61c189-da5f-4c
 
 * Sprint NOT: Surf Mekaniğinde çıkan geç bir gelişmeden dolayı görev tamamlama süresinde küçük bir aksanma yaşanmıştır.
 
-* Sprint Retrospective:
+## Sprint Retrospective:
 * Fikir konusunda kararsızlıklar görevlerde değişimlere neden olmuştur.
 * Fikirlerimiz ve konuştuklarımızda yeterince detaylı olmaz isek yanlış anlaşılmaya neden olacağımız fark edilmiştir.
 * Toplantı ve Daily Scrum için katılamayan olursa kısa notlar ile konuşulan konulardan haberdar etme kararı alınmıştır.
