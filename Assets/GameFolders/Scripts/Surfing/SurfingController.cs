@@ -32,6 +32,8 @@ public class SurfingController : MonoBehaviour
 
     public float maxDistanceFromPathPoint = 1.0f;
 
+    public float turnNormalRotationSpeed = 10.0f;
+
     public float finishPoint = 1025.0f;
     public float certainFinishPoint = 1065.0f;
     public float blackoutSpeed = 0.1f;
@@ -44,6 +46,10 @@ public class SurfingController : MonoBehaviour
 
     float translationX;
     float translationZ;
+
+    float alyuvarNowRotationValueX = 0.0f;
+    float alyuvarNowRotationValueY = 0.0f;
+    float alyuvarNowRotationValueZ = 0.0f;
 
     float xDistanceFromPathPoint1 = 0.0f;
     float xDistanceFromPathPoint2 = 0.0f;
@@ -148,6 +154,7 @@ public class SurfingController : MonoBehaviour
             //Debug.Log("Döndürülüyor...");
             //transform.Rotate(rotationX, 0, 0);
 
+
         }
 
         if (nowRotationValueX > startRotationValueX - alyuvarRotationMaxiumValueX && nowRotationValueX < startRotationValueX + alyuvarRotationMaxiumValueX)
@@ -215,7 +222,10 @@ public class SurfingController : MonoBehaviour
         {
             xDistanceFromPathPoint2 = maxDistanceFromPathPoint * -1;
         }
-
+        else
+        {
+            
+        }
 
 
         yDistanceFromPathPoint1 = inputVertical * maxDistanceFromPathPoint * Time.deltaTime * 10;
@@ -228,10 +238,20 @@ public class SurfingController : MonoBehaviour
         if (yDistanceFromPathPoint2 > maxDistanceFromPathPoint)
         {
             yDistanceFromPathPoint2 = maxDistanceFromPathPoint;
+
+
+            rotateAlyuvarNormalRatation();
         }
         else if (yDistanceFromPathPoint2 < maxDistanceFromPathPoint * -1)
         {
             yDistanceFromPathPoint2 = maxDistanceFromPathPoint * -1;
+
+
+            rotateAlyuvarNormalRatation();
+        }
+        else
+        {
+            determineRotateValueOfAlyuvar();
         }
 
         Debug.Log("xDistanceFromPathPoint1: " + xDistanceFromPathPoint1);
@@ -303,10 +323,18 @@ public class SurfingController : MonoBehaviour
         //transform.rotation = pathCreator.path.GetRotationAtDistance(dstTravelled, end);
 
         //transform.rotation = Quaternion.Euler(new Vector3(270,0,0));
-        transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x + 270
-            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.y
+        transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x + 270 + alyuvarNowRotationValueX
+            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.y  + alyuvarNowRotationValueY
             , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.z - 270));
+
+        //rotateAlyuvarHorizontal();
+
+
+
+        //rotateAlyuvarAccordingToInputValue();
     }
+
+
 
 
     private void blockFarFromPath()
@@ -353,6 +381,104 @@ public class SurfingController : MonoBehaviour
 
     }
 
+    private void rotateAlyuvarHorizontal()
+    {
+        transform.Rotate(Vector3.up, inputHorizontal * rotationSpeed * Time.deltaTime);
+    }
+
+    private void determineRotateValueOfAlyuvar()
+    {
+        
+        alyuvarNowRotationValueX = inputVertical * alyuvarRotationMaxiumValueX * -1;
+        alyuvarNowRotationValueY = 0;
+        alyuvarNowRotationValueZ = 0;
+        
+
+        /*
+        if (Math.Abs(inputVertical) >= Math.Abs(inputHorizontal))
+        {
+            alyuvarNowRotationValueX = inputVertical * alyuvarRotationMaxiumValueX * -1;
+
+            alyuvarNowRotationValueY = 0;
+            alyuvarNowRotationValueZ = 0;
+        }
+        else
+        {
+            alyuvarNowRotationValueX = inputHorizontal * alyuvarRotationMaxiumValueX * -1;
+
+            //alyuvarNowRotationValueY = 90.0f / (Math.Abs(inputHorizontal) + Math.Abs(inputVertical));
+            alyuvarNowRotationValueZ = 0;
+
+            if(Math.Abs(inputHorizontal) > 0.85f && Math.Abs(inputVertical) < 0.15f)
+            {
+                alyuvarNowRotationValueY = 90.0f;
+            }
+            else if (Math.Abs(inputHorizontal) < 0.15f && Math.Abs(inputVertical) > 0.85f)
+            {
+                alyuvarNowRotationValueY = 0.0f;
+            }
+            else
+            {
+                alyuvarNowRotationValueY = 45.0f;
+            }
+        }
+        */
+
+        
+        /*
+        if(Math.Abs(inputVertical) > 0.95f && Math.Abs(inputHorizontal) < 0.05f)
+        {
+            alyuvarNowRotationValueY = 0;
+            alyuvarNowRotationValueZ = 0;
+        }
+        else if (Math.Abs(inputHorizontal) > 0.95f && Math.Abs(inputVertical) < 0.05f)
+        {
+            alyuvarNowRotationValueY = 90;
+            alyuvarNowRotationValueZ = -90;
+        }
+        else
+        {
+            if(Math.Abs(inputHorizontal) + Math.Abs(inputVertical) != 0)
+            {
+                alyuvarNowRotationValueY = inputHorizontal > inputVertical ? 90.0f / (Math.Abs(inputHorizontal) + Math.Abs(inputVertical)) 
+                    : 90.0f - (90.0f / (Math.Abs(inputHorizontal) + Math.Abs(inputVertical)));
+
+                alyuvarNowRotationValueZ = alyuvarNowRotationValueY * -1;
+            }
+            else
+            {
+                alyuvarNowRotationValueY = 0;
+                alyuvarNowRotationValueZ = 0;
+            }
+            
+        }
+
+        Debug.LogWarning("alyuvarNowRotationValueX: " + alyuvarNowRotationValueX);
+        Debug.LogWarning("alyuvarNowRotationValueY: " + alyuvarNowRotationValueY);
+        Debug.LogWarning("alyuvarNowRotationValueZ: " + alyuvarNowRotationValueZ);
+        */
+        
+
+    }
+
+    private void rotateAlyuvarNormalRatation()
+    {
+        
+        if (alyuvarNowRotationValueX < 0.025f && alyuvarNowRotationValueX > -0.025f)
+        {
+            alyuvarNowRotationValueX = 0;
+        }
+
+        if (alyuvarNowRotationValueX > 0)
+        {
+            alyuvarNowRotationValueX -= alyuvarRotationMaxiumValueX * Time.deltaTime * turnNormalRotationSpeed;
+        }
+        else if (alyuvarNowRotationValueX < 0)
+        {
+            alyuvarNowRotationValueX += alyuvarRotationMaxiumValueX * Time.deltaTime * turnNormalRotationSpeed;
+        }
+        
+    }
 
     private void rotateAlyuvar() 
     {

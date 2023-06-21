@@ -568,15 +568,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c3c2f459d276fe44a930a26287038f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.008961394
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c3c2f459d276fe44a930a26287038f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: -0.015095617
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c3c2f459d276fe44a930a26287038f1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.67
+      value: 1.657375
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c3c2f459d276fe44a930a26287038f1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1048,13 +1048,14 @@ MonoBehaviour:
   speed: 20
   maxSpeed: 200
   speedAcceleration: 20
-  rotationSpeed: 100
+  rotationSpeed: 2000
   horizontalSpeed: 2
   verticalSpeed: 2
   heightSpeed: 20
-  alyuvarRotationMaxiumValueX: 15
-  alyuvarRotationMaxiumValueY: 15
+  alyuvarRotationMaxiumValueX: 25
+  alyuvarRotationMaxiumValueY: 25
   maxDistanceFromPathPoint: 1.1
+  turnNormalRotationSpeed: 10
   finishPoint: 1000
   certainFinishPoint: 1060
   blackoutSpeed: 1.5
@@ -1187,6 +1188,7 @@ MonoBehaviour:
   alyuvarRotationMaxiumValueX: 15
   alyuvarRotationMaxiumValueY: 15
   maxDistanceFromPathPoint: 5
+  turnNormalRotationSpeed: 10
   finishPoint: 1050
   certainFinishPoint: 1065
   blackoutSpeed: 0.01
