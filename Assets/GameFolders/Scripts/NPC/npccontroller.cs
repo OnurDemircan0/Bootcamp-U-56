@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class npccontroller : MonoBehaviour
 {
+    GameObject Player;
     Animator animator;
     public int npchealth = 100;
 
@@ -15,16 +16,25 @@ public class npccontroller : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         movement = GetComponent<NPCAI>();
+        Player = GameObject.FindWithTag("Player");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (npchealth<=0)
+        if (Vector3.Distance(this.transform.position, Player.transform.position) <= 10)
         {
-            animator.SetBool("dead", true);
-            movement._agent.SetDestination(this.transform.position);
+            animator.SetBool("npcattack", true);
+            if (npchealth <= 0)
+            {
+                animator.SetBool("dead", true);
+                movement._agent.SetDestination(this.transform.position);
+            }
+        }
+        else
+        {
+            animator.SetBool("npcattack", false);
         }
     }
 }
