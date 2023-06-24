@@ -23,7 +23,7 @@ adındaki robotumuz, hastalığa neden olan virüsleri damar yolu üzerinden çe
        fikir sahibi etmek.
        
 ## Product BackLog Sprint 1
-[BackLog](https://miro.com/app/board/uXjVM9lHoZU=/?share_link_id=634540424044)
+[BackLog](https://miro.com/app/board/uXjVM9lHoZU=/?share_link_id=674053002415)
 
 ## Hedef Kitle
 * Anatomi ile İlgili Olan İnsanlar
@@ -35,8 +35,8 @@ adındaki robotumuz, hastalığa neden olan virüsleri damar yolu üzerinden çe
 * Yetişkinler
 
 # Sprint 1
-* Sprint İçinde Tamamlanması Tahmin Edilen Puan: 100
-* Puan Tamamlama Mantığı: 3 Sprint içinde toplam tamamlanması gereken puan 340 olduğundan. Ve 3 Sprint içindeki ilk Sprintimiz olması nedeniyle  sağlam bir temel ile başlamak için ne çok yüksek ne de çok az bir puan olduğunu düşünmekteyiz.
+* Sprint İçinde Tamamlanması Tahmin Edilen Puan: 110
+* Puan Tamamlama Mantığı: 3 Sprint içinde toplam tamamlanması gereken puan 400 olduğundan. Ve 3 Sprint içindeki ilk Sprintimiz olması nedeniyle  sağlam bir temel ile başlamak için ne çok yüksek ne de çok az bir puan olduğunu düşünmekteyiz. 
 * Daily Scrum: Daily Scrum toplantılarımız Genellikle Discorda sesli kanal üzerinden gerçekleşmiştir. Ama bunun yanında Whatsapp Grubumuzda vardır. [Daily Scrum File](https://drive.google.com/file/d/1482t4A-Iwyq-ha79APHP4zzc_vZ9ZrRc/view?usp=sharing)
 * Sprint Board ScreenShotları: ![Sprnt](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/5c232b71-6154-4a28-bc59-31efea738b09)![BurnDown Chart](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/db2fd445-a74f-4381-9133-f186768fffc2)
 
@@ -58,9 +58,9 @@ https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/de61c189-da5f-4c
 
 * Sprint Review: Her kişiye atanan görevlerden çoğu verilen sürelerde başarılı bir şekilde bittirilmiştir. Karekter hareketleri tamamlanmış, Enemy AI Scripti hazırlanmış, Damar modelimiz bitmiş ve Surf Mekaniğimiz çalışır biçimdedir.
 
-NOT: Surf Mekaniğinde çıkan geç bir gelişmeden dolayı görev tamamlama süresinde küçük bir aksanma yaşanmıştır.
+* Sprint NOT: Surf Mekaniğinde çıkan geç bir gelişmeden dolayı görev tamamlama süresinde küçük bir aksanma yaşanmıştır.
 
-* Sprint Retrospective:
+## Sprint Retrospective:
 * Fikir konusunda kararsızlıklar görevlerde değişimlere neden olmuştur.
 * Fikirlerimiz ve konuştuklarımızda yeterince detaylı olmaz isek yanlış anlaşılmaya neden olacağımız fark edilmiştir.
 * Toplantı ve Daily Scrum için katılamayan olursa kısa notlar ile konuşulan konulardan haberdar etme kararı alınmıştır.

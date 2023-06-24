@@ -12,6 +12,8 @@ public class CameraFollowControllerWithPath : MonoBehaviour
     public float dstTravelled;
 
     public float speed = 5.0f;
+    public float maxSpeed = 50.0f;
+    public float speedAcceleration = 0.25f;
 
     public Transform character;
     public float distance;
@@ -31,12 +33,21 @@ public class CameraFollowControllerWithPath : MonoBehaviour
 
     private void followPath()
     {
+        if (dstTravelled > 780 - 4 && speed < maxSpeed)
+        {
+            speed += speedAcceleration * Time.deltaTime;
+        }
+        else if (speed >= maxSpeed)
+        {
+            speed = maxSpeed;
+        }
+
         dstTravelled += speed * Time.deltaTime;
         //transform.position = pathCreator.path.GetPointAtDistance(dstTravelled, end);
 
         transform.position = new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x
-            , pathCreator.path.GetPointAtDistance(dstTravelled, end).y + 1
-            , pathCreator.path.GetPointAtDistance(dstTravelled, end).z - 1f); 
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).y + 1.5f
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).z); 
 
         Debug.Log("Camera Rotatinon: " + transform.rotation.eulerAngles);
         //Debug.Log("Rotatinon: " + pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles);
