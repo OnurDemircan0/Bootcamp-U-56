@@ -534,4 +534,13 @@ public class ThirdPersonShooterController : MonoBehaviour
        
     }
 
+    public void EnableScript()
+    {
+        enabled = true;
+    }
+
+    public void DisableScript()
+    {
+        enabled = false;
+    }
 }
