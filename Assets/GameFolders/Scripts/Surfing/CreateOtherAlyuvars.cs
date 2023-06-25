@@ -8,7 +8,6 @@ public class CreateOtherAlyuvars : MonoBehaviour
 
     [SerializeField] private int otherAlyuvarsCount;
 
-    // Start is called before the first frame update
     void Start()
     {
         for(int i=0; i < otherAlyuvarsCount; i++)
@@ -18,9 +17,4 @@ public class CreateOtherAlyuvars : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

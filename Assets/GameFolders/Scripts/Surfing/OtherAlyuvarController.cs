@@ -13,14 +13,18 @@ public class OtherAlyuvarController : MonoBehaviour
 
 
     private float speed;
-    [SerializeField] private float minSpeed;
-    [SerializeField] private float maxSpeed;
+    public float speedAcceleration = 0.25f;
+    public float maxSpeed;
+    public float minSpeedForRandom; 
+    public float maxSpeedForRandom;
     [SerializeField] private float maxRotationAngle;
 
-    [SerializeField] private float maxDistanceFromPathPoint = 1.25f;
+    public float minDistanceFromPathPoint = 0.0f;
+    public float maxDistanceFromPathPoint = 0.5f;
+    
 
-    [SerializeField] private float minDistanceFromStartPoint;
-    [SerializeField] private float maxDistanceFromStartPoint;
+    public float minDistanceFromStartPoint;
+    public float maxDistanceFromStartPoint;
 
     private float randomPositionX;
     private float randomPositionY;
@@ -36,18 +40,38 @@ public class OtherAlyuvarController : MonoBehaviour
         if(pathCreator == null)
         {
             Debug.Log("pathCreator null");
+
             pathCreator = GameObject.Find("path").gameObject.GetComponent<PathCreator>();
         }
 
-        randomPositionX = Random.Range(maxDistanceFromPathPoint * -1, maxDistanceFromPathPoint);
-        randomPositionY = Random.Range(maxDistanceFromPathPoint * -1, maxDistanceFromPathPoint);
+        //randomPositionX = Random.Range(maxDistanceFromPathPoint * -1, maxDistanceFromPathPoint);
+        //randomPositionY = Random.Range(maxDistanceFromPathPoint * -1, maxDistanceFromPathPoint);
         //randomPositionZ = Random.Range(minDistanceFromStartPoint, maxDistanceFromStartPoint);
+
+        if(Random.Range(0,2) == 0)
+        {
+            randomPositionX = Random.Range(maxDistanceFromPathPoint * -1, minDistanceFromPathPoint * -1);
+        }
+        else
+        {
+            randomPositionX = Random.Range(minDistanceFromPathPoint, maxDistanceFromPathPoint);
+        }
+
+        if (Random.Range(0, 2) == 0)
+        {
+            randomPositionY = Random.Range(maxDistanceFromPathPoint * -1, minDistanceFromPathPoint * -1);
+            
+        }
+        else
+        {
+            randomPositionY = Random.Range(minDistanceFromPathPoint, maxDistanceFromPathPoint);
+        }
 
         randomRotationX = Random.Range(maxRotationAngle * -1, maxRotationAngle);
         randomRotationY = Random.Range(maxRotationAngle * -1, maxRotationAngle);
         randomRotationZ = Random.Range(maxRotationAngle * -1, maxRotationAngle);
 
-        speed = Random.Range(minSpeed, maxSpeed);
+        speed = Random.Range(minSpeedForRandom, maxSpeedForRandom);
 
         dstTravelled = Random.Range(minDistanceFromStartPoint, maxDistanceFromStartPoint);
 
@@ -60,6 +84,15 @@ public class OtherAlyuvarController : MonoBehaviour
 
     private void followPath()
     {
+        if (dstTravelled > 780 && speed < maxSpeed)
+        {
+            speed += speedAcceleration * Time.deltaTime;
+        }
+        else if (speed >= maxSpeed)
+        {
+            speed = maxSpeed;
+        }
+
         dstTravelled += speed * Time.deltaTime;
         //transform.position = pathCreator.path.GetPointAtDistance(dstTravelled, end);
 

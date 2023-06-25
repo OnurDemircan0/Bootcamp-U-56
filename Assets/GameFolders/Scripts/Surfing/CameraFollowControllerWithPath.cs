@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using PathCreation;
+using StarterAssets;
 
 public class CameraFollowControllerWithPath : MonoBehaviour
 {
@@ -18,9 +19,20 @@ public class CameraFollowControllerWithPath : MonoBehaviour
     public Transform character;
     public float distance;
 
+    [SerializeField] private StarterAssetsInputs starterAssetsInputs;
+
+    [SerializeField] private float maximumRotationValueX;
+    [SerializeField] private float maximumRotationValueY;
+
+    private float mouseX;
+    private float mouseY;
+
+    private float sumMouseX;
+    private float sumMouseY;
+
     private void Start()
     {
-        distance = character.position.z - transform.position.z;
+        distance = character.position.z - transform.position.z; // 4 metre iyi
     }
 
 
@@ -53,8 +65,49 @@ public class CameraFollowControllerWithPath : MonoBehaviour
         //Debug.Log("Rotatinon: " + pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles);
         //transform.rotation = pathCreator.path.GetRotationAtDistance(dstTravelled, end);
 
-        transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x + 10
-            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.y
+
+
+        // Get the mouse delta. This is not in the range -1...1
+        //float x = speed * Input.GetAxis("Mouse X");
+        //float y = speed * Input.GetAxis("Mouse Y");
+        //transform.Rotate(x, y, 0);
+
+
+
+        mouseX = starterAssetsInputs.look.x;
+        mouseY = starterAssetsInputs.look.y;
+
+        Debug.Log("mouseX: " + mouseX);
+        Debug.Log("mouseY: " + mouseY);
+
+        sumMouseX += mouseX;
+        sumMouseY += mouseY;
+
+        if(sumMouseX > maximumRotationValueX)
+        {
+            sumMouseX = maximumRotationValueX;
+        }
+        else if (sumMouseX < maximumRotationValueX * -1)
+        {
+            sumMouseX = maximumRotationValueX * -1;
+        }
+
+        if (sumMouseY > maximumRotationValueY)
+        {
+            sumMouseY = maximumRotationValueY;
+        }
+        else if (sumMouseY < maximumRotationValueY * -1)
+        {
+            sumMouseY = maximumRotationValueY * -1;
+        }
+
+        Debug.Log("sumMouseX: " + sumMouseX);
+        Debug.Log("sumMouseY: " + sumMouseY);
+
+
+
+        transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x + 10 + sumMouseY
+            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.y + sumMouseX
             , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.z + 90));
 
         //transform.rotation = Quaternion.Euler(new Vector3(270,0,0));

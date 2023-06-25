@@ -112,10 +112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
-  end: 0
-  minSpeed: 20
-  maxSpeed: 25
-  maxRotationAngle: 1.5
-  maxDistanceFromPathPoint: 1.25
-  minDistanceFromStartPoint: 4.5
+  end: 2
+  speedAcceleration: 9
+  maxSpeed: 85
+  minSpeedForRandom: 20
+  maxSpeedForRandom: 22
+  maxRotationAngle: 2
+  minDistanceFromPathPoint: 0
+  maxDistanceFromPathPoint: 2
+  minDistanceFromStartPoint: 10
   maxDistanceFromStartPoint: 80
