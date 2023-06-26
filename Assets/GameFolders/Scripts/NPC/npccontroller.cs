@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class npccontroller : MonoBehaviour
 {
+    public float distance;
+
     GameObject Player;
     Animator animator;
     public int npchealth = 100;
 
 
-    NPCAI movement;
+    
     // Start is called before the first frame update
+    NavMeshAgent _agent;
     void Start()
 
     {
+        _agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        movement = GetComponent<NPCAI>();
+        
         Player = GameObject.FindWithTag("Player");
 
     }
@@ -23,18 +28,29 @@ public class npccontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(this.transform.position, Player.transform.position) <= 10)
+        distance =Vector3.Distance(this.transform.position, Player.transform.position);
+        if (distance <= 5)
         {
             animator.SetBool("npcattack", true);
-            if (npchealth <= 0)
-            {
-                animator.SetBool("dead", true);
-                movement._agent.SetDestination(this.transform.position);
-            }
+            //attack
+        }
+        else if (distance<=50)
+        {
+            animator.SetBool("npcattack", false);
+            _agent.SetDestination(Player.transform.position);
+
         }
         else
         {
-            animator.SetBool("npcattack", false);
+            _agent.SetDestination(this.transform.position);
+
+        }
+
+
+        if (npchealth <= 0)
+        {
+            animator.SetBool("dead", true);
+
         }
     }
 }
