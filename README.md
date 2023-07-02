@@ -65,3 +65,13 @@ https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/de61c189-da5f-4c
 * Fikirlerimiz ve konuştuklarımızda yeterince detaylı olmaz isek yanlış anlaşılmaya neden olacağımız fark edilmiştir.
 * Toplantı ve Daily Scrum için katılamayan olursa kısa notlar ile konuşulan konulardan haberdar etme kararı alınmıştır.
 
+# Sprint 2
+
+## Product BackLog Sprint 2
+[BackLog](https://miro.com/app/board/uXjVM9lHoZU=/?share_link_id=674053002415)
+
+* Sprint İçinde Tamamlanması Tahmin Edilen Puan: 255
+* Puan Tamamlama Mantığı: 2.Sprint sürecinde takımımızdan 4 kişinin Finallerinin bitmiş olduğundan ve son sprint genel olarak polish ve Bug fixlere ayrıldığından dolayı bu Sprintte oyunu olabildiğince son duruma getirmeye çalıştık.
+* Daily Scrum: Daily Scrum toplantılarımız önceki Sprintte de olduğu gibi genellikle giscorda sesli kanal üzerinden gerçekleşmiştir. Ama bunun yanında Whatsapp Grubumuzda vardır.
+
+
