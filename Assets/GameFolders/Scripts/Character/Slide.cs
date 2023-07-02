@@ -7,12 +7,14 @@ using UnityEngine.EventSystems;
 
 public class Slide : MonoBehaviour
 {
+    StarterAssetsInputs starterInputs;
     ThirdPersonShooterController shooterController;
     ThirdPersonController personController;
 
     [SerializeField] LayerMask slideLayer;
 
     public bool Sliding = true;
+    bool slideTriggered = false;
 
     Animator animator;
 
@@ -29,22 +31,28 @@ public class Slide : MonoBehaviour
         animator = GetComponent<Animator>();
         characterTransform = GetComponent<Transform>();
         characterController = GetComponent<CharacterController>();
+        starterInputs = GetComponent<StarterAssetsInputs>();
     }
+    
+
 
     private void Update()
     {
+
         CharacterSlide();
     }
-    void CharacterSlide()
+    public void CharacterSlide()
     {
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - personController.GroundedOffset,
-                transform.position.z);
-        Sliding = Physics.CheckSphere(spherePosition, personController.GroundedRadius, slideLayer,
+                   transform.position.z);
+        Sliding = Physics.CheckSphere(spherePosition, 0.45f, slideLayer,
             QueryTriggerInteraction.Ignore);
 
-        if(Sliding)
+        if (Sliding)
         {
             Debug.Log("Sliding");
+
+            StartCoroutine(PressW());
             animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 1f, Time.deltaTime * 10f));
 
             characterTransform.rotation = Quaternion.Euler(0f, characterTransform.rotation.y - 90f, 0f);
@@ -54,12 +62,28 @@ public class Slide : MonoBehaviour
             characterController.Move(fowardDirection * speed * Time.deltaTime);
 
             shooterController.DisableScript();
+
+            slideTriggered = true;
         }
         else
         {
+            if(slideTriggered)
             shooterController.EnableScript();
             animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 0f, Time.deltaTime * 10f));
+            slideTriggered = false;
         }
+    }
+
+    IEnumerator PressW()
+    {
+        yield return new WaitForSeconds(0.3f);
+        starterInputs.move.y = 1f;
+
+        yield return new WaitForSeconds(1);
+
+        starterInputs.move.y = 0f;
+
+        yield break;
     }
 }
 

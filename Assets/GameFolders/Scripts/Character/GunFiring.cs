@@ -10,7 +10,6 @@ public class GunFiring : MonoBehaviour
     AudioSource audioSource;
     StarterAssetsInputs starterAssets;
 
-    bool cpPlaying = false;
     private float initialVolume;
 
     // Start is called before the first frame update

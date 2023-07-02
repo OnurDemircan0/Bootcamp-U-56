@@ -11,7 +11,6 @@ public class GravityReset : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         personController.Grounded = true;
-        slidecs.Sliding = false;
         
     }
     void Start()
