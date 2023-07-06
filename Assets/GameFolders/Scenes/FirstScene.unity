@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AutoDolly:
-    m_Enabled: 1
+    m_Enabled: 0
     m_PositionOffset: 0
     m_SearchRadius: 2
     m_SearchResolution: 5
@@ -2375,7 +2375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Path: {fileID: 437922253}
   m_UpdateMethod: 2
-  m_PositionUnits: 1
+  m_PositionUnits: 0
   m_Speed: 0
   m_Position: 0
 --- !u!4 &827738718
