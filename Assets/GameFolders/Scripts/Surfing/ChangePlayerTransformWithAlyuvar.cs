@@ -16,11 +16,15 @@ public class ChangePlayerTransformWithAlyuvar : MonoBehaviour
 
     [SerializeField] private float fixedPositionValueY = 0.1f;
 
+    private void Awake()
+    {
+        determineFirstPlayerTransformAccordingToAlyuvar();
+    }
 
 
     void Start()
     {
-        Invoke("determineFirstPlayerTransformAccordingToAlyuvar",0.03f);
+        //Invoke("determineFirstPlayerTransformAccordingToAlyuvar",0.03f);
 
         //starterAssetsInputs.shoot = true;
     }
