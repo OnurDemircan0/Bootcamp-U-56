@@ -34,6 +34,8 @@ public class SurfingControllerV2 : MonoBehaviour
     public float alyuvarRotationMaxiumValueZ = 15.0f;
 
     public float maxDistanceFromPathPoint = 1.0f;
+    private float maxDistanceFromPathPointY;
+    private float maxDistanceFromPathPointX;
 
     public float turnNormalRotationSpeed = 10.0f;
 
@@ -93,6 +95,17 @@ public class SurfingControllerV2 : MonoBehaviour
         nearestPointNumberForCharacter = 0;
         nearestPointForCharacter = pathCreator.path.localPoints[nearestPointNumberForCharacter];
 
+        /*
+        maxDistanceFromPathPointX = (float) Math.Sqrt(Math.Pow(maxDistanceFromPathPoint, 2) / 2);
+        maxDistanceFromPathPointY = (float) Math.Sqrt(Math.Pow(maxDistanceFromPathPoint, 2) / 2);
+
+        Debug.Log("maxDistanceFromPathPointX: " + maxDistanceFromPathPointX);
+        Debug.Log("maxDistanceFromPathPointY: " + maxDistanceFromPathPointY);
+        */
+
+        maxDistanceFromPathPointX = maxDistanceFromPathPoint;
+        maxDistanceFromPathPointY = maxDistanceFromPathPoint;
+
 
     }
 
@@ -138,15 +151,26 @@ public class SurfingControllerV2 : MonoBehaviour
         if (gameObject.transform.childCount > 0)
         {
             //Debug.Log("gameObject.transform.GetChild(0).gameObject.transform.GetChild(0): " + gameObject.transform.GetChild(0).gameObject.transform.GetChild(0));
+
             
-            
-            gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition
+
+            try
+            {
+                gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition
                 | RigidbodyConstraints.FreezeRotation;
-            
-            
+            }
+            catch(Exception e)
+            {
+
+            }
+
+
+
 
 
             followPath();
+
+            //Invoke("followPath", 3);
         }
 
 
@@ -184,20 +208,22 @@ public class SurfingControllerV2 : MonoBehaviour
 
         xDistanceFromPathPoint1 = inputHorizontal * maxDistanceFromPathPoint * Time.deltaTime * 10;
 
+        
+
         if (xDistanceFromPathPoint1 != xDistanceFromPathPoint2)
         {
             xDistanceFromPathPoint2 += xDistanceFromPathPoint1;
         }
 
-        if (xDistanceFromPathPoint2 > maxDistanceFromPathPoint)
+        if (xDistanceFromPathPoint2 > maxDistanceFromPathPointX)
         {
-            xDistanceFromPathPoint2 = maxDistanceFromPathPoint;
+            xDistanceFromPathPoint2 = maxDistanceFromPathPointX;
 
             rotateAlyuvarNormalRatation(false,true);
         }
-        else if (xDistanceFromPathPoint2 < maxDistanceFromPathPoint * -1)
+        else if (xDistanceFromPathPoint2 < maxDistanceFromPathPointX * -1)
         {
-            xDistanceFromPathPoint2 = maxDistanceFromPathPoint * -1;
+            xDistanceFromPathPoint2 = maxDistanceFromPathPointX * -1;
 
             rotateAlyuvarNormalRatation(false, true);
         }
@@ -207,23 +233,26 @@ public class SurfingControllerV2 : MonoBehaviour
         }
 
 
+
         yDistanceFromPathPoint1 = inputVertical * maxDistanceFromPathPoint * Time.deltaTime * 10;
+
+        
 
         if (yDistanceFromPathPoint1 != yDistanceFromPathPoint2)
         {
             yDistanceFromPathPoint2 += yDistanceFromPathPoint1;
         }
 
-        if (yDistanceFromPathPoint2 > maxDistanceFromPathPoint)
+        if (yDistanceFromPathPoint2 > maxDistanceFromPathPointY)
         {
-            yDistanceFromPathPoint2 = maxDistanceFromPathPoint;
+            yDistanceFromPathPoint2 = maxDistanceFromPathPointY;
 
 
             rotateAlyuvarNormalRatation(true, false);
         }
-        else if (yDistanceFromPathPoint2 < maxDistanceFromPathPoint * -1)
+        else if (yDistanceFromPathPoint2 < maxDistanceFromPathPointY * -1)
         {
-            yDistanceFromPathPoint2 = maxDistanceFromPathPoint * -1;
+            yDistanceFromPathPoint2 = maxDistanceFromPathPointY * -1;
 
 
             rotateAlyuvarNormalRatation(true, false);
@@ -233,11 +262,21 @@ public class SurfingControllerV2 : MonoBehaviour
             determineRotateValueOfAlyuvar(false, true);
         }
 
-        Debug.Log("xDistanceFromPathPoint1: " + xDistanceFromPathPoint1);
+        //Debug.Log("xDistanceFromPathPoint1: " + xDistanceFromPathPoint1);
         Debug.Log("xDistanceFromPathPoint2: " + xDistanceFromPathPoint2);
 
-        Debug.Log("yDistanceFromPathPoint1: " + yDistanceFromPathPoint1);
+        //Debug.Log("yDistanceFromPathPoint1: " + yDistanceFromPathPoint1);
         Debug.Log("yDistanceFromPathPoint2: " + yDistanceFromPathPoint2);
+
+
+        /*
+        maxDistanceFromPathPointX = (float) Math.Sqrt(Math.Pow(maxDistanceFromPathPoint, 2) - Math.Pow(xDistanceFromPathPoint2, 2));
+        maxDistanceFromPathPointY = (float) Math.Sqrt(Math.Pow(maxDistanceFromPathPoint, 2) - Math.Pow(yDistanceFromPathPoint2, 2));
+
+
+        Debug.Log("maxDistanceFromPathPointX: " + maxDistanceFromPathPointX);
+        Debug.Log("maxDistanceFromPathPointY: " + maxDistanceFromPathPointY);
+        */
 
 
 
@@ -457,7 +496,7 @@ public class SurfingControllerV2 : MonoBehaviour
 
             Debug.Log("rotateAlyuvarNormalRatationControlX");
 
-            if (alyuvarNowRotationValueX < 0.025f && alyuvarNowRotationValueX > -0.025f)
+            if (alyuvarNowRotationValueX < 0.25f && alyuvarNowRotationValueX > -0.25f)
             {
                 alyuvarNowRotationValueX = 0;
 
@@ -481,7 +520,7 @@ public class SurfingControllerV2 : MonoBehaviour
         // Z
         if (rotateAlyuvarNormalRatationControlZ)
         {
-            if (alyuvarNowRotationValueZ < 0.025f && alyuvarNowRotationValueZ > -0.025f)
+            if (alyuvarNowRotationValueZ < 0.25f && alyuvarNowRotationValueZ > -0.25f)
             {
                 alyuvarNowRotationValueZ = 0;
             }

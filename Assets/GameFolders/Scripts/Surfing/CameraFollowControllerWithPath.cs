@@ -104,11 +104,16 @@ public class CameraFollowControllerWithPath : MonoBehaviour
         Debug.Log("sumMouseX: " + sumMouseX);
         Debug.Log("sumMouseY: " + sumMouseY);
 
+        transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x + 10
+            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.y
+            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.z + 90));
 
 
+        /*
         transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x + 10 + sumMouseY
             , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.y + sumMouseX
             , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.z + 90));
+        */
 
         //transform.rotation = Quaternion.Euler(new Vector3(270,0,0));
         /*
