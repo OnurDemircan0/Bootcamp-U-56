@@ -8,6 +8,11 @@ TagManager:
   - VFXtarget
   - VFXother
   - mimic
+  - VFXtargetbullet
+  - VFXotherbullet
+  - EnemyBullet
+  - Enemy
+  - Muzzle Effect
   layers:
   - Default
   - TransparentFX
@@ -19,7 +24,7 @@ TagManager:
   - SlideLayer
   - Blood
   - BloodBottom
-  - 
+  - Player
   - 
   - 
   - 

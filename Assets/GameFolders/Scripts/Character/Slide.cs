@@ -50,8 +50,6 @@ public class Slide : MonoBehaviour
 
         if (Sliding)
         {
-            Debug.Log("Sliding");
-
             StartCoroutine(PressW());
             animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 1f, Time.deltaTime * 10f));
 

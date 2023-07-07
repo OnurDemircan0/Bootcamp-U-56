@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5559912105377681500}
   - component: {fileID: 7299122069546001746}
   - component: {fileID: 331012574666469968}
-  - component: {fileID: 3483716386881719079}
   m_Layer: 6
   m_Name: BulletProjectile
   m_TagString: Untagged
@@ -130,20 +129,3 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &3483716386881719079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5296896097677452141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: ff715964bbbaac6489520aab8d3b6589, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0

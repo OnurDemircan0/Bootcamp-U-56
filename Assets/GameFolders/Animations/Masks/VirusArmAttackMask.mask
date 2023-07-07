@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: VirusArmAttackMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Back Leg Feet IK
+    m_Weight: 0
+  - m_Path: Back Leg Joint IK
+    m_Weight: 0
+  - m_Path: Front Leg Feet IK
+    m_Weight: 0
+  - m_Path: Front Leg Joint IK
+    m_Weight: 0
+  - m_Path: Left Leg Feet IK
+    m_Weight: 0
+  - m_Path: Left Leg Joint IK
+    m_Weight: 0
+  - m_Path: Left Second Leg IK
+    m_Weight: 0
+  - m_Path: Left Second Leg Joint IK
+    m_Weight: 0
+  - m_Path: Right Leg Feet IK
+    m_Weight: 0
+  - m_Path: Right Leg Joint IK
+    m_Weight: 0
+  - m_Path: Right Second Leg IK
+    m_Weight: 0
+  - m_Path: Right Second Leg Joint IK
+    m_Weight: 0
+  - m_Path: Spine
+    m_Weight: 0
+  - m_Path: Spine/Back Leg Base
+    m_Weight: 1
+  - m_Path: Spine/Back Leg Base/Back Upper Leg
+    m_Weight: 0
+  - m_Path: Spine/Back Leg Base/Back Upper Leg/Back Lower Leg
+    m_Weight: 0
+  - m_Path: Spine/Back Leg Base/Back Upper Leg/Back Lower Leg/Back Leg Feet
+    m_Weight: 0
+  - m_Path: Spine/Back Leg Base/Back Upper Leg/Back Lower Leg/Back Leg Feet/Circle.020
+    m_Weight: 0
+  - m_Path: Spine/Back Leg Base/Back Upper Leg/Back Lower Leg/Circle.019
+    m_Weight: 0
+  - m_Path: Spine/Back Leg Base/Back Upper Leg/Back Lower Leg/Circle.021
+    m_Weight: 0
+  - m_Path: Spine/Back Leg Base/Back Upper Leg/Circle.018
+    m_Weight: 0
+  - m_Path: Spine/Back Leg Base/Circle.022
+    m_Weight: 0
+  - m_Path: Spine/Circle.001
+    m_Weight: 0
+  - m_Path: Spine/Circle.002
+    m_Weight: 0
+  - m_Path: Spine/Front Leg Base
+    m_Weight: 0
+  - m_Path: Spine/Front Leg Base/Circle.007
+    m_Weight: 0
+  - m_Path: Spine/Front Leg Base/Front Upper Leg
+    m_Weight: 0
+  - m_Path: Spine/Front Leg Base/Front Upper Leg/Circle.003
+    m_Weight: 0
+  - m_Path: Spine/Front Leg Base/Front Upper Leg/Front Lower Leg
+    m_Weight: 0
+  - m_Path: Spine/Front Leg Base/Front Upper Leg/Front Lower Leg/Circle.004
+    m_Weight: 0
+  - m_Path: Spine/Front Leg Base/Front Upper Leg/Front Lower Leg/Circle.006
+    m_Weight: 0
+  - m_Path: Spine/Front Leg Base/Front Upper Leg/Front Lower Leg/Front Leg Feet
+    m_Weight: 0
+  - m_Path: Spine/Front Leg Base/Front Upper Leg/Front Lower Leg/Front Leg Feet/Circle.005
+    m_Weight: 0
+  - m_Path: Spine/Head
+    m_Weight: 0
+  - m_Path: Spine/Head/Circle
+    m_Weight: 0
+  - m_Path: Spine/Left Leg Base
+    m_Weight: 0
+  - m_Path: Spine/Left Leg Base/Circle.032
+    m_Weight: 0
+  - m_Path: Spine/Left Leg Base/Left Upper Leg
+    m_Weight: 0
+  - m_Path: Spine/Left Leg Base/Left Upper Leg/Circle.028
+    m_Weight: 0
+  - m_Path: Spine/Left Leg Base/Left Upper Leg/Left Lower Leg
+    m_Weight: 0
+  - m_Path: Spine/Left Leg Base/Left Upper Leg/Left Lower Leg/Circle.029
+    m_Weight: 0
+  - m_Path: Spine/Left Leg Base/Left Upper Leg/Left Lower Leg/Circle.031
+    m_Weight: 0
+  - m_Path: Spine/Left Leg Base/Left Upper Leg/Left Lower Leg/Left Leg Feet
+    m_Weight: 0
+  - m_Path: Spine/Left Leg Base/Left Upper Leg/Left Lower Leg/Left Leg Feet/Circle.030
+    m_Weight: 0
+  - m_Path: Spine/Left Second Leg Base
+    m_Weight: 0
+  - m_Path: Spine/Left Second Leg Base/Circle.027
+    m_Weight: 0
+  - m_Path: 'Spine/Left Second Leg Base/Left Upper Second Leg '
+    m_Weight: 0
+  - m_Path: Spine/Left Second Leg Base/Left Upper Second Leg /Circle.023
+    m_Weight: 0
+  - m_Path: 'Spine/Left Second Leg Base/Left Upper Second Leg /Left Lower Second
+      Leg '
+    m_Weight: 0
+  - m_Path: Spine/Left Second Leg Base/Left Upper Second Leg /Left Lower Second Leg
+      /Circle.024
+    m_Weight: 0
+  - m_Path: Spine/Left Second Leg Base/Left Upper Second Leg /Left Lower Second Leg
+      /Circle.026
+    m_Weight: 0
+  - m_Path: Spine/Left Second Leg Base/Left Upper Second Leg /Left Lower Second Leg
+      /Left Second Leg Feet
+    m_Weight: 0
+  - m_Path: Spine/Left Second Leg Base/Left Upper Second Leg /Left Lower Second Leg
+      /Left Second Leg Feet/Circle.025
+    m_Weight: 0
+  - m_Path: Spine/Right Leg Base
+    m_Weight: 0
+  - m_Path: Spine/Right Leg Base/Circle.012
+    m_Weight: 0
+  - m_Path: Spine/Right Leg Base/Right Upper Leg
+    m_Weight: 0
+  - m_Path: Spine/Right Leg Base/Right Upper Leg/Circle.008
+    m_Weight: 0
+  - m_Path: Spine/Right Leg Base/Right Upper Leg/Right Lower Leg
+    m_Weight: 0
+  - m_Path: Spine/Right Leg Base/Right Upper Leg/Right Lower Leg/Circle.009
+    m_Weight: 0
+  - m_Path: Spine/Right Leg Base/Right Upper Leg/Right Lower Leg/Circle.011
+    m_Weight: 0
+  - m_Path: Spine/Right Leg Base/Right Upper Leg/Right Lower Leg/Right Leg Feet
+    m_Weight: 0
+  - m_Path: Spine/Right Leg Base/Right Upper Leg/Right Lower Leg/Right Leg Feet/Circle.010
+    m_Weight: 0
+  - m_Path: Spine/Right Second Leg Base
+    m_Weight: 0
+  - m_Path: Spine/Right Second Leg Base/Circle.017
+    m_Weight: 0
+  - m_Path: 'Spine/Right Second Leg Base/Right Upper Second Leg '
+    m_Weight: 0
+  - m_Path: Spine/Right Second Leg Base/Right Upper Second Leg /Circle.013
+    m_Weight: 0
+  - m_Path: 'Spine/Right Second Leg Base/Right Upper Second Leg /Right Lower Second
+      Leg '
+    m_Weight: 0
+  - m_Path: Spine/Right Second Leg Base/Right Upper Second Leg /Right Lower Second
+      Leg /Circle.014
+    m_Weight: 0
+  - m_Path: Spine/Right Second Leg Base/Right Upper Second Leg /Right Lower Second
+      Leg /Circle.016
+    m_Weight: 0
+  - m_Path: Spine/Right Second Leg Base/Right Upper Second Leg /Right Lower Second
+      Leg /Right Second Leg Feet
+    m_Weight: 0
+  - m_Path: Spine/Right Second Leg Base/Right Upper Second Leg /Right Lower Second
+      Leg /Right Second Leg Feet/Circle.015
+    m_Weight: 0

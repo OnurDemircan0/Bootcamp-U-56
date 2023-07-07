@@ -34,9 +34,10 @@ public class ThirdPersonShooterController : MonoBehaviour
     StarterAssetsInputs assetsInputs;
     ThirdPersonController thirdPerson;
 
+    public bool EnemyHit;
     bool AimWalkTriggered = false;
     bool AimSprintTriggered = false;
-    bool ýsAiming;
+    public bool ýsAiming;
     bool OnWalk;
     bool OnSprint;
     bool AimIdleTriggered;
@@ -134,6 +135,14 @@ public class ThirdPersonShooterController : MonoBehaviour
             {
                 if (hitTransform.transform.GetComponent<Hit_Target>() != null)
                 {
+                    if(hitTransform.transform.GetComponent<Enemy>() != null)
+                    {
+                        Enemy enemy = hitTransform.transform.GetComponent<Enemy>();
+                        enemy.Health -= 2f;
+                        enemy.correctEnemy = true;
+                        EnemyHit = true;
+                    }
+
                     if ((TargetInstances == null || TargetInstances.Length < DesiredInstanceAmount))
                     {
                         Instantiate(VFXhitTarget, raycastHit.point, Quaternion.identity);
@@ -144,7 +153,6 @@ public class ThirdPersonShooterController : MonoBehaviour
                         if (c == (DesiredInstanceAmount))
                         {
                             c = 0;
-                        
                         }
 
                         TargetInstances = GameObject.FindGameObjectsWithTag("VFXtarget");
@@ -203,6 +211,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         {
             ýsShooting = false;
             animator.SetBool("Shooting", false);
+            EnemyHit = false;
         }
 
         // Silahýn Prjectile Atmasý Ýçin

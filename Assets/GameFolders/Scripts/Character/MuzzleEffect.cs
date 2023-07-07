@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class MuzzleEffect : MonoBehaviour
 {
-    bool set = false;
+    public int childIndex = 25;
     public Transform muzzle;
     GameObject[] muzzleEffect;
-    public int childIndex = 25;
     [SerializeField] StarterAssetsInputs starterInputs;
+
+    bool onshoot = false;
+    Coroutine muzzleAnimationCoroutine;
 
     private void Start()
     {
@@ -17,56 +19,56 @@ public class MuzzleEffect : MonoBehaviour
         GoThrough();
     }
 
-    private void Update()
-
-    {
-        if (starterInputs.shoot)
-        {
-            StartCoroutine(PlayMuzzleAnimation());
-            set = true;
-        }
-        else
-        {
-            set = false;
-        }
-    }
     void GoThrough()
     {
         for (int i = 0; i < childIndex; i++)
         {
-            Debug.Log("ITERATÝON" + i);
+           // Debug.Log("ITERATION " + i);
 
-            Transform ChildTransform = muzzle.GetChild(i);
+            Transform childTransform = muzzle.GetChild(i);
+            muzzleEffect[i] = childTransform.gameObject;
+           // Debug.Log("Child Object " + i + ": " + muzzleEffect[i].name);
+        }
+    }
+    private void Update()
+    {
+        onshoot = starterInputs.shoot;
 
-            muzzleEffect[i] = ChildTransform.gameObject;
+        if (onshoot && muzzleAnimationCoroutine == null)
+        {
+            muzzleAnimationCoroutine = StartCoroutine(PlayMuzzleAnimation());
+        }
+        else if (!onshoot && muzzleAnimationCoroutine != null)
+        {
+            StopCoroutine(muzzleAnimationCoroutine);
+            muzzleAnimationCoroutine = null;
+            SetItAllFlase();
+        }
+    }
+    IEnumerator PlayMuzzleAnimation()
+    {
+        int index = 0;
+        while (onshoot)
+        {
+            if (index >= muzzleEffect.Length)
+                index = 0;
+
+           // Debug.Log("Activating Child Object " + index);
+            muzzleEffect[index].SetActive(true);
+            yield return new WaitForSeconds(0.04f);
+
+           // Debug.Log("Deactivating Child Object " + index);
+            muzzleEffect[index].SetActive(false);
+
+            index++;
         }
     }
 
-    IEnumerator PlayMuzzleAnimation()
+    void SetItAllFlase()
     {
         for (int i = 0; i < childIndex; i++)
         {
-            if(set)
-            {
-                MuzzleAnimation(muzzleEffect[i]);
-                yield return new WaitForSeconds(0.04f);
-            }
-            else
-            {
-                i = childIndex;
-            }
+            muzzleEffect[i].SetActive(false);
         }
-    }
-
-    void MuzzleAnimation(GameObject frame)
-    {
-        frame.SetActive(true);
-        StartCoroutine(DeactivateAfterDelay(frame, 0.04f));
-    }
-
-    IEnumerator DeactivateAfterDelay(GameObject frame, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        frame.SetActive(false);
     }
 }
