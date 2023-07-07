@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public static Enemy instance;
+
     Animator animator;
     public float Health = 100;
     public GameObject enemyGameObject;
@@ -18,6 +20,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        instance = this;
+
         ragDollToggle = GetComponent<RagDollToggle>();
         animator = GetComponent<Animator>();
         enemyAI = GetComponent<EnemyAI>();

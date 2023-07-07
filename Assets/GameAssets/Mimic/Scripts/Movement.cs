@@ -26,11 +26,11 @@ namespace MimicSpace
 
         void Update()
         {
-            velocity = Vector3.Lerp(velocity, new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized * speed, velocityLerpCoef * Time.deltaTime);
-
+            //velocity = Vector3.Lerp(velocity, new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized * speed, velocityLerpCoef * Time.deltaTime);
+            
             // Assigning velocity to the mimic to assure great leg placement
             myMimic.velocity = velocity;
-
+            
             transform.position = transform.position + velocity * Time.deltaTime;
             RaycastHit hit;
             Vector3 destHeight = transform.position;

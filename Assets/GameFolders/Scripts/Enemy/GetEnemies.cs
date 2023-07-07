@@ -55,6 +55,7 @@ public class GetEnemies : MonoBehaviour
             Debug.Log("All Enemies are Death");
 
             ClearBlood();
+            ActivateEnemies();
         }
     }
 
@@ -92,7 +93,6 @@ public class GetEnemies : MonoBehaviour
             yield return null;
         }
 
-        ActivateEnemies();
     }
 
     void ClearBlood()
@@ -103,21 +103,32 @@ public class GetEnemies : MonoBehaviour
 
     void ActivateEnemies()
     {
+        Debug.Log("Insýde The Activate Enemies");
+
         int enemyCount = enemies.Length;
         int spawnPointCount = SpawnPoints.Length;
 
         int enemiesPerSpawnPoint = enemyCount / spawnPointCount;
         int remainingEnemies = enemyCount % spawnPointCount; // Enemies that cannot be evenly distributed
 
+        
+
         int enemyIndex = 0;
 
         for (int i = 0; i < spawnPointCount; i++)
         {
+            Debug.Log("Calculating Spawn Point" + i);
             Vector3 spawnPos = SpawnPoints[i].transform.position;
 
             // Spawn the enemies per spawn point
-            for (int j = 0; j < enemiesPerSpawnPoint; j++)
+            for (int c = 0; c < enemiesPerSpawnPoint; c++)
             {
+                float RandomX = Random.Range(1f, 50f);
+                float RandomZ = Random.Range(1f, 50f);
+                spawnPos.x = RandomX;
+                spawnPos.z = RandomZ;
+
+                Debug.Log("Distrubuting Enemies");
                 SpawnEnemy(spawnPos, enemyIndex);
                 enemyIndex++;
             }
@@ -125,6 +136,7 @@ public class GetEnemies : MonoBehaviour
             // Handle the remaining enemies
             if (remainingEnemies > 0)
             {
+                Debug.Log("Spawning Remaning Enemies");
                 SpawnEnemy(spawnPos, enemyIndex);
                 enemyIndex++;
                 remainingEnemies--;
@@ -134,11 +146,24 @@ public class GetEnemies : MonoBehaviour
 
     void SpawnEnemy(Vector3 spawnPosition, int enemyIndex)
     {
+        Debug.Log("Spawning Enemies");
         if (enemyIndex >= 0 && enemyIndex < enemies.Length)
         {
+            Debug.Log("Spawning Enemy" + enemies[enemyIndex].name);
+
             GameObject enemy = enemies[enemyIndex];
+
+            enemy.GetComponent<Enemy>().Health = 100;
+            enemy.GetComponent<RagDollToggle>().RagdollEnable(false);
+            enemy.GetComponent<ProjectileAttack>().enabled = false;
+            enemy.GetComponent<EnemyAI>().enabled = true;
+
             enemy.transform.position = spawnPosition;
             enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+            
+
+            enemy.gameObject.SetActive(true);
         }
     }
 }

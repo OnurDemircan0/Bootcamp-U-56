@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RagDollToggle : MonoBehaviour
 {
+    public static RagDollToggle instance;
+
     Animator animator;
     BoxCollider boxCollider;
 
@@ -13,6 +15,8 @@ public class RagDollToggle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
 

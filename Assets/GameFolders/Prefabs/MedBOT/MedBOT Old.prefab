@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 2180934386344890041}
   - component: {fileID: 4895342687920066152}
   m_Layer: 8
-  m_Name: MedBOT
+  m_Name: MedBOT Old
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
