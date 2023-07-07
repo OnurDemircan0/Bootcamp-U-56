@@ -1,28 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NPC_Spawning : MonoBehaviour
 {
-    private GameObject _mimic;
-    private float deadTime;
-    private float spawningTime = 10f;
+    [SerializeField] GameObject NPC;
+    [SerializeField] float range = 30.0f;
+    [SerializeField] float spawnDelay = 1f;
+
+    private bool canSpawn;
 
     private void Start()
     {
-        deadTime = 0;
-        _mimic = transform.GetChild(0).gameObject;
+        canSpawn = true;
     }
+
     private void Update()
     {
-        if (!_mimic.activeSelf)
+        if (canSpawn)
         {
-            deadTime += Time.deltaTime;
-
-            if(deadTime > spawningTime)
-            {
-                _mimic.SetActive(true);
-            }
+            Spawn();
         }
+    }
+
+    private void Spawn()
+    {
+        float randomX = Random.Range(0, range);
+        float axisX = randomX * (Random.Range(0, 2) * 2 - 1);
+        float axisZ = Mathf.Sqrt(Mathf.Pow(range, 2) - Mathf.Pow(randomX, 2)) * (Random.Range(0, 2) * 2 - 1);
+        Vector3 randomPoint = new Vector3(transform.position.x + axisX, transform.position.y + 1, transform.position.z + axisZ);
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomPoint, out hit, 3.0f, NavMesh.AllAreas))
+        {
+            Instantiate(NPC, hit.position, Quaternion.identity);
+            canSpawn = false;
+            Invoke(nameof(SetSpawnTrue), spawnDelay);
+        }
+    }
+
+    private void SetSpawnTrue()
+    {
+        canSpawn = true;
     }
 }
