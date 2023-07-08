@@ -5,8 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/GameFolders/Scenes/Seyit_TestScene_Kalp.unity
     guid: bf4970a88ecfed64fb57a42c9f3606da
+  - enabled: 1
+    path: Assets/GameFolders/Scenes/Api Test.unity
+    guid: f9506a527d7ca1343b1bb78080026efe
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
