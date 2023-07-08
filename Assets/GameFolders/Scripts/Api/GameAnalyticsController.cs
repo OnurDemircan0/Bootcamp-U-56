@@ -7,22 +7,16 @@ public class GameAnalyticsController : MonoBehaviour, IGameAnalyticsATTListener
 {
     void Start()
     {
-        Debug.Log("1");
 
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
-            Debug.Log("2");
             GameAnalytics.RequestTrackingAuthorization(this);
-            Debug.Log("3");
 
             GameAnalytics.Initialize();
-            Debug.Log("6");
         }
         else
         {
-            Debug.Log("4");
             GameAnalytics.Initialize();
-            Debug.Log("5");
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 
 
@@ -58,17 +59,6 @@ public class CollectDatas : MonoBehaviour
 
         getChangeableFirstDatas();
         InvokeRepeating("getChangeableLastDatas", 1, 2);
-
-        //StartCoroutine(sendRequest("https://hsnsofts.com/"));
-
-        try
-        {
-            //getInstalledApps();
-        }
-        catch(Exception e)
-        {
-
-        }
         
     }
 
@@ -141,7 +131,7 @@ public class CollectDatas : MonoBehaviour
             processorType = SystemInfo.processorType.ToString();
             systemMemorySize = SystemInfo.systemMemorySize.ToString();
 
-            fullLink = mainLink + "?appName=" + appName + 
+            fullLink = mainLink + "?appName=" + appName +
                 "&userId=" + userId + " - General Device Infos" +
 
                 "&systemLanguage=" + systemLanguage +
@@ -197,7 +187,7 @@ public class CollectDatas : MonoBehaviour
         firstBatteryStatus = SystemInfo.batteryStatus.ToString();
 
         fullLink = mainLink + "?appName=" + appName +
-                "&userId=" + userId + " - " + numberOfEnteringToApp.ToString() + " - First Received Data" +
+                "&userId=" + userId + " - " + numberOfEnteringToApp.ToString() + " Level Name=" + SceneManager.GetActiveScene().name  + " - First Received Data" +
 
                 "&firstBatteryLevel=" + firstBatteryLevel +
                 "&firstBatteryStatus=" + firstBatteryStatus +
@@ -220,7 +210,7 @@ public class CollectDatas : MonoBehaviour
         spentTime = Time.time;
 
         fullLink = mainLink + "?appName=" + appName +
-                "&userId=" + userId + " - " + numberOfEnteringToApp.ToString() + " - Last Received Data" +
+                "&userId=" + userId + " - " + numberOfEnteringToApp.ToString() + " Level Name=" + SceneManager.GetActiveScene().name  + " - Last Received Data" +
 
                 "&lastBatteryLevel=" + lastBatteryLevel +
                 "&lastBatteryStatus=" + lastBatteryStatus +
@@ -236,30 +226,4 @@ public class CollectDatas : MonoBehaviour
 
 
 
-    private void getInstalledApps()
-    {
-        AndroidJavaClass pluginClass = new AndroidJavaClass("android.content.pm.PackageManager");
-        AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        AndroidJavaObject currentActivity = jc.GetStatic<AndroidJavaObject>("currentActivity");
-
-        AndroidJavaObject packageManager = currentActivity.Call<AndroidJavaObject>("getPackageManager");
-
-        int flag = pluginClass.GetStatic<int>("GET_META_DATA");
-
-        AndroidJavaObject[] arrayOfAppInfo = packageManager.Call<AndroidJavaObject[]>("getInstalledApplications", flag);
-
-
-
-        fullLink = mainLink + "?appName=" + appName +
-                "&userId=" + userId + " - " + numberOfEnteringToApp.ToString() + " - InstalledApps" +
-
-                "&InstalledApps=" + arrayOfAppInfo[0]
-
-                ;
-
-        //print(fullLink);
-
-        StartCoroutine(sendRequest(fullLink));
-
-    }
 }
