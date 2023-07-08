@@ -226,17 +226,19 @@ public class ThirdPersonShooterController : MonoBehaviour
 
         void AimJump()
         {
-            if (assetsInputs.jump)
+            if(StopMoving.Instance == null || !StopMoving.Instance.DisableMove)
             {
-                animator.SetBool("Jump Aim", true);
-               // animator.SetLayerWeight(2, Mathf.Lerp(animator.GetLayerWeight(2), 1f, Time.deltaTime * 10f));
-            }
-            else if(!assetsInputs.jump)
-            {
-                animator.SetBool("Jump Aim", false);
-               // animator.SetLayerWeight(2, Mathf.Lerp(animator.GetLayerWeight(2), 0f, Time.deltaTime * 10f));
-            }
-            
+                if (assetsInputs.jump)
+                {
+                    animator.SetBool("Jump Aim", true);
+                    // animator.SetLayerWeight(2, Mathf.Lerp(animator.GetLayerWeight(2), 1f, Time.deltaTime * 10f));
+                }
+                else if (!assetsInputs.jump)
+                {
+                    animator.SetBool("Jump Aim", false);
+                    // animator.SetLayerWeight(2, Mathf.Lerp(animator.GetLayerWeight(2), 0f, Time.deltaTime * 10f));
+                }
+            }            
         }
         void AýmAnim()
         {
