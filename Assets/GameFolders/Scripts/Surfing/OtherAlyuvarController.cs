@@ -9,7 +9,7 @@ public class OtherAlyuvarController : MonoBehaviour
 
     [SerializeField] private PathCreator pathCreator;
     [SerializeField] private EndOfPathInstruction end;
-    float dstTravelled;
+    public float dstTravelled;
 
 
     private float speed;
@@ -98,10 +98,12 @@ public class OtherAlyuvarController : MonoBehaviour
 
 
 
-
+        
         transform.position = new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x + randomPositionX
             , pathCreator.path.GetPointAtDistance(dstTravelled, end).y + randomPositionY
             , pathCreator.path.GetPointAtDistance(dstTravelled, end).z + randomPositionZ);
+        
+
 
 
         transform.Rotate(randomRotationX, randomRotationY, randomRotationZ, Space.Self);
@@ -111,8 +113,5 @@ public class OtherAlyuvarController : MonoBehaviour
         //Debug.Log("Rotatinon: " + pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles);
 
         //transform.rotation = pathCreator.path.GetRotationAtDistance(dstTravelled, end);
-
-
-
     }
 }

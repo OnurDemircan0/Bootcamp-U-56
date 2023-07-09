@@ -134,6 +134,17 @@ public class ThirdPersonShooterController : MonoBehaviour
 
             if (hitTransform != null)
             {
+                //Hasan Ekledi --------------------------------------------------------------------------------------------------------------------------------
+                if (hitTransform.gameObject.GetComponent<EnemyInVeinController>() != null)
+                {
+                    EnemyInVeinController enemyInVeinController = hitTransform.transform.GetComponent<EnemyInVeinController>();
+
+                    enemyInVeinController.enemyGetDamaged();
+                    enemyInVeinController.hittedControl = true;
+                }
+                //---------------------------------------------------------------------------------------------------------------------------------------------
+
+
                 if (hitTransform.transform.GetComponent<Hit_Target>() != null)
                 {
                     if(hitTransform.transform.GetComponent<Enemy>() != null)
