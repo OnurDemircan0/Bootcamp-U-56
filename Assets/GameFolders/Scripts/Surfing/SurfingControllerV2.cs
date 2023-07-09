@@ -397,7 +397,7 @@ public class SurfingControllerV2 : MonoBehaviour
         }
 
 
-        Debug.Log("En Yakýn Nokta: " + nearestPointForCharacter);
+        //Debug.Log("En Yakýn Nokta: " + nearestPointForCharacter);
 
         if (transform.position.x > nearestPointForCharacter.x + maxDistanceFromPathPoint)
         {
