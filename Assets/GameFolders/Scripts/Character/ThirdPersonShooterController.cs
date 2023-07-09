@@ -18,10 +18,11 @@ public class ThirdPersonShooterController : MonoBehaviour
     [SerializeField] GameObject RayCastDebug;
     [SerializeField] GameObject RayCastDebugChild;
     [SerializeField] GameObject pfBulletProjectile;
-    [SerializeField] GameObject bulletInstantiateLocation;
+    [SerializeField] GameObject trailSpawnLocation;
     [SerializeField] GameObject VFXhitTarget;
     [SerializeField] GameObject VFXhitOther;
     [SerializeField] Transform muzzleAim;
+    [SerializeField] float bulletDamage = 8.2f;
 
     [SerializeField] int DesiredInstanceAmount = 3;
 
@@ -138,7 +139,7 @@ public class ThirdPersonShooterController : MonoBehaviour
                     if(hitTransform.transform.GetComponent<Enemy>() != null)
                     {
                         Enemy enemy = hitTransform.transform.GetComponent<Enemy>();
-                        enemy.Health -= 2f;
+                        enemy.Health -= bulletDamage * Time.deltaTime;
                         enemy.correctEnemy = true;
                         EnemyHit = true;
                     }
@@ -216,13 +217,12 @@ public class ThirdPersonShooterController : MonoBehaviour
 
         // Silahýn Prjectile Atmasý Ýçin
 
-        //if(assetsInputs.shoot)
-        //{
-        //    Vector3 bulletDirection = (WorldAimPoint - bulletInstantiateLocation.transform.position).normalized;
-        //
-        //    Instantiate(pfBulletProjectile, bulletInstantiateLocation.transform.position, Quaternion.LookRotation(bulletDirection, Vector3.up));
-        //    assetsInputs.shoot = false;
-        //}
+        if(assetsInputs.shoot && trailSpawnLocation != null)
+        {
+            Vector3 bulletDirection = (WorldAimPoint - trailSpawnLocation.transform.position).normalized;
+        
+            ObjectPooler.instance.SpawnFromPool("TrailBulletPlayer", trailSpawnLocation.transform.position, Quaternion.LookRotation(bulletDirection, Vector3.up));
+        }
 
         void AimJump()
         {

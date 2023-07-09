@@ -6,17 +6,27 @@ public class Enemy : MonoBehaviour
 {
     public static Enemy instance;
 
-    Animator animator;
-    public float Health = 100;
+
     public GameObject enemyGameObject;
+
+    Animator animator;
+
     RagDollToggle ragDollToggle;
+
     EnemyAI enemyAI;
 
-    [SerializeField] ThirdPersonShooterController shooterController;
+    
+
+
+    [SerializeField] 
+    ThirdPersonShooterController shooterController;
 
     public bool correctEnemy;
     public bool isShooting = false;
 
+    string enemyTag;
+
+    public float Health = 100;
 
     private void Start()
     {
@@ -25,17 +35,30 @@ public class Enemy : MonoBehaviour
         ragDollToggle = GetComponent<RagDollToggle>();
         animator = GetComponent<Animator>();
         enemyAI = GetComponent<EnemyAI>();
+
+        enemyTag = gameObject.tag;
     }
     private void Update()
     {
-        if (enemyGameObject != null)
+        if (enemyGameObject != null && enemyTag == "Enemy")
         {
             CheckHealth(); 
             HitAnim();
            // SetShootAnim();
         }
+        else
+        {
+            CheckHealthBoss();
+        }
     }
 
+    void CheckHealthBoss()
+    {
+        if(Health < 0)
+        {
+            Debug.Log("Enemy is dead");
+        }
+    }
     void CheckHealth()
     {
         if (Health < 0)
@@ -52,6 +75,7 @@ public class Enemy : MonoBehaviour
         if(shooterController.EnemyHit && correctEnemy)
         {
             animator.SetBool("Hit", true);
+            correctEnemy = false;
         }
         else
         {
@@ -76,7 +100,16 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(10f);
 
         enemyGameObject.SetActive(false);
-        GetEnemies.Instance.CheckEnemyAliveState();
+
+        if(enemyTag == "Enemy")
+        {
+            GetEnemies.Instance.CheckEnemyAliveState();
+        }
+        else
+        {
+            GetEnemies.Instance.CheckEnemyAliveStatePhaseTwo();
+        }
+        
         yield break;
     }
 }

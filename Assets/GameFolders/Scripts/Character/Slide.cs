@@ -8,7 +8,9 @@ using UnityEngine.EventSystems;
 public class Slide : MonoBehaviour
 {
     StarterAssetsInputs starterInputs;
+
     ThirdPersonShooterController shooterController;
+
     ThirdPersonController personController;
 
     [SerializeField] LayerMask slideLayer;
@@ -38,7 +40,6 @@ public class Slide : MonoBehaviour
 
     private void Update()
     {
-
         CharacterSlide();
     }
     public void CharacterSlide()
@@ -61,17 +62,21 @@ public class Slide : MonoBehaviour
 
             shooterController.DisableScript();
 
-            slideTriggered = true;
-        }
-        else
-        {
-            if(slideTriggered)
-            shooterController.EnableScript();
-            animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 0f, Time.deltaTime * 10f));
-            slideTriggered = false;
+            StartCoroutine(FinishSlide());
         }
     }
+    //this
+    IEnumerator FinishSlide()
+    {
+        yield return new WaitForSeconds(5.30f);
 
+        shooterController.EnableScript();
+        animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 0f, Time.deltaTime * 10f));
+        slideTriggered = false;
+
+        this.enabled = false;
+        yield break;
+    }
     IEnumerator PressW()
     {
         yield return new WaitForSeconds(0.3f);

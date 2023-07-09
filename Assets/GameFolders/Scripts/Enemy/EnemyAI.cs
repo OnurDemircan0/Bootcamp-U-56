@@ -135,7 +135,7 @@ public class EnemyAI : MonoBehaviour
             StopAttacking();
         }
     }
-    private void StopAttacking()
+    public void StopAttacking()
     {
         if(!isDeathCharacter)
         {

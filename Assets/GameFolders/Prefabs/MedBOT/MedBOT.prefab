@@ -192,10 +192,11 @@ MonoBehaviour:
   RayCastDebug: {fileID: 0}
   RayCastDebugChild: {fileID: 0}
   pfBulletProjectile: {fileID: 5296896097677452141, guid: 7c5956ebb0b63444e8ae44933a4521ab, type: 3}
-  bulletInstantiateLocation: {fileID: 0}
-  VFXhitTarget: {fileID: 6882079212614555563, guid: 9efbf54ad78347e4a871a0701d165442, type: 3}
-  VFXhitOther: {fileID: 6882079212614555563, guid: e477eac36c1a26f4f85123bcf16b3771, type: 3}
+  trailSpawnLocation: {fileID: 0}
+  VFXhitTarget: {fileID: 315092135605843382, guid: 5792ea1b0c54089479c1fe8bca626748, type: 3}
+  VFXhitOther: {fileID: 6578257160112329743, guid: 0801e194ec2400143b5114c44ea08642, type: 3}
   muzzleAim: {fileID: 8978365288882480012}
+  bulletDamage: 60
   DesiredInstanceAmount: 10
   interpolationDuration: 0.3
   interpolationDuration2: 0.01
@@ -542,6 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd284356e294b44a970ba64a8051522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  death: 0
   deathCam: {fileID: 0}
   animator: {fileID: 737683901382488607}
   disableScripts: {fileID: 5319603990208060916}
@@ -1199,7 +1201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8978365290067264561}
   m_LocalRotation: {x: 0.7071066, y: 0.70710707, z: -0.00000027939666, w: -0.00000029057253}
-  m_LocalPosition: {x: 1, y: -156.2, z: -106.6}
+  m_LocalPosition: {x: -0.000049704395, y: 124.71198, z: -3.54}
   m_LocalScale: {x: 98.80345, y: 98.80343, z: 98.8034}
   m_ConstrainProportionsScale: 0
   m_Children: []

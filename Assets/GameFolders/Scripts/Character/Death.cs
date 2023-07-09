@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Death : MonoBehaviour
 {
-    bool death;
+    public bool death = false;
     bool onAim;
     bool onShoot;
 
@@ -50,9 +50,24 @@ public class Death : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            deathCam.SetActive(true);
-            StartCoroutine(DeathAnimation());
-            disableScripts.DisableAllScripts();
+            if(deathCam != null) {
+                deathCam.SetActive(true);
+                StartCoroutine(DeathAnimation());
+            }
+            else
+            {
+                Debug.LogWarning("Death Cam is not assigned");
+            }
+            
+            if(disableScripts != null)
+            {
+                disableScripts.DisableAllScripts();
+            }
+            else
+            {
+                Debug.LogWarning("Disable Script is not assigned");
+            }
+            
         }
     }
 
@@ -60,10 +75,27 @@ public class Death : MonoBehaviour
     {
         if(health < 0f)
         {
-            deathCam.SetActive(true);
-            StartCoroutine(DeathAnimation());
-            disableScripts.DisableAllScripts();
+            death = true;
 
+            if(deathCam != null)
+            {
+                deathCam.SetActive(true);
+                StartCoroutine(DeathAnimation());
+            }
+            else
+            {
+                Debug.LogWarning("Death Cam is not assigned");
+            }
+            
+            if(disableScripts != null)
+            {
+                disableScripts.DisableAllScripts();
+            }
+            else
+            {
+                Debug.LogWarning("Disable Script is not assigned");
+            }
+            
             Invoke("Fade", 5f);
         }
     }
@@ -75,28 +107,42 @@ public class Death : MonoBehaviour
 
 
     IEnumerator DeathAnimation() 
-    {
-        float timer = 0f;
-        float duration = 1f;
-        float startWeight = animator.GetLayerWeight(5);
-        float targetWeight = 1.0f;
-
-        while (timer < duration)
+    {if(animator != null)
         {
-            timer += Time.deltaTime;
-            float t = timer / duration;
-            float currentWeight = Mathf.Lerp(startWeight, targetWeight, t);
-            animator.SetLayerWeight(5, currentWeight);
-            yield return null;
-        }
+            float timer = 0f;
+            float duration = 1f;
+            float startWeight = animator.GetLayerWeight(5);
+            float targetWeight = 1.0f;
 
-        animator.SetLayerWeight(5, targetWeight);
-        yield break;
+            while (timer < duration)
+            {
+                timer += Time.deltaTime;
+                float t = timer / duration;
+                float currentWeight = Mathf.Lerp(startWeight, targetWeight, t);
+                animator.SetLayerWeight(5, currentWeight);
+                yield return null;
+            }
+
+            animator.SetLayerWeight(5, targetWeight);
+            yield break;
+        }
+    else
+        {
+            Debug.LogWarning("Animator is not assigned");
+        }
     }
+        
 
     void Fade()
     {
-        fadeCam.isDead = true;
+        if(fadeCam != null)
+        {
+            fadeCam.isDead = true;
+        }
+        else
+        {
+            Debug.LogWarning("Fade Cam is not assigned");
+        }
     }
 
     public void TakeHit(int damage)
@@ -106,31 +152,43 @@ public class Death : MonoBehaviour
         AudioSource.PlayClipAtPoint(hitClip, transform.position);
 
         animator.SetTrigger("Hit");
-
-        ShakeHit();
-
+        try
+        {
+            ShakeHit();
+        }
+        catch
+        {
+            Debug.LogWarning("Shake Method Couldn't Execute --- Check if ShakeManager is Inside the Scene");
+        }
     }
 
     void ShakeHit()
     {
-        Debug.Log("Shake Hit Activated");
-        CinemachineCameraShaker.Instance.ShakeCameraFollow(0.3f, .3f, true);
-        CinemachineCameraShaker.Instance.ShakeCameraAim(0.3f, .3f, true);
-        Debug.Log("Shake Hit Finished");
+        if (CinemachineCameraShaker.Instance != null)
+        {
+            //Debug.Log("Shake Hit Activated");
+            CinemachineCameraShaker.Instance.ShakeCameraFollow(0.3f, .3f, true);
+            CinemachineCameraShaker.Instance.ShakeCameraAim(0.3f, .3f, true);
+            //Debug.Log("Shake Hit Finished");
+        }
+        else
+        {
+            throw new System.Exception("ShakeManager is not present");
+        }
     }
 
 
-   //void Die()
-   //{
-   //    Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - personController.GroundedOffset,
-   //            transform.position.z);
-   //    death = Physics.CheckSphere(spherePosition, personController.GroundedRadius, BloodBottomLayer,
-   //        QueryTriggerInteraction.Ignore);
-   //
-   //    if(death)
-   //    {
-   //        animator.SetLayerWeight(5, Mathf.Lerp(animator.GetLayerWeight(5), 1f, Time.deltaTime * 10f));
-   //        deathCam.SetActive(true);
-   //    }
-   //}
+    //void Die()
+    //{
+    //    Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - personController.GroundedOffset,
+    //            transform.position.z);
+    //    death = Physics.CheckSphere(spherePosition, personController.GroundedRadius, BloodBottomLayer,
+    //        QueryTriggerInteraction.Ignore);
+    //
+    //    if(death)
+    //    {
+    //        animator.SetLayerWeight(5, Mathf.Lerp(animator.GetLayerWeight(5), 1f, Time.deltaTime * 10f));
+    //        deathCam.SetActive(true);
+    //    }
+    //}
 }

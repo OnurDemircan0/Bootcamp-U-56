@@ -48,6 +48,9 @@ namespace MimicSpace
 
         bool canCreateLeg = true;
 
+        [SerializeField]
+        LayerMask GroundLayerMask;
+
         List<GameObject> availableLegPool = new List<GameObject>();
 
         [Tooltip("This must be updates as the Mimin moves to assure great leg placement")]
@@ -164,5 +167,4 @@ namespace MimicSpace
             leg.SetActive(false);
         }
     }
-
 }

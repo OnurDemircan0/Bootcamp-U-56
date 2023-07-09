@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GetEnemies : MonoBehaviour
 {
@@ -13,15 +14,24 @@ public class GetEnemies : MonoBehaviour
 
     GameObject[] enemies;
 
+    GameObject[] enemiesPhase2;
+
+    public GameObject phase2Parent;
+
     bool[] enemyAliveState;
+    bool[] enemyAliveStatePhaseTwo;
 
     [SerializeField]
     float clearBloodDuration = 5f;
+
+    [SerializeField]
+    float riseBloodDuration = 15f;
 
     float timer = 0.0f;
 
     int j = 0;
     int a;
+    int enemySpawned = 0;
 
 
 
@@ -34,6 +44,12 @@ public class GetEnemies : MonoBehaviour
         Debug.Log("Enemy number is " + enemies.Length);
 
         enemyAliveState = new bool[enemies.Length];
+
+        enemiesPhase2 = phase2Parent.GetComponentsInChildren<Transform>()
+            .Where(t => t != phase2Parent.transform)
+            .Select(t => t.gameObject)
+            .ToArray();
+        foreach (GameObject enemy in enemiesPhase2) { enemy.SetActive(false); }
 
         CheckEnemyAliveState();
     }
@@ -54,8 +70,39 @@ public class GetEnemies : MonoBehaviour
             // Call Function if all the enemies are death
             Debug.Log("All Enemies are Death");
 
-            ClearBlood();
-            ActivateEnemies();
+            
+            if(enemySpawned < enemies.Length)
+            {
+                ClearBlood();
+                ActivateEnemies();
+            }
+            else if (enemySpawned >= enemies.Length)
+            {
+                Debug.Log("Phase 2 Starting");
+                RiseBlood();
+                StartPhaseTwo();
+            }
+
+        }
+    }
+
+    public void CheckEnemyAliveStatePhaseTwo()
+    {
+        for (int i = 0; i < enemiesPhase2.Length; i++)
+        {
+            enemyAliveStatePhaseTwo[i] = enemiesPhase2[i].activeSelf;
+
+           // Debug.Log("Enemy " + i + " alive state: " + enemyAliveState[i]);
+        }
+
+        bool allFalse = enemyAliveStatePhaseTwo.All(value => value == false);
+        if (allFalse)
+        {
+            // Call Function if all the enemies are death
+            //Debug.Log("All Enemies are Death");
+
+            Debug.Log("Do Something Here");
+
         }
     }
 
@@ -66,13 +113,13 @@ public class GetEnemies : MonoBehaviour
         yield return new WaitForSeconds(4);
 
         Vector3 originalPosF = ThingsToMove[0].transform.position;
-        float targetY = originalPosF.y - 120f;
+        float targetY = originalPosF.y - 56.5f;
 
         Vector3 originalPosS = ThingsToMove[1].transform.position;
-        float targetYS = originalPosS.y - 120f;
+        float targetYS = originalPosS.y - 56.5f;
 
         Vector3 originalPosT = ThingsToMove[2].transform.position;
-        float targetYT = originalPosT.y - 120f;
+        float targetYT = originalPosT.y - 56.5f;
 
         float elapsedTime = 0f;
 
@@ -95,12 +142,60 @@ public class GetEnemies : MonoBehaviour
 
     }
 
+    private IEnumerator RiseBloodCoroutine()
+    {
+        Debug.Log("Rising Blood");
+
+        Vector3 originalPosF = ThingsToMove[0].transform.position;
+        float targetY = originalPosF.y + 11f;
+
+        Vector3 originalPosS = ThingsToMove[1].transform.position;
+        float targetYS = originalPosS.y + 11f;
+
+        Vector3 originalPosT = ThingsToMove[2].transform.position;
+        float targetYT = originalPosT.y + 11f;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < riseBloodDuration)
+        {
+            float t = elapsedTime / riseBloodDuration;
+
+            float newY = Mathf.Lerp(originalPosF.y, targetY, t);
+            float newYS = Mathf.Lerp(originalPosS.y, targetYS, t);
+            float newYT = Mathf.Lerp(originalPosT.y, targetYT, t);
+
+            // Set the new position of the objects
+            ThingsToMove[0].transform.position = new Vector3(originalPosF.x, newY, originalPosF.z);
+            ThingsToMove[1].transform.position = new Vector3(originalPosS.x, newYS, originalPosS.z);
+            ThingsToMove[2].transform.position = new Vector3(originalPosT.x, newYT, originalPosT.z);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+    }
+
     void ClearBlood()
     {
         StartCoroutine(ClearBloodCoroutine());
     }
 
+    void RiseBlood()
+    {
+        StartCoroutine(RiseBloodCoroutine());
+    }
 
+    void StartPhaseTwo()
+    {
+        Debug.Log("Trying to Activate Phase Two Enemies");
+        foreach (GameObject enemy in enemiesPhase2)
+        {
+            enemy.SetActive(true);
+            Debug.Log("Enemy set true");
+        }
+
+    }
     void ActivateEnemies()
     {
         Debug.Log("Insýde The Activate Enemies");
@@ -111,7 +206,7 @@ public class GetEnemies : MonoBehaviour
         int enemiesPerSpawnPoint = enemyCount / spawnPointCount;
         int remainingEnemies = enemyCount % spawnPointCount; // Enemies that cannot be evenly distributed
 
-        
+
 
         int enemyIndex = 0;
 
@@ -123,10 +218,10 @@ public class GetEnemies : MonoBehaviour
             // Spawn the enemies per spawn point
             for (int c = 0; c < enemiesPerSpawnPoint; c++)
             {
-                float RandomX = Random.Range(1f, 50f);
-                float RandomZ = Random.Range(1f, 50f);
-                spawnPos.x = RandomX;
-                spawnPos.z = RandomZ;
+               // float RandomX = Random.Range(1f, 55f);
+               // float RandomZ = Random.Range(1f, 55f);
+               // spawnPos.x += RandomX;
+               // spawnPos.z += RandomZ;
 
                 Debug.Log("Distrubuting Enemies");
                 SpawnEnemy(spawnPos, enemyIndex);
@@ -153,10 +248,19 @@ public class GetEnemies : MonoBehaviour
 
             GameObject enemy = enemies[enemyIndex];
 
-            enemy.GetComponent<Enemy>().Health = 100;
+           MoveObjectWithOther enemyObjectAttach = enemy.GetComponent<MoveObjectWithOther>();
+
+            if(enemyObjectAttach != null)
+            {
+                enemyObjectAttach.enabled = false;
+            }
+
+            enemy.GetComponent<NavMeshAgent>().enabled = true;
+            enemy.GetComponent<Enemy>().Health = 110;
             enemy.GetComponent<RagDollToggle>().RagdollEnable(false);
             enemy.GetComponent<ProjectileAttack>().enabled = false;
             enemy.GetComponent<EnemyAI>().enabled = true;
+           
 
             enemy.transform.position = spawnPosition;
             enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -164,6 +268,8 @@ public class GetEnemies : MonoBehaviour
             
 
             enemy.gameObject.SetActive(true);
+
+            enemySpawned++;
         }
     }
 }

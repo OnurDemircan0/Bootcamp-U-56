@@ -13,6 +13,7 @@ TagManager:
   - EnemyBullet
   - Enemy
   - Muzzle Effect
+  - Phase Two Enemy
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - Blood
   - BloodBottom
   - Player
-  - 
-  - 
+  - MimicLayer
+  - LegLayer
   - 
   - 
   - 
