@@ -182,7 +182,6 @@ public class SurfingControllerV2 : MonoBehaviour
 
     private void followPath()
     {
-
         if (dstTravelled > 780 && speed < maxSpeed)
         {
             speed += speedAcceleration * Time.deltaTime;

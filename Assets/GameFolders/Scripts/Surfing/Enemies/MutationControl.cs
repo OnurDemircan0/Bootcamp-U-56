@@ -38,10 +38,10 @@ public class MutationControl : MonoBehaviour
     [Range(0.1f, 10f)] [SerializeField] private float minChangeColorSpeed;
     [Range(0.1f, 10f)] [SerializeField] private float maxChangeColorSpeed;
     private float changeColorSpeed;
-    [SerializeField] private Color[] virusMaterialColors;
+    public Color[] virusMaterialColors;
     private Material virusMaterial;
     public int nowVirusMaterialColorsNumber = -1;
-    private int targetVirusMaterialColorsNumber = 0;
+    public int targetVirusMaterialColorsNumber = -1;
 
     [Range(10f, 200f)] [SerializeField] private float minChangeSizeSpeed;
     [Range(10f, 200f)] [SerializeField] private float maxChangeSizeSpeed;
@@ -61,7 +61,13 @@ public class MutationControl : MonoBehaviour
 
     private bool beforeMutated = false;
 
+    [SerializeField] private int minRanmdomMutationNumberForDetermineMutations;
+    [SerializeField] private int maxRanmdomMutationNumberForDetermineMutations;
+    private int ranmdomMutationNumberForDetermineMutations;
+
     private GameObject newDividedVirus;
+
+
 
 
     private void Awake()
@@ -89,11 +95,13 @@ public class MutationControl : MonoBehaviour
         }
         virusMaterial.color = virusMaterialColors[nowVirusMaterialColorsNumber];
 
+        targetVirusMaterialColorsNumber = nowVirusMaterialColorsNumber;
+
 
         firstSizeValue = transform.localScale.x;
     }
 
-    private void mutateVirus()
+    public void mutateVirus()
     {
         //Kendi kendinede mutayon geçirsin bazen
 
@@ -110,13 +118,59 @@ public class MutationControl : MonoBehaviour
 
         //Mutosyon 9 -> Etrafýnda Kalkan Oluþsun Diðer mutasyonlardan farklý random fankisyonuna koy
 
+
+        ranmdomMutationNumberForDetermineMutations = Random.Range(minRanmdomMutationNumberForDetermineMutations, maxRanmdomMutationNumberForDetermineMutations);
+
+        switch (ranmdomMutationNumberForDetermineMutations)
+        {
+            case 0:
+                changeColorControl = true;
+                break;
+            case 1:
+                changeSizeControl = true;
+                break;
+            case 2:
+                mutationDivideControl = true;
+                break;
+            case 3:
+                changeColorControl = true;
+                changeSizeControl = true;
+                break;
+            case 4:
+                changeColorControl = true;
+                mutationDivideControl = true;
+                break;
+            case 5:
+                changeSizeControl = true;
+                mutationDivideControl = true;
+                break;
+            case 6:
+                changeColorControl = true;
+                changeSizeControl = true;
+                mutationDivideControl = true;
+                break;
+
+            default:
+                changeColorControl = true;
+                changeSizeControl = true;
+                mutationDivideControl = true;
+                break;
+        }
+
+
+
+
+        /*
         if(beforeMutated == false)
         {
             //Eðer önceden hiç mutasyon geçirmediyse mutasyon geçirsin
 
             beforeMutated = true;
         }
+        */
     }
+
+
 
     IEnumerator changeColorVirus()
     {
