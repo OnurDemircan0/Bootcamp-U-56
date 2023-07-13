@@ -16,6 +16,9 @@ public class SurfingControllerV2 : MonoBehaviour
     [SerializeField] private Image imageBlack;
 
 
+    [SerializeField] private bool alyuvarVerticalAndHorizontalMovementControl = true;
+
+
     
 
     //[SerializeField] private float startPoint;
@@ -116,9 +119,17 @@ public class SurfingControllerV2 : MonoBehaviour
         inputHorizontal = Input.GetAxis("Horizontal");
 
 
-
-        translationX = inputVertical * speed * Time.deltaTime;
-        translationZ = inputHorizontal * speed * Time.deltaTime;
+        if (alyuvarVerticalAndHorizontalMovementControl)
+        {
+            translationX = inputVertical * speed * Time.deltaTime;
+            translationZ = inputHorizontal * speed * Time.deltaTime;
+        }
+        else
+        {
+            translationX = 0;
+            translationZ = 0;
+        }
+        
 
         //Debug.Log("translation X: " + translationX * alyuvarRotationMaxiumValueX);
         //Debug.Log("translation Z: " + translationZ * alyuvarRotationMaxiumValueY);
@@ -182,7 +193,6 @@ public class SurfingControllerV2 : MonoBehaviour
 
     private void followPath()
     {
-
         if (dstTravelled > 780 && speed < maxSpeed)
         {
             speed += speedAcceleration * Time.deltaTime;
@@ -298,16 +308,21 @@ public class SurfingControllerV2 : MonoBehaviour
             transform.right.z * xDistanceFromPathPoint2);
         */
 
-        
-        transform.position += new Vector3(transform.right.x * xDistanceFromPathPoint2,
+
+        if (alyuvarVerticalAndHorizontalMovementControl)
+        {
+            transform.position += new Vector3(transform.right.x * xDistanceFromPathPoint2,
             0 * xDistanceFromPathPoint2,
             transform.right.z * xDistanceFromPathPoint2);
+
+
+
+            transform.position += new Vector3(transform.up.x * yDistanceFromPathPoint2,
+                transform.up.y * yDistanceFromPathPoint2,
+                transform.up.z * yDistanceFromPathPoint2);
+        }
+
         
-
-
-        transform.position += new Vector3(transform.up.x * yDistanceFromPathPoint2,
-            transform.up.y * yDistanceFromPathPoint2,
-            transform.up.z * yDistanceFromPathPoint2);
 
 
         /*
@@ -359,10 +374,20 @@ public class SurfingControllerV2 : MonoBehaviour
         //transform.rotation = Quaternion.Euler(new Vector3(270,0,0));
 
 
-
-        transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x + alyuvarNowRotationValueX * -1
+        if (alyuvarVerticalAndHorizontalMovementControl)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x + alyuvarNowRotationValueX * -1
             , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.y
             , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.z + 90 + alyuvarNowRotationValueZ));
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x
+            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.y
+            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.z + 90));
+        }
+
+        
 
 
         //rotateAlyuvarHorizontal();

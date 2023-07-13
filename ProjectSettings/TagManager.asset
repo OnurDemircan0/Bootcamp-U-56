@@ -14,6 +14,10 @@ TagManager:
   - Enemy
   - Muzzle Effect
   - Phase Two Enemy
+  - FxTemporaire
+  - BlueVirus
+  - GreenVirus
+  - RedVirus
   layers:
   - Default
   - TransparentFX

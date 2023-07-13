@@ -35,6 +35,9 @@ public class VirusController : MonoBehaviour
     public float addPositionY = 0.0f;
     public float addPositionZ = 0.0f;
 
+    private float randomPositionX;
+    private float randomPositionY;
+
     private float addPositionBeforeValueX = 0.0f;
     private float addPositionBeforeValueY = 0.0f;
     private float addPositionBeforeValueZ = 0.0f;
@@ -60,6 +63,27 @@ public class VirusController : MonoBehaviour
         speed = Random.Range(minSpeedForRandom, maxSpeedForRandom);
 
         dstTravelled = Random.Range(minDistanceFromStartPoint, maxDistanceFromStartPoint);
+
+
+
+        if (Random.Range(0, 2) == 0)
+        {
+            randomPositionX = Random.Range(maxDistanceFromPathPoint * -1, minDistanceFromPathPoint * -1);
+        }
+        else
+        {
+            randomPositionX = Random.Range(minDistanceFromPathPoint, maxDistanceFromPathPoint);
+        }
+
+        if (Random.Range(0, 2) == 0)
+        {
+            randomPositionY = Random.Range(maxDistanceFromPathPoint * -1, minDistanceFromPathPoint * -1);
+
+        }
+        else
+        {
+            randomPositionY = Random.Range(minDistanceFromPathPoint, maxDistanceFromPathPoint);
+        }
 
     }
 
@@ -99,8 +123,16 @@ public class VirusController : MonoBehaviour
             , pathCreator.path.GetPointAtDistance(dstTravelled, end).z + nowPositionZ + addPositionZ);
         */
 
+
+        /*
         transform.position = new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x + nowPositionX + addPositionX
             , pathCreator.path.GetPointAtDistance(dstTravelled, end).y + nowPositionY + addPositionY
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).z);
+        */
+
+
+        transform.position = new Vector3(pathCreator.path.GetPointAtDistance(dstTravelled, end).x + nowPositionX + addPositionX + randomPositionX
+            , pathCreator.path.GetPointAtDistance(dstTravelled, end).y + nowPositionY + addPositionY + randomPositionY
             , pathCreator.path.GetPointAtDistance(dstTravelled, end).z);
 
 
