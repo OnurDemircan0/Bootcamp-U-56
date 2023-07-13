@@ -25,11 +25,20 @@ public class GetEnemies : MonoBehaviour
 
     public bool phase2CanStart = false;
 
+    private bool pushedPlayerOnce = false;
+    private bool afterBloodClear = false;
+
     [SerializeField]
     float clearBloodDuration = 5f;
 
     [SerializeField]
     float riseBloodDuration = 15f;
+
+    [SerializeField]
+    CharacterController characterController;
+
+    [SerializeField]
+    Death deathScript;
 
     float timer = 0.0f;
 
@@ -39,6 +48,8 @@ public class GetEnemies : MonoBehaviour
 
     [SerializeField]
     GatePulse gatePulse;
+
+
 
     private void Start()
     {
@@ -95,7 +106,7 @@ public class GetEnemies : MonoBehaviour
                 RiseBlood();
                 StartPhaseTwo();
             }
-
+            deathScript.health = 100f;
         }
     }
 
@@ -152,6 +163,7 @@ public class GetEnemies : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        afterBloodClear = true;
 
     }
 
@@ -186,6 +198,7 @@ public class GetEnemies : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        
 
     }
 
@@ -282,6 +295,16 @@ public class GetEnemies : MonoBehaviour
             enemy.gameObject.SetActive(true);
 
             enemySpawned++;
+        }
+
+    }
+
+    public void pushEnemyWithPulse()
+    {
+        if(!pushedPlayerOnce && afterBloodClear)
+        {
+            characterController.Move(new Vector3(0f, 5f, 10f));
+            pushedPlayerOnce = true;
         }
     }
 }

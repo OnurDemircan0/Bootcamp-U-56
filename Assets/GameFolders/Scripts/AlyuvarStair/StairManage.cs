@@ -24,6 +24,9 @@ public class StairManage : MonoBehaviour
     [SerializeField]
     ThirdPersonController personController;
 
+    [SerializeField]
+    GameObject EndOfLevel;
+
     bool invokeTriggered = false;
 
     public void CallSetStairs()
@@ -35,36 +38,38 @@ public class StairManage : MonoBehaviour
     {
         yield return new WaitForSeconds(7f);
 
-        for (int i = 0; i < alyuvar.Length; i++ )
+        for (int i = 0; i < alyuvar.Length; i++)
         {
-            Vector3 newPosition = new Vector3((alyuvar[i].transform.position.x - 2f), alyuvar[i].transform.position.y, alyuvar[i].transform.position.z);
+            Vector3 currentPosition = alyuvar[i].transform.position;
+            Vector3 newPosition = new Vector3(currentPosition.x - 3.85f, currentPosition.y, currentPosition.z);
+            float startTime = Time.time;
 
             while (alyuvar[i].transform.position.x > newPosition.x)
             {
-                alyuvar[i].transform.position = Vector3.Lerp(alyuvar[i].transform.position, newPosition, Time.deltaTime * stairTime);
+                float t = (Time.time - startTime) / stairTime;
+                alyuvar[i].transform.position = Vector3.Lerp(currentPosition, newPosition, t);
+
                 yield return null;
             }
-            
+
             yield return new WaitForSeconds(0.5f);
         }
 
-        if(!invokeTriggered)
+        if (!invokeTriggered)
         {
-            Invoke("JumpBoosParticle", 6f);
+            Invoke("JumpBoostParticle", 6f);
             invokeTriggered = true;
         }
-        
-
-        yield break;
     }
 
-
-    void JumpBoosParticle()
+    void JumpBoostParticle()
     {
         jumpBoostParticle.SetActive(true);
 
         jumpBoostSound.PlayOneShot(jumpBoostSound.clip);
 
         personController.JumpHeight *= 2f;
+
+        EndOfLevel.SetActive(true);
     }
 }

@@ -35,6 +35,12 @@ public class Death : MonoBehaviour
     [SerializeField]
     Movement mimicMovement;
 
+    [SerializeField]
+    GameObject muzzle;
+
+    [SerializeField]
+    AudioSource gunSound;
+
     //public CameraShaker cameraShaker;
 
     ThirdPersonController personController;
@@ -55,7 +61,13 @@ public class Death : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            if(deathCam != null) {
+            if (muzzle != null && gunSound != null)
+            {
+                muzzle.SetActive(false);
+                gunSound.Stop();
+            }
+
+            if (deathCam != null) {
                 deathCam.SetActive(true);
                 StartCoroutine(DeathAnimation());
             }
@@ -81,7 +93,12 @@ public class Death : MonoBehaviour
         if(health < 0f)
         {
             death = true;
-
+            if(muzzle != null && gunSound != null)
+            {
+                muzzle.SetActive(false);
+                gunSound.Stop();
+            }
+            
             if(deathCam != null)
             {
                 deathCam.SetActive(true);

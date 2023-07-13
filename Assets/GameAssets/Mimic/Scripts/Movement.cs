@@ -29,6 +29,7 @@ namespace MimicSpace
         private bool damageTriggered = false;
         private bool bossThemeTriggered = false;
         private bool bossThemeSoundsIsSet= false;
+        private bool VirusEscapeSceneTriggered = false;
 
         public float timeBetweenAttacks = 1f;
         public int mimicDamage = 20;
@@ -37,6 +38,7 @@ namespace MimicSpace
         public float damageCoolDown = 0.3f;
 
         public float explosionDamage = 18f;
+        public float MainVirusEscapeSceneTime = 5f;
 
         Death playerDeathScript;
 
@@ -61,6 +63,15 @@ namespace MimicSpace
 
         [SerializeField]
         ParticleSystem damageParticle;
+
+        [SerializeField]
+        GameObject MainVirusEscapeCamera;
+
+        [SerializeField]
+        GameObject MainVirus;
+
+        [SerializeField]
+        Animator mainVirusAnimator;
         private void OnDrawGizmos()
         {
 
@@ -109,7 +120,9 @@ namespace MimicSpace
 
                 StartDecreaseVolume();
 
-                stairManage.CallSetStairs();
+                Invoke("SetMainVirusEscapeCam", 7f);
+
+                Invoke("CallStairs", MainVirusEscapeSceneTime + 7f);
 
                 Invoke("KillMimic", 2.5f);
 
@@ -151,9 +164,11 @@ namespace MimicSpace
 
         public void CheckPlayerHealth()
         {
-            if(playerDeathScript.health <= 0f)
+            if(playerDeathScript.health < 0f)
             {
                 isDeadCharacter = true;
+
+                DecreaseVolume();
             }
         }
         private void ResetAttack()
@@ -223,6 +238,32 @@ namespace MimicSpace
         void StartIncreaseVolume()
         {
             StartCoroutine(IncreaseVolume());
+        }
+
+        void CallStairs()
+        {
+            stairManage.CallSetStairs();
+        }
+
+        void SetMainVirusEscapeCam()
+        {
+            if(!VirusEscapeSceneTriggered)
+            {
+                MainVirus.SetActive(true);
+
+                mainVirusAnimator.SetBool("Enabled", true);
+
+                MainVirusEscapeCamera.SetActive(true);
+                Invoke("SetOFFMainVirusEscapeCam", MainVirusEscapeSceneTime);
+
+                VirusEscapeSceneTriggered = true;
+            }
+        }
+
+        void SetOFFMainVirusEscapeCam()
+        {
+            MainVirusEscapeCamera.SetActive(false);
+            MainVirus.SetActive(false);
         }
     }
 
