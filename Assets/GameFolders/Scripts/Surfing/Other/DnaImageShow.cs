@@ -20,7 +20,7 @@ public class DnaImageShow : MonoBehaviour
         
     }
 
-
+    /*
     IEnumerator changeColorAlphaDNAImage()
     {
         //yield return null;
@@ -68,4 +68,5 @@ public class DnaImageShow : MonoBehaviour
         }
 
     }
+    */
 }
