@@ -46,6 +46,16 @@ public class HitFeelingController : MonoBehaviour
     [SerializeField] private float cameraShakefullIntensityTimeForMutate;
     [SerializeField] private float cameraShakeGoToZeroTimeForMutate;
 
+    [SerializeField] private Image dnaImage;
+
+    [SerializeField] private float minColorAlpha;
+    [SerializeField] private float maxColorAlpha;
+
+    [SerializeField] private float changeColorAlphaSpeed;
+
+    private bool changeColorToZeroCompleteControl;
+    private bool changeColorToOneCompleteControl;
+
     private float nowSizeCrossHair;
 
     private bool killedControl;
@@ -119,6 +129,7 @@ public class HitFeelingController : MonoBehaviour
         if(mutationEfectFinishedControl == true)
         {
             StartCoroutine(changeScaleAndRotationCrossHairImageForMutate());
+            StartCoroutine(changeColorAlphaDNAImage());
 
             cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForMutate, cameraShakefullIntensityTimeForMutate, cameraShakeGoToZeroTimeForMutate);
             mutationControl.mutateVirus();
@@ -129,6 +140,54 @@ public class HitFeelingController : MonoBehaviour
         
 
         //Debug.Log("Mutasyon geçirdi");
+    }
+
+    IEnumerator changeColorAlphaDNAImage()
+    {
+        //yield return null;
+
+        changeColorToZeroCompleteControl = false;
+        changeColorToOneCompleteControl = false;
+
+
+
+        while (true)
+        {
+
+            if (changeColorToOneCompleteControl == false)
+            {
+                dnaImage.color += new Color(0, 0, 0, 0.01f) * changeColorAlphaSpeed * Time.deltaTime;
+
+                //Debug.Log("Kalp atýþ büyüyor: ");
+                //Debug.Log("Kalp atýþ büyüyor heartIconImageRectTransform.sizeDelta.x: " + heartIconImageRectTransform.sizeDelta.x);
+
+                if (dnaImage.color.a >= maxColorAlpha)
+                {
+                    changeColorToOneCompleteControl = true;
+
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+            else if (changeColorToZeroCompleteControl == false)
+            {
+                dnaImage.color -= new Color(0, 0, 0, 0.01f) * changeColorAlphaSpeed * Time.deltaTime;
+
+                //Debug.Log("Kalp atýþ küçülüyor: ");
+                //Debug.Log("Kalp atýþ küçülüyor heartIconImageRectTransform.sizeDelta.x: " + heartIconImageRectTransform.sizeDelta.x);
+
+                if (dnaImage.color.a <= minColorAlpha)
+                {
+                    dnaImage.color = new Color(dnaImage.color.r, dnaImage.color.g, dnaImage.color.b, 0);
+
+                    break;
+                }
+
+            }
+
+            yield return new WaitForEndOfFrame();
+
+        }
+
     }
 
 

@@ -37,10 +37,10 @@ public class EnemyCreator : MonoBehaviour
     void Awake()
     {
         firstEnemyCreatingControl = false;
-        StartCoroutine(createAlyuvars());
+        StartCoroutine(createEnemies());
     }
 
-    IEnumerator createAlyuvars()
+    IEnumerator createEnemies()
     {
         while (true)
         {
