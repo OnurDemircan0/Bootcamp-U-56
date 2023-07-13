@@ -16,10 +16,11 @@ public class BeatDetection : MonoBehaviour
 
     private void Update()
     {
-        foreach (Intervals interval in _intervals) { 
-        
+        foreach (Intervals interval in _intervals)
+        {
+
             float sampledTime = (_audioSource.timeSamples / (_audioSource.clip.frequency * interval.GetIntervalLenght(_bpm)));
-            interval.CheckForNewInterval(sampledTime); 
+            interval.CheckForNewInterval(sampledTime);
         }
     }
 }
@@ -27,7 +28,7 @@ public class BeatDetection : MonoBehaviour
 [System.Serializable]
 public class Intervals
 {
-    [SerializeField] 
+    [SerializeField]
     private float _steps;
 
     [SerializeField]
@@ -40,7 +41,8 @@ public class Intervals
         return 60f / (bpm * _steps);
     }
 
-    public void CheckForNewInterval (float interval) {
+    public void CheckForNewInterval(float interval)
+    {
 
         if (Mathf.FloorToInt(interval) != _lastInterval)
         {

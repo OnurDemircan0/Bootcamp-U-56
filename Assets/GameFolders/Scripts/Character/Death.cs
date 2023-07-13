@@ -12,6 +12,8 @@ public class Death : MonoBehaviour
     bool onAim;
     bool onShoot;
 
+    public bool onMimicStage = false;
+
     [SerializeField] 
     GameObject deathCam;
 
@@ -29,6 +31,9 @@ public class Death : MonoBehaviour
 
     [SerializeField]
     AudioClip hitClip;
+
+    [SerializeField]
+    Movement mimicMovement;
 
     //public CameraShaker cameraShaker;
 
@@ -150,6 +155,11 @@ public class Death : MonoBehaviour
         health -= damage;
 
         AudioSource.PlayClipAtPoint(hitClip, transform.position);
+
+        if(mimicMovement != null && onMimicStage)
+        {
+            mimicMovement.CheckPlayerHealth();
+        }
 
         animator.SetTrigger("Hit");
         try

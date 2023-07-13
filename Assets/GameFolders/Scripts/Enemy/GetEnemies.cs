@@ -10,6 +10,8 @@ public class GetEnemies : MonoBehaviour
 
     public GameObject[] SpawnPoints;
 
+    public PulseObjects[] FirstPassageCubes;
+
     public static GetEnemies Instance;
 
     GameObject[] enemies;
@@ -20,6 +22,8 @@ public class GetEnemies : MonoBehaviour
 
     bool[] enemyAliveState;
     bool[] enemyAliveStatePhaseTwo;
+
+    public bool phase2CanStart = false;
 
     [SerializeField]
     float clearBloodDuration = 5f;
@@ -33,7 +37,8 @@ public class GetEnemies : MonoBehaviour
     int a;
     int enemySpawned = 0;
 
-
+    [SerializeField]
+    GatePulse gatePulse;
 
     private void Start()
     {
@@ -79,6 +84,14 @@ public class GetEnemies : MonoBehaviour
             else if (enemySpawned >= enemies.Length)
             {
                 Debug.Log("Phase 2 Starting");
+
+                foreach(PulseObjects pulse in FirstPassageCubes)
+                {
+                    pulse.pulseScalePassage = 1.15f;
+                }
+
+                phase2CanStart = true;
+
                 RiseBlood();
                 StartPhaseTwo();
             }
@@ -185,16 +198,15 @@ public class GetEnemies : MonoBehaviour
     {
         StartCoroutine(RiseBloodCoroutine());
     }
-
     void StartPhaseTwo()
     {
         Debug.Log("Trying to Activate Phase Two Enemies");
+
         foreach (GameObject enemy in enemiesPhase2)
         {
             enemy.SetActive(true);
             Debug.Log("Enemy set true");
-        }
-
+        }   
     }
     void ActivateEnemies()
     {

@@ -9,6 +9,9 @@ public class PulseObjects : MonoBehaviour
     [SerializeField]
     float pulseScale = 1.1f;
 
+    public
+    float pulseScalePassage = 1.1f;
+
     [SerializeField]
     float pulseTime = 5f;
 
@@ -22,10 +25,17 @@ public class PulseObjects : MonoBehaviour
         transform.localScale = Vector3.Lerp(transform.localScale, startScale, Time.deltaTime * pulseTime);
     }
 
-    public void Pulse()
+    public void PulseVein()
     {
         Vector3 newScale = transform.localScale;
         newScale.y *= pulseScale;
+        transform.localScale = newScale;
+    }
+
+    public void PulsePassage()
+    {
+        Vector3 newScale = transform.localScale;
+        newScale *= pulseScalePassage;
         transform.localScale = newScale;
     }
 }

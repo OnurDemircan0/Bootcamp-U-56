@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1682633662898237459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -223,25 +223,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDeployed: 0
   footPosition: {x: 0, y: 0, z: 0}
-  maxLegDistance: 0
+  maxLegDistance: 15.21
   legResolution: 0
-  legLine: {fileID: 0}
-  handlesCount: 8
-  legMinHeight: 0.6
-  legMaxHeight: 1.2
+  legLine: {fileID: 6164918350687002688}
+  handlesCount: 55
+  legMinHeight: 2.63
+  legMaxHeight: 4.98
   handles: []
   handleOffsetMinRadius: 0.2
   handleOffsetMaxRadius: 0.65
   handleOffsets: []
   finalFootDistance: 0.35
-  growCoef: 3
-  growTarget: 1
+  growCoef: 8.76
+  growTarget: 9.97
   progression: 0
   minDuration: 0.5
   rotationSpeed: 180
   minRotSpeed: 15
   maxRotSpeed: 150
-  oscillationSpeed: 0
+  oscillationSpeed: -8.22
   minOscillationSpeed: 20
   maxOscillationSpeed: 100
   myColor: {r: 0, g: 0, b: 0, a: 0}

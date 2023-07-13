@@ -40,11 +40,11 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
-        if (enemyGameObject != null && enemyTag == "Enemy")
+        if (enemyGameObject != null && (enemyTag == "Enemy" || enemyTag == "Phase Two Enemy"))
         {
-            CheckHealth(); 
+            CheckHealth();
             HitAnim();
-           // SetShootAnim();
+            // SetShootAnim();
         }
         else
         {

@@ -9,6 +9,7 @@ public class CameraShakeManager : MonoBehaviour
     StarterAssetsInputs starterAssetsInputs;
 
     bool Shaked = false;
+    public bool mimicExplode = false;
 
     [SerializeField]
     float ShakeIntesity;
@@ -17,7 +18,7 @@ public class CameraShakeManager : MonoBehaviour
     {
         if (starterAssetsInputs != null)
         {
-            if(starterAssetsInputs.shoot)
+            if(starterAssetsInputs.shoot && !mimicExplode)
             {
                 //Debug.Log("Inside shoot IF");
                 CinemachineCameraShaker.Instance.SetIntensityShakeAimManuel(ShakeIntesity);
@@ -28,7 +29,7 @@ public class CameraShakeManager : MonoBehaviour
             }
             else
             {
-                if (Shaked && !starterAssetsInputs.shoot)
+                if (Shaked && !starterAssetsInputs.shoot && !mimicExplode)
                 {
                    //Debug.Log("In Restart Shake");
                     CinemachineCameraShaker.Instance.SetIntensityShakeAimManuel(0f);

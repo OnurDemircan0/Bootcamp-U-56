@@ -12,11 +12,13 @@ namespace MimicSpace
         [Range(0.5f, 5f)]
         public float height = 0.8f;
 
+        public float health = 100f;
         public float speed = 5f;
         public float velocityLerpCoef = 4f;
 
         public GameObject player;
-        public float chaseDistance = 2f;
+        public float attackDistance = 2f;
+        public float chaseDistance = 10f;
         public int damageAmount = 10;
 
         private NavMeshAgent agent;
@@ -24,13 +26,48 @@ namespace MimicSpace
 
         private bool alreadyAttacked = false;
         private bool isDeadCharacter = false;
+        private bool damageTriggered = false;
+        private bool bossThemeTriggered = false;
+        private bool bossThemeSoundsIsSet= false;
 
         public float timeBetweenAttacks = 1f;
         public int mimicDamage = 20;
 
-        private float attackCooldown = 0f;
+        public float mimicRadius = 0.5f;
+        public float damageCoolDown = 0.3f;
+
+        public float explosionDamage = 18f;
 
         Death playerDeathScript;
+
+        [SerializeField]
+        DissolveObject dissolveObject;
+        
+
+        [SerializeField]
+        LayerMask mimicExplosion;
+
+        [SerializeField]
+        StairManage stairManage;
+
+        [SerializeField]
+        AudioSource angryMusic;
+
+        [SerializeField]
+        AudioSource splatClip;
+
+        [SerializeField]
+        ParticleSystem deathParticle;
+
+        [SerializeField]
+        ParticleSystem damageParticle;
+        private void OnDrawGizmos()
+        {
+
+            Gizmos.color = Color.black;
+            Gizmos.DrawWireSphere(transform.position, mimicRadius);
+            
+        }
 
         private void Start()
         {
@@ -41,13 +78,20 @@ namespace MimicSpace
 
         private void Update()
         {
-            if (player != null)
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+
+            if (player != null && distance <= chaseDistance)
             {
                 agent.SetDestination(player.transform.position);
 
-                float distance = Vector3.Distance(transform.position, player.transform.position);
+                if(!bossThemeTriggered)
+                {
+                    angryMusic.Play();    
+                    StartIncreaseVolume();
+                    bossThemeTriggered = true;
+                }
 
-                if (distance <= chaseDistance)
+                if (distance <= attackDistance)
                 {
                     if (!isDeadCharacter)
                     {
@@ -56,11 +100,36 @@ namespace MimicSpace
                 }
             }
 
-            //if (attackCooldown > 0f)
-            //{
-            //    attackCooldown -= Time.deltaTime;
-            //}
-            //
+            if(health < 0f)
+            {
+                StartCoroutine(dissolveObject.Dissolve());
+                attackDistance = 0f;
+                agent.SetDestination(transform.position);
+                deathParticle.gameObject.SetActive(true);
+
+                StartDecreaseVolume();
+
+                stairManage.CallSetStairs();
+
+                Invoke("KillMimic", 2.5f);
+
+                Invoke("StopMusic", 15f);
+            }
+
+            bool checkRadius = CheckTriggerSphere(transform.position, mimicRadius, mimicExplosion);
+
+            if(checkRadius && !damageTriggered)
+            {
+                health -= explosionDamage;
+
+                damageParticle.gameObject.SetActive(true );
+                splatClip.PlayOneShot(splatClip.clip);
+
+                damageTriggered = true;
+
+                Invoke("ResetDamageBool", damageCoolDown);
+            }
+
             myMimic.velocity = agent.velocity;
             transform.position = agent.nextPosition + Vector3.up * height;
         }
@@ -80,7 +149,7 @@ namespace MimicSpace
             }
         }
 
-        private void CheckPlayerHealth()
+        public void CheckPlayerHealth()
         {
             if(playerDeathScript.health <= 0f)
             {
@@ -91,5 +160,70 @@ namespace MimicSpace
         {
             alreadyAttacked = false;
         }
+
+        void ResetDamageBool()
+        {
+            damageTriggered = false;
+        }
+
+        public bool CheckTriggerSphere(Vector3 center, float radius, LayerMask layerMask)
+        {
+            Collider[] colliders = Physics.OverlapSphere(center, radius, layerMask, QueryTriggerInteraction.Collide);
+            return colliders.Length > 0;
+        }
+
+        void KillMimic()
+        {
+            this.gameObject.SetActive(false);
+        }
+
+        void StopMusic()
+        {
+            angryMusic.Stop();
+        }
+
+        private IEnumerator DecreaseVolume()
+        {
+            float startVolume = angryMusic.volume;
+            float targetVolume = -0.5f;
+            float elapsedTime = 0f;
+            float duration = 5f; 
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                angryMusic.volume = Mathf.Lerp(startVolume, targetVolume, elapsedTime / duration);
+                yield return null;
+            }
+
+            angryMusic.Stop();
+        }
+
+        private IEnumerator IncreaseVolume()
+        {
+            float startVolume = angryMusic.volume;
+            float targetVolume = 0.5f;
+            float elapsedTime = 0f;
+            float duration = 5f;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                angryMusic.volume = Mathf.Lerp(startVolume, targetVolume, elapsedTime / duration);
+                yield return null;
+            }
+        }
+
+
+        void StartDecreaseVolume()
+        {
+            StartCoroutine(DecreaseVolume());
+        }
+
+        void StartIncreaseVolume()
+        {
+            StartCoroutine(IncreaseVolume());
+        }
     }
+
 }

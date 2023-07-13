@@ -154,6 +154,17 @@ public class ThirdPersonShooterController : MonoBehaviour
                         enemy.correctEnemy = true;
                         EnemyHit = true;
                     }
+                    else if(hitTransform.transform.GetComponent<mimicExplode>() != null)
+                    {
+                        WaitBeforeReady readyBloodPool = hitTransform.transform.GetComponent<WaitBeforeReady>();
+                        readyBloodPool.triggeed = true;
+
+                        if (readyBloodPool.isReady)
+                        {
+                            ObjectPooler.instance.SpawnFromPool("mimicExplode", hitTransform.position, Quaternion.identity);
+                        }
+
+                    }
 
                     if ((TargetInstances == null || TargetInstances.Length < DesiredInstanceAmount))
                     {
