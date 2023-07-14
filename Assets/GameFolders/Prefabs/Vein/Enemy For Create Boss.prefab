@@ -132,8 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   bossController: {fileID: 0}
-  minSpeed: 15
-  maxSpeed: 25
+  minSpeed: 20
+  maxSpeed: 50
   minFarForDestroyX: 0.5
   minFarForDestroyY: 0.5
   minFarForDestroyZ: 0.5

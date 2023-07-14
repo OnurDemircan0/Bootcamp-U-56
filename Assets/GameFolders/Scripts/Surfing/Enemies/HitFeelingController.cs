@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -122,6 +123,7 @@ public class HitFeelingController : MonoBehaviour
     }
 
 
+
     public void wrongMedicine(MutationControl mutationControl)
     {
         //Debug.Log("Mutasyon geçir");
@@ -132,7 +134,15 @@ public class HitFeelingController : MonoBehaviour
             StartCoroutine(changeColorAlphaDNAImage());
 
             cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForMutate, cameraShakefullIntensityTimeForMutate, cameraShakeGoToZeroTimeForMutate);
-            mutationControl.mutateVirus();
+
+            try
+            {
+                mutationControl.mutateVirus();
+            }
+            catch(Exception e)
+            {
+
+            }
 
 
             surfingAlyuvarAudioSource.PlayOneShot(mutateSound);

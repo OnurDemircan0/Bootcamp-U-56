@@ -1,9 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DnaImageShow : MonoBehaviour
 {
+    [SerializeField] private Image dnaImage;
+
+    [SerializeField] private float minColorAlpha;
+    [SerializeField] private float maxColorAlpha;
+
+    [SerializeField] private float changeColorAlphaSpeed;
+
+    
+
+    private bool hideDnaImageControl;
+    private bool showDnaImageControl;
 
     private bool changeColorToZeroCompleteControl;
     private bool changeColorToOneCompleteControl;
@@ -11,16 +23,30 @@ public class DnaImageShow : MonoBehaviour
 
     void Start()
     {
+        showDnaImageControl = true;
+        hideDnaImageControl = false;
+
         
+        //showDna();
     }
 
 
-    void Update()
+    public void showDna()
     {
-        
+        if (showDnaImageControl)
+        {
+            StartCoroutine(changeColorAlphaDNAImage());
+
+            showDnaImageControl = false;
+        }
     }
 
-    /*
+    public void hideDna()
+    {
+        hideDnaImageControl = true;
+    }
+
+
     IEnumerator changeColorAlphaDNAImage()
     {
         //yield return null;
@@ -47,7 +73,7 @@ public class DnaImageShow : MonoBehaviour
                     yield return new WaitForEndOfFrame();
                 }
             }
-            else if (changeColorToZeroCompleteControl == false)
+            else if (changeColorToZeroCompleteControl == false && hideDnaImageControl == true)
             {
                 dnaImage.color -= new Color(0, 0, 0, 0.01f) * changeColorAlphaSpeed * Time.deltaTime;
 
@@ -57,6 +83,10 @@ public class DnaImageShow : MonoBehaviour
                 if (dnaImage.color.a <= minColorAlpha)
                 {
                     dnaImage.color = new Color(dnaImage.color.r, dnaImage.color.g, dnaImage.color.b, 0);
+
+
+                    showDnaImageControl = true;
+                    hideDnaImageControl = false;
 
                     break;
                 }
@@ -68,5 +98,5 @@ public class DnaImageShow : MonoBehaviour
         }
 
     }
-    */
+    
 }
