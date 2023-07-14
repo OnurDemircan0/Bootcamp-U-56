@@ -34,6 +34,8 @@ public class MutationControl : MonoBehaviour
     private float maxFarValueY;
     private float maxFarValueZ;
 
+    [SerializeField] private float multiplyLocalSizeForMoveAfterDivideMutation;
+
 
     [Range(0.1f, 10f)] [SerializeField] private float minChangeColorSpeed;
     [Range(0.1f, 10f)] [SerializeField] private float maxChangeColorSpeed;
@@ -244,7 +246,8 @@ public class MutationControl : MonoBehaviour
 
     IEnumerator changePositionDividedViruses()
     {
-        maxFarValueX = Random.Range(minFarValueFromDivededVirusesX + transform.localScale.x, maxFarValueFromDivededVirusesX + transform.localScale.x);
+        maxFarValueX = Random.Range(minFarValueFromDivededVirusesX + transform.localScale.x / multiplyLocalSizeForMoveAfterDivideMutation, 
+            maxFarValueFromDivededVirusesX + transform.localScale.x / multiplyLocalSizeForMoveAfterDivideMutation);
         //maxFarValueY = Random.Range(minFarValueFromDivededVirusesY + transform.localScale.x, maxFarValueFromDivededVirusesY + transform.localScale.x);
         //maxFarValueZ = Random.Range(minFarValueFromDivededVirusesZ + transform.localScale.x, maxFarValueFromDivededVirusesZ + transform.localScale.x);
 

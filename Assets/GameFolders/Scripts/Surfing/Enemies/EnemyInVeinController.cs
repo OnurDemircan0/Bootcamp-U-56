@@ -66,6 +66,11 @@ public class EnemyInVeinController : MonoBehaviour
 
             wantedScale -= changeScaleValueEachHit; // Virüsü Küçültüp patlatmak için
 
+            if (wantedScale < 0)
+            {
+                wantedScale = 0;
+            }
+
             //wantedScale += changeScaleValueEachHit; // Virüsü büyütüp patlatmak için
 
             detectControl = false;
