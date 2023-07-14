@@ -3,7 +3,17 @@ guid: af9f6851d944f42469b8f113cfed961f
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Protrusions
+    second: {fileID: 2100000, guid: c3576324ae6d6254a86b24976d6c15a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Virus
+    second: {fileID: 2100000, guid: d36649bdf5bd60d4db880efe780b4614, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

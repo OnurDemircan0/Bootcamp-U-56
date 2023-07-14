@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starterAssetsInputs: {fileID: 0}
+  mimicExplode: 0
   ShakeIntesity: 1
 --- !u!114 &2472599250797891642
 MonoBehaviour:

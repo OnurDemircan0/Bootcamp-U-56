@@ -5631,7 +5631,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: cca619beb90b1614c8aca1369b363850, type: 2}
+  sharedProfile: {fileID: 11400000, guid: cc4f72ddc13137e43870ebc311ca1eae, type: 2}
 --- !u!4 &125997311
 Transform:
   m_ObjectHideFlags: 0
@@ -49816,6 +49816,10 @@ PrefabInstance:
       propertyPath: mimicMovement
       value: 
       objectReference: {fileID: 707000805}
+    - target: {fileID: 2247414625023530813, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
+      propertyPath: speed
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 6692256194045475040, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
       propertyPath: TargetTransform
       value: 
