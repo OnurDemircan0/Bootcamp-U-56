@@ -3559,6 +3559,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 181ae3936dbfc534c9971608140cb56f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 78e2f93a1df6a3842accb75698afe61e, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 181ae3936dbfc534c9971608140cb56f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3256441253251743497, guid: bf6df472cee1f65408d93e90fc1560bf, type: 3}
     - target: {fileID: 919132149155446097, guid: 181ae3936dbfc534c9971608140cb56f, type: 3}
       propertyPath: m_Name
       value: Brain
@@ -16848,11 +16856,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 637812996160317914, guid: 55501b003366f8344972816441c19dea, type: 3}
       propertyPath: velocity.x
-      value: 0.40910047
+      value: -0.48861647
       objectReference: {fileID: 0}
     - target: {fileID: 637812996160317914, guid: 55501b003366f8344972816441c19dea, type: 3}
       propertyPath: velocity.z
-      value: -0.46093795
+      value: 0.32823583
       objectReference: {fileID: 0}
     - target: {fileID: 637812996160317915, guid: 55501b003366f8344972816441c19dea, type: 3}
       propertyPath: m_LocalPosition.y
