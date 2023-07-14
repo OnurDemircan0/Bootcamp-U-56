@@ -35,49 +35,42 @@ public class NPCControllerExplosive : MonoBehaviour
         isDead = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("VFXotherbullet"))
-        {
-            Debug.Log("musthappen");
-            _agent.isStopped = true;
-            _agent.ResetPath();
-            animator.SetBool("Attack", true);
-            attack = true;
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
         distance =Vector3.Distance(transform.position, Player.transform.position);
-        if (distance <= 5)
+
+        if(!attack && !isDead)
         {
-            _agent.isStopped = true;
-            _agent.ResetPath();
-            animator.SetBool("Attack", true);
-            attack = true;
-        }
-        else if (distance<=50)
-        {
-            if (!attack)
+            if (distance <= 5)
             {
-                _agent.SetDestination(Player.transform.position);
+                _agent.isStopped = true;
+                _agent.ResetPath();
+                animator.SetBool("Attack", true);
+                attack = true;
+                Invoke(nameof(DisableObject), 2);
+            }
+            else
+            {
+                if (!attack)
+                {
+                    _agent.SetDestination(Player.transform.position);
+                }
+            }
+
+
+            if (_currentHealthNPC <= 0)
+            {
+                isDead = true;
+                DisableObject();
             }
         }
-        else
-        {
-            _agent.isStopped = true;
-            _agent.ResetPath();
-        }
-
-
-        if (_currentHealthNPC <= 0)
-        {
-            isDead = true;
-        }
-
-        
 
     }
+
+    private void DisableObject()
+    {
+        Destroy(gameObject);
+    }
+
 }
