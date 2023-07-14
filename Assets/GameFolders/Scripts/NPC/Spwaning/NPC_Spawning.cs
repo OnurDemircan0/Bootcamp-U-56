@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class NPC_Spawning : MonoBehaviour
 {
-    [SerializeField] GameObject[] NPCs;
+    [SerializeField] GameObject NPC;
     [SerializeField] float range = 30.0f;
     [SerializeField] float spawnDelay = 1f;
 
@@ -18,7 +18,7 @@ public class NPC_Spawning : MonoBehaviour
 
     private void Update()
     {
-        if (canSpawn)
+        if (canSpawn && !StopSpawningNPCArea.stopSpawningNPC)
         {
             Spawn();
         }
@@ -34,8 +34,7 @@ public class NPC_Spawning : MonoBehaviour
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomPoint, out hit, 3.0f, NavMesh.AllAreas))
         {
-            int randomNPC = Random.Range(0, 3);
-            Instantiate(NPCs[randomNPC], hit.position, Quaternion.identity);
+            Instantiate(NPC, hit.position, Quaternion.identity);
             canSpawn = false;
             Invoke(nameof(SetSpawnTrue), spawnDelay);
         }

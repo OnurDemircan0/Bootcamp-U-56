@@ -992,6 +992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachineVirtualCameraAim: {fileID: 837848934}
   cinemachineVirtualCameraFollow: {fileID: 1860835244}
+  cinemachineVirtualCameraVirusShow: {fileID: 0}
 --- !u!114 &458975224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,6 +1070,10 @@ PrefabInstance:
       propertyPath: TargetTransform
       value: 
       objectReference: {fileID: 2076979675}
+    - target: {fileID: 5319603990208060892, guid: 1cf170e8bbd46b54a9f6374a429766fb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5319603990208060926, guid: 1cf170e8bbd46b54a9f6374a429766fb, type: 3}
       propertyPath: deathCam
       value: 

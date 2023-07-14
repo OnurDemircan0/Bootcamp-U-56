@@ -521,7 +521,7 @@ public class SurfingControllerV2 : MonoBehaviour
 
             Debug.Log("rotateAlyuvarNormalRatationControlX");
 
-            if (alyuvarNowRotationValueX < 0.25f && alyuvarNowRotationValueX > -0.25f)
+            if (alyuvarNowRotationValueX < 1.5f && alyuvarNowRotationValueX > -1.5f)
             {
                 alyuvarNowRotationValueX = 0;
 
@@ -545,7 +545,7 @@ public class SurfingControllerV2 : MonoBehaviour
         // Z
         if (rotateAlyuvarNormalRatationControlZ)
         {
-            if (alyuvarNowRotationValueZ < 0.25f && alyuvarNowRotationValueZ > -0.25f)
+            if (alyuvarNowRotationValueZ < 1.5f && alyuvarNowRotationValueZ > -1.5f)
             {
                 alyuvarNowRotationValueZ = 0;
             }
@@ -583,7 +583,7 @@ public class SurfingControllerV2 : MonoBehaviour
             || (nowRotationValueX <= startRotationValueX - alyuvarRotationMaxiumValueX && inputHorizontal > 0))
         {
             Debug.Log("Döndürülüyor 4");
-            transform.Rotate(Vector3.up, inputHorizontal * rotationSpeed * Time.deltaTime);
+            //transform.Rotate(Vector3.up, inputHorizontal * rotationSpeed * Time.deltaTime);
         }
 
 

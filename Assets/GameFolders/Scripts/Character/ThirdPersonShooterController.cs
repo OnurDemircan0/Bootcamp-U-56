@@ -51,12 +51,12 @@ public class ThirdPersonShooterController : MonoBehaviour
     public bool EnemyHit;
     bool AimWalkTriggered = false;
     bool AimSprintTriggered = false;
-    public bool ýsAiming;
+    public bool ï¿½sAiming;
     bool OnWalk;
     bool OnSprint;
     bool AimIdleTriggered;
     bool IK_on = false;
-    public bool ýsShooting = false;
+    public bool ï¿½sShooting = false;
 
     int c = 0;
     int co = 0;
@@ -83,7 +83,7 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     private void Update()
     {
-        if(ýsAiming || ýsShooting)
+        if(ï¿½sAiming || ï¿½sShooting)
         {
             SetIkWeightON();
         }
@@ -92,7 +92,7 @@ public class ThirdPersonShooterController : MonoBehaviour
             SetIkWeightOFF();
         }
         burnOutMeter = Mathf.Clamp(burnOutMeter, 0f, burnOutLimit + 5);
-       if(!ýsShooting && !OnResetBurnOut) burnOutMeter = Mathf.Lerp(burnOutMeter, 0f, Time.deltaTime * burnOutTime);
+       if(!ï¿½sShooting && !OnResetBurnOut) burnOutMeter = Mathf.Lerp(burnOutMeter, 0f, Time.deltaTime * burnOutTime);
 
         if (burnOutMeter >= burnOutLimit)
         {
@@ -143,9 +143,9 @@ public class ThirdPersonShooterController : MonoBehaviour
 
             transform.forward = Vector3.Lerp(transform.forward, AimDirection, Time.deltaTime * 20f);
 
-            ýsAiming = true;
+            ï¿½sAiming = true;
 
-            AýmAnim();
+            Aï¿½mAnim();
 
         }
 
@@ -157,12 +157,12 @@ public class ThirdPersonShooterController : MonoBehaviour
             thirdPerson.SetSensitivity(NormalSensitivity);
             CrossHair.gameObject.SetActive(false);
 
-            ýsAiming = false;
+            ï¿½sAiming = false;
 
-            AýmAnim();
+            Aï¿½mAnim();
         }
 
-        //Mermi Kullanmadan Anýnda Zarar Ýçin
+        //Mermi Kullanmadan Anï¿½nda Zarar ï¿½ï¿½in
 
         if(assetsInputs.shoot)
         {
@@ -175,7 +175,7 @@ public class ThirdPersonShooterController : MonoBehaviour
                 if(!burnedOut)
                 {
 
-                    ýsShooting = true;
+                    ï¿½sShooting = true;
                     animator.SetBool("Shooting", true);
                     RotateToBack(RayCastDebug.transform, 80f);
 
@@ -265,7 +265,7 @@ public class ThirdPersonShooterController : MonoBehaviour
                 }
                 else
                 {
-                    ýsShooting = false;
+                    ï¿½sShooting = false;
                     animator.SetBool("Shooting", false);
                     EnemyHit = false;
                 }
@@ -288,12 +288,12 @@ public class ThirdPersonShooterController : MonoBehaviour
         }
         else
         {
-            ýsShooting = false;
+            ï¿½sShooting = false;
             animator.SetBool("Shooting", false);
             EnemyHit = false;
         }
 
-        // Silahýn Prjectile Atmasý Ýçin
+        // Silahï¿½n Prjectile Atmasï¿½ ï¿½ï¿½in
 
         if(assetsInputs.shoot && trailSpawnLocation != null)
         {
@@ -318,9 +318,9 @@ public class ThirdPersonShooterController : MonoBehaviour
                 }
             }            
         }
-        void AýmAnim()
+        void Aï¿½mAnim()
         {
-            if(ýsAiming)
+            if(ï¿½sAiming)
             {
                 AimJump();
                 thirdPerson.IsAim = true;

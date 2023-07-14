@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class EnemyInVeinController : MonoBehaviour
     private HitFeelingController hitFeelingController;
 
     private MutationControl mutationControl;
+
+    private BossController bossController;
 
     private MedicineSwitching medicineSwitching;
 
@@ -45,6 +48,8 @@ public class EnemyInVeinController : MonoBehaviour
 
         detectControl = true;
 
+        bossController = gameObject.GetComponent<BossController>();
+
         hitFeelingController = GameObject.Find("GameManager").gameObject.GetComponent<HitFeelingController>();
         medicineSwitching = GameObject.Find("GameManager").gameObject.GetComponent<MedicineSwitching>();
 
@@ -61,6 +66,11 @@ public class EnemyInVeinController : MonoBehaviour
 
             wantedScale -= changeScaleValueEachHit; // Virüsü Küçültüp patlatmak için
 
+            if (wantedScale < 0)
+            {
+                wantedScale = 0;
+            }
+
             //wantedScale += changeScaleValueEachHit; // Virüsü büyütüp patlatmak için
 
             detectControl = false;
@@ -69,10 +79,26 @@ public class EnemyInVeinController : MonoBehaviour
 
 
             //enemyColor = mutationControl.virusMaterialColors[mutationControl.nowVirusMaterialColorsNumber];
-            enemyColor = mutationControl.virusMaterialColors[mutationControl.targetVirusMaterialColorsNumber];
+            try
+            {
+                enemyColor = mutationControl.virusMaterialColors[mutationControl.targetVirusMaterialColorsNumber];
+            }
+            catch(Exception e)
+            {
+                enemyColor = bossController.virusMaterialColors[bossController.targetVirusMaterialColorsNumber];
+            }
+
             //Debug.Log("enemyColor: " + enemyColor);
 
-            medicineColor = mutationControl.virusMaterialColors[medicineSwitching.currentSelectedWeapon];
+            try
+            {
+                medicineColor = mutationControl.virusMaterialColors[medicineSwitching.currentSelectedWeapon];
+            }
+            catch(Exception e)
+            {
+                medicineColor = bossController.virusMaterialColors[medicineSwitching.currentSelectedWeapon];
+            }
+
             //Debug.Log("medicineColor: " + medicineColor);
 
             medicineAndVirusSameColorControl = (medicineColor == enemyColor);
@@ -82,6 +108,15 @@ public class EnemyInVeinController : MonoBehaviour
             if (medicineAndVirusSameColorControl)
             {
                 hitFeelingController.hittedVirus();
+
+                try
+                {
+                    bossController.bossGetDamaged();
+                }
+                catch(Exception e)
+                {
+
+                }
             }
             else
             {

@@ -29,9 +29,9 @@ public class GoToDifferentObject : MonoBehaviour
 
         if (Mathf.Abs(direction.x) <= minFarForDestroyX && Mathf.Abs(direction.y) <= minFarForDestroyY && Mathf.Abs(direction.z) <= minFarForDestroyZ)
         {
-            Debug.Log("Hedefe Ulaþýldý X: " + Mathf.Abs(direction.x).ToString());
-            Debug.Log("Hedefe Ulaþýldý Y: " + Mathf.Abs(direction.y).ToString());
-            Debug.Log("Hedefe Ulaþýldý Z: " + Mathf.Abs(direction.z).ToString());
+            //Debug.Log("Hedefe Ulaþýldý X: " + Mathf.Abs(direction.x).ToString());
+            //Debug.Log("Hedefe Ulaþýldý Y: " + Mathf.Abs(direction.y).ToString());
+            //Debug.Log("Hedefe Ulaþýldý Z: " + Mathf.Abs(direction.z).ToString());
 
             bossController.magnificationBoss();
 

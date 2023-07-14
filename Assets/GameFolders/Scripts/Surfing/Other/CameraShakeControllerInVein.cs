@@ -9,9 +9,11 @@ public class CameraShakeControllerInVein : MonoBehaviour
 
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCameraAim;
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCameraFollow;
+    [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCameraVirusShow;
 
     private CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlinAim;
     private CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlinFollow;
+    private CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlinVirusShow;
 
     void Awake()
     {
@@ -33,6 +35,16 @@ public class CameraShakeControllerInVein : MonoBehaviour
         catch (Exception e)
         {
             cinemachineBasicMultiChannelPerlinFollow = null;
+        }
+
+
+        try
+        {
+            cinemachineBasicMultiChannelPerlinVirusShow = cinemachineVirtualCameraVirusShow.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        }
+        catch (Exception e)
+        {
+            cinemachineBasicMultiChannelPerlinVirusShow = null;
         }
 
     }
@@ -77,6 +89,18 @@ public class CameraShakeControllerInVein : MonoBehaviour
                 cinemachineBasicMultiChannelPerlinFollow = null;
             }
         }
+
+        if (cinemachineBasicMultiChannelPerlinVirusShow == null)
+        {
+            try
+            {
+                cinemachineBasicMultiChannelPerlinVirusShow = cinemachineVirtualCameraVirusShow.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            }
+            catch (Exception e)
+            {
+                cinemachineBasicMultiChannelPerlinVirusShow = null;
+            }
+        }
     }
 
 
@@ -85,6 +109,7 @@ public class CameraShakeControllerInVein : MonoBehaviour
     {
         cinemachineBasicMultiChannelPerlinAim.m_AmplitudeGain = intensity;
         cinemachineBasicMultiChannelPerlinFollow.m_AmplitudeGain = intensity;
+        cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;
 
         yield return new WaitForSeconds(fullIntensityTime);
 
@@ -96,6 +121,7 @@ public class CameraShakeControllerInVein : MonoBehaviour
             intensity -= intensity * 0.033f / goToZeroTime;
             cinemachineBasicMultiChannelPerlinAim.m_AmplitudeGain = intensity;
             cinemachineBasicMultiChannelPerlinFollow.m_AmplitudeGain = intensity;
+            cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;
 
             yield return new WaitForSeconds(0.033f); //Saniyenin 30 da biri kadar bekle
 
@@ -115,6 +141,7 @@ public class CameraShakeControllerInVein : MonoBehaviour
                 intensity = 0;
                 cinemachineBasicMultiChannelPerlinAim.m_AmplitudeGain = intensity;
                 cinemachineBasicMultiChannelPerlinFollow.m_AmplitudeGain = intensity;
+                cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;
             }
 
         }

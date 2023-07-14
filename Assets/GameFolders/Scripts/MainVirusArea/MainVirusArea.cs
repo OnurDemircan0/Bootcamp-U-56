@@ -18,7 +18,7 @@ public class MainVirusArea : MonoBehaviour
 
     private void Update()
     {
-        if(VirusCount.virusCount == nextVirusCount)
+        if(VirusCount.virusCount == nextVirusCount && PlayerCheckingArea.playerDetectedMainVirusArea)
         {
             _animator.SetTrigger("NextStage");
             stage++;
