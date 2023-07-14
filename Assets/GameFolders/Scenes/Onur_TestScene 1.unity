@@ -2633,7 +2633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 104805402057734206, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 738457682960261764, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
       propertyPath: m_RootOrder
@@ -10265,10 +10265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85d859bae4b47a4aa125337bd034bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPCs:
-  - {fileID: 5778123787436796281, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-  - {fileID: 5734477699820212195, guid: 5b2f6c339bf25b645a2557db9359b13c, type: 3}
-  - {fileID: 6408204428892269199, guid: b1b0e1aa66695d2469cd381b08979a9e, type: 3}
+  NPC: {fileID: 562257183623465314, guid: f305ead889b9373418fb30922b57a419, type: 3}
   range: 30
   spawnDelay: 2
 --- !u!1 &1960245318 stripped
@@ -15805,6 +15802,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1b0e1aa66695d2469cd381b08979a9e, type: 3}
+--- !u!1001 &2123328913652535816
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 562257183623465314, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_Name
+      value: VirusExlosiveNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 562257183623465314, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417597916899597473, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f305ead889b9373418fb30922b57a419, type: 3}
 --- !u!1001 &3102210005811194811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15927,144 +15985,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b2f6c339bf25b645a2557db9359b13c, type: 3}
---- !u!1001 &5371133478106378771
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 38254982751211726, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534644371696925882, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5065266044062659981, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5778123787436796281, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_Name
-      value: VirusExlosiveNPC_Blue
-      objectReference: {fileID: 0}
-    - target: {fileID: 5778123787436796281, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
---- !u!1 &5371133478106378772 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5065266044062659981, guid: 3fea4673d5288ad4b9e9581a3d93425d, type: 3}
-  m_PrefabInstance: {fileID: 5371133478106378771}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5371133478106378773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5371133478106378772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3ef798a86911ab41ac8102526ecbd42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randomMutationControl: 0
-  mutationDivideActiveControl: 0
-  changeColorActiveControl: 0
-  changeSizeActiveControl: 0
-  mutationDivideControl: 0
-  changeColorControl: 0
-  changeSizeControl: 0
-  changeColorCompleteControl: 0
-  changeSizeCompleteControl: 0
-  mutationDivideCompleteControl: 0
-  minSpeedFarFromDivededViruses: 1
-  maxSpeedFarFromDivededViruses: 2
-  minFarValueFromDivededVirusesX: 1.5
-  maxFarValueFromDivededVirusesX: 2
-  minChangeColorSpeed: 5
-  maxChangeColorSpeed: 10
-  virusMaterialNormalColors:
-  - {r: 0, g: 1, b: 0, a: 0}
-  - {r: 0, g: 0.5882353, b: 1, a: 0}
-  - {r: 1, g: 0, b: 0.7372549, a: 0}
-  virusMaterialNormalColorsEmission:
-  - {r: 0, g: 0.35686275, b: 0, a: 0}
-  - {r: 0.011764706, g: 0, b: 0.3764706, a: 0}
-  - {r: 0.5849056, g: 0.18981841, b: 0.48109847, a: 0}
-  virusMaterialLightColors:
-  - {r: 0, g: 1, b: 0, a: 0}
-  - {r: 0, g: 0.5411765, b: 1, a: 0}
-  - {r: 1, g: 0, b: 0.7372549, a: 0}
-  virusMaterialLightColorsEmission:
-  - {r: 0, g: 0.67058825, b: 0, a: 0}
-  - {r: 0, g: 0.21960784, b: 0.59607846, a: 0}
-  - {r: 0.5188679, g: 0.23202205, b: 0.4450264, a: 0}
-  nowVirusMaterialColorsNumber: -1
-  targetVirusMaterialColorsNumber: -1
-  minChangeSizeSpeed: 1750
-  maxChangeSizeSpeed: 2000
-  minChangeSizeValue: 25
-  maxChangeSizeValue: 50
-  minRanmdomMutationNumberForDetermineMutations: 0
-  maxRanmdomMutationNumberForDetermineMutations: 7
 --- !u!1001 &6961985082045793876
 PrefabInstance:
   m_ObjectHideFlags: 0
