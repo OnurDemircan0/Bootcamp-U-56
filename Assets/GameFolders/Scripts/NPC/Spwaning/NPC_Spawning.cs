@@ -18,7 +18,7 @@ public class NPC_Spawning : MonoBehaviour
 
     private void Update()
     {
-        if (canSpawn)
+        if (canSpawn && !StopSpawningNPCArea.stopSpawningNPC)
         {
             Spawn();
         }
