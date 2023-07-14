@@ -10,11 +10,14 @@ public class MuzzleEffect : MonoBehaviour
     GameObject[] muzzleEffect;
     [SerializeField] StarterAssetsInputs starterInputs;
 
+    ThirdPersonShooterController shooterController;
+
     bool onshoot = false;
     Coroutine muzzleAnimationCoroutine;
 
     private void Start()
     {
+        shooterController = GetComponent<ThirdPersonShooterController>();
         muzzleEffect = new GameObject[childIndex];
         GoThrough();
     }
@@ -33,12 +36,13 @@ public class MuzzleEffect : MonoBehaviour
     private void Update()
     {
         onshoot = starterInputs.shoot;
+        bool burnedOut = shooterController.burnedOut;
 
-        if (onshoot && muzzleAnimationCoroutine == null)
+        if (onshoot && muzzleAnimationCoroutine == null && !burnedOut)
         {
             muzzleAnimationCoroutine = StartCoroutine(PlayMuzzleAnimation());
         }
-        else if (!onshoot && muzzleAnimationCoroutine != null)
+        else if ((!onshoot  || burnedOut ) && muzzleAnimationCoroutine != null)
         {
             StopCoroutine(muzzleAnimationCoroutine);
             muzzleAnimationCoroutine = null;

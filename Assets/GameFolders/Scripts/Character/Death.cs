@@ -41,6 +41,9 @@ public class Death : MonoBehaviour
     [SerializeField]
     AudioSource gunSound;
 
+    [SerializeField]
+    GameObject CrossHair;
+
     //public CameraShaker cameraShaker;
 
     ThirdPersonController personController;
@@ -84,7 +87,8 @@ public class Death : MonoBehaviour
             {
                 Debug.LogWarning("Disable Script is not assigned");
             }
-            
+            if (muzzle != null) muzzle.SetActive(false);
+
         }
     }
 
@@ -118,6 +122,7 @@ public class Death : MonoBehaviour
                 Debug.LogWarning("Disable Script is not assigned");
             }
             
+            if(muzzle != null) muzzle.SetActive(false );
             Invoke("Fade", 5f);
         }
     }

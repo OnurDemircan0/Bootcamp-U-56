@@ -24,6 +24,10 @@ public class DissolveObject : MonoBehaviour
     public bool colliderTriggered;
 
     bool triggeredParticleOnce;
+    bool firstPhaseDone;
+
+    bool secondOneIsTriggered = false;
+    bool thirdOneIsTriggered = false;
 
     [SerializeField] float particleDelayTime = 0.15f;
 
@@ -49,7 +53,7 @@ public class DissolveObject : MonoBehaviour
 
     private void OnTriggerEnter()
     {
-        if(GetEnemies.Instance.phase2CanStart)
+        if(GetEnemies.Instance.phase2CanStart && !firstPhaseDone)
         {
             StartCoroutine(Dissolve());
 
@@ -63,9 +67,10 @@ public class DissolveObject : MonoBehaviour
             {
                 gatePulse.pulseStart = true;
             }
-        }
 
-        else if(insideBossVein)
+            firstPhaseDone = true;
+        }
+        else if(GetEnemies.Instance.phase2IsDone && !secondOneIsTriggered)
         {
             StartCoroutine(Dissolve());
 
@@ -79,6 +84,24 @@ public class DissolveObject : MonoBehaviour
             {
                 gatePulse.pulseStart = true;
             }
+            secondOneIsTriggered = true;
+        }
+
+        else if(insideBossVein && !thirdOneIsTriggered)
+        {
+            StartCoroutine(Dissolve());
+
+            if (!triggeredParticleOnce)
+            {
+                Invoke("StartParticle", particleDelayTime);
+                triggeredParticleOnce = true;
+            }
+
+            foreach (GatePulse gatePulse in gateCubes)
+            {
+                gatePulse.pulseStart = true;
+            }
+            thirdOneIsTriggered = true;
         }
     }
 

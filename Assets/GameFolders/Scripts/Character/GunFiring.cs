@@ -9,6 +9,7 @@ public class GunFiring : MonoBehaviour
     [SerializeField] float fadeDuration;
     AudioSource audioSource;
     StarterAssetsInputs starterAssets;
+    ThirdPersonShooterController shooterController;
 
     private float initialVolume;
 
@@ -18,16 +19,17 @@ public class GunFiring : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         starterAssets = GetComponent<StarterAssetsInputs>();
         initialVolume = audioSource.volume;
+        shooterController = GetComponent<ThirdPersonShooterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!audioSource.isPlaying && starterAssets.shoot)
+        if(!audioSource.isPlaying && starterAssets.shoot && !shooterController.burnedOut)
         {
             PlayClip();
         }
-        else if(audioSource.isPlaying && !starterAssets.shoot)
+        else if(audioSource.isPlaying && (!starterAssets.shoot || shooterController.burnedOut))
         {
             StartCoroutine(FadeOutAudio());
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProjectileAttack : MonoBehaviour
@@ -28,11 +29,15 @@ public class ProjectileAttack : MonoBehaviour
 
     Enemy enemyScript;
 
+    EnemyAI enemyAI;
+
     Transform rayHitTransform;
     private void Start()
     {
         pooler = ObjectPooler.instance;
         enemyScript = GetComponent<Enemy>();
+
+        enemyAI = GetComponent<EnemyAI>();
     }
     private void Update()
     {
@@ -45,11 +50,22 @@ public class ProjectileAttack : MonoBehaviour
       // }
 
         float elapsedTime = Time.time - lastShootTime;
-
-        if (enemyScript.Health > 0 && elapsedTime >= shootDelay && MedBotDeath.health >= 0)
+        if(enemyAI.enabled == false)
         {
-            ProjectileStart();
+            if (enemyScript.Health > 0 && elapsedTime >= shootDelay && MedBotDeath.health >= 0)
+            {
+                ProjectileStart();
+            }
         }
+        else
+        {
+            if (enemyScript.Health > 0 && elapsedTime >= shootDelay && MedBotDeath.health >= 0)
+            {
+                ProjectileWithEnemyAI();
+            }
+        }
+
+        
         
     }
     void ProjectileStart()
@@ -68,5 +84,21 @@ public class ProjectileAttack : MonoBehaviour
         else { /* enemyScript.isShooting  = false; */ return; }
 
         
+    }
+
+    void ProjectileWithEnemyAI()
+    {
+        float distance = Vector3.Distance(bulletSpawnPoint.position, medBOT.position);
+
+        if (distance < projectileDistance && !enemyAI.playerInSightRange)
+        {
+            Vector3 shootDirection = (medBOT.position - bulletSpawnPoint.position).normalized;
+            pooler.SpawnFromPool("EnemyBullet", bulletSpawnPoint.position, Quaternion.LookRotation(shootDirection, Vector3.up));
+
+            lastShootTime = Time.time;
+
+            //enemyScript.isShooting = true;
+        }
+        else { /* enemyScript.isShooting  = false; */ return; }
     }
 }

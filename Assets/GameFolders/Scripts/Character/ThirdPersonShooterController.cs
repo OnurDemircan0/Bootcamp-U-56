@@ -30,6 +30,19 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     [SerializeField] private float interpolationDuration2 = 0.15f;
 
+    float burnOutMeter = 0f;
+    [SerializeField] float burnOutLimit = 100f;
+    [SerializeField] float burnOutTime = 10f;
+    [SerializeField] float burnOutRate = 5.4f;
+    [SerializeField] float afterBurntOutWait = 2.8f;
+    float timerForBurntOut = 0f;
+
+    bool OnResetBurnOut = false;
+    bool triggeredSetTimer = false;
+
+    [HideInInspector]
+    public bool burnedOut = false;
+
     private float interpolationTimer = 0f;
 
     StarterAssetsInputs assetsInputs;
@@ -78,7 +91,32 @@ public class ThirdPersonShooterController : MonoBehaviour
         {
             SetIkWeightOFF();
         }
+        burnOutMeter = Mathf.Clamp(burnOutMeter, 0f, burnOutLimit + 5);
+       if(!ýsShooting && !OnResetBurnOut) burnOutMeter = Mathf.Lerp(burnOutMeter, 0f, Time.deltaTime * burnOutTime);
 
+        if (burnOutMeter >= burnOutLimit)
+        {
+            if (!triggeredSetTimer)
+            {
+                timerForBurntOut = afterBurntOutWait;
+                triggeredSetTimer = true;
+            }
+            timerForBurntOut -= Time.deltaTime;
+
+            if (timerForBurntOut > 0f)
+            {
+                burnedOut = true;
+                OnResetBurnOut = true;
+            }
+            else
+            {
+                burnOutMeter = 0f;
+                timerForBurntOut = 0f;
+                OnResetBurnOut = false;
+                triggeredSetTimer = false;
+                burnedOut = false;
+            }
+        }
 
         Vector3 WorldAimPoint = Vector3.zero;
 
@@ -134,93 +172,103 @@ public class ThirdPersonShooterController : MonoBehaviour
             }
             else
             {
-                ýsShooting = true;
-                animator.SetBool("Shooting", true);
-                RotateToBack(RayCastDebug.transform, 80f);
-
-                if (hitTransform != null)
+                if(!burnedOut)
                 {
-                    //Hasan Ekledi --------------------------------------------------------------------------------------------------------------------------------
-                    if (hitTransform.gameObject.GetComponent<EnemyInVeinController>() != null)
+
+                    ýsShooting = true;
+                    animator.SetBool("Shooting", true);
+                    RotateToBack(RayCastDebug.transform, 80f);
+
+                    burnOutMeter += burnOutRate * Time.deltaTime;
+
+                    if (hitTransform != null)
                     {
-                        EnemyInVeinController enemyInVeinController = hitTransform.transform.GetComponent<EnemyInVeinController>();
-
-                        enemyInVeinController.enemyGetDamaged();
-                        enemyInVeinController.hittedControl = true;
-                    }
-                    //---------------------------------------------------------------------------------------------------------------------------------------------
-
-
-                    if (hitTransform.transform.GetComponent<Hit_Target>() != null)
-                    {
-                        if (hitTransform.transform.GetComponent<Enemy>() != null)
+                        //Hasan Ekledi --------------------------------------------------------------------------------------------------------------------------------
+                        if (hitTransform.gameObject.GetComponent<EnemyInVeinController>() != null)
                         {
-                            Enemy enemy = hitTransform.transform.GetComponent<Enemy>();
-                            enemy.Health -= bulletDamage * Time.deltaTime;
-                            enemy.correctEnemy = true;
-                            EnemyHit = true;
+                            EnemyInVeinController enemyInVeinController = hitTransform.transform.GetComponent<EnemyInVeinController>();
+
+                            enemyInVeinController.enemyGetDamaged();
+                            enemyInVeinController.hittedControl = true;
                         }
-                        else if (hitTransform.transform.GetComponent<mimicExplode>() != null)
-                        {
-                            WaitBeforeReady readyBloodPool = hitTransform.transform.GetComponent<WaitBeforeReady>();
-                            readyBloodPool.triggeed = true;
+                        //---------------------------------------------------------------------------------------------------------------------------------------------
 
-                            if (readyBloodPool.isReady)
+
+                        if (hitTransform.transform.GetComponent<Hit_Target>() != null)
+                        {
+                            if (hitTransform.transform.GetComponent<Enemy>() != null)
                             {
-                                ObjectPooler.instance.SpawnFromPool("mimicExplode", hitTransform.position, Quaternion.identity);
+                                Enemy enemy = hitTransform.transform.GetComponent<Enemy>();
+                                enemy.Health -= bulletDamage * Time.deltaTime;
+                                enemy.correctEnemy = true;
+                                EnemyHit = true;
+                            }
+                            else if (hitTransform.transform.GetComponent<mimicExplode>() != null)
+                            {
+                                WaitBeforeReady readyBloodPool = hitTransform.transform.GetComponent<WaitBeforeReady>();
+                                readyBloodPool.triggeed = true;
+
+                                if (readyBloodPool.isReady)
+                                {
+                                    ObjectPooler.instance.SpawnFromPool("mimicExplode", hitTransform.position, Quaternion.identity);
+                                }
+
                             }
 
-                        }
+                            if ((TargetInstances == null || TargetInstances.Length < DesiredInstanceAmount))
+                            {
+                                Instantiate(VFXhitTarget, raycastHit.point, Quaternion.identity);
+                                TargetInstances = GameObject.FindGameObjectsWithTag("VFXtarget");
+                            }
+                            else
+                            {
+                                if (c == (DesiredInstanceAmount))
+                                {
+                                    c = 0;
+                                }
 
-                        if ((TargetInstances == null || TargetInstances.Length < DesiredInstanceAmount))
-                        {
-                            Instantiate(VFXhitTarget, raycastHit.point, Quaternion.identity);
-                            TargetInstances = GameObject.FindGameObjectsWithTag("VFXtarget");
+                                TargetInstances = GameObject.FindGameObjectsWithTag("VFXtarget");
+
+                                TargetInstances[c].SetActive(false);
+
+                                TargetInstances[c].transform.position = raycastHit.point;
+                                TargetInstances[c].SetActive(true);
+                                c++;
+                            }
                         }
                         else
                         {
-                            if (c == (DesiredInstanceAmount))
+                            if ((OtherHitInstances == null || OtherHitInstances.Length < DesiredInstanceAmount))
                             {
-                                c = 0;
+                                Instantiate(VFXhitOther, raycastHit.point, Quaternion.identity);
+                                OtherHitInstances = GameObject.FindGameObjectsWithTag("VFXother");
                             }
-
-                            TargetInstances = GameObject.FindGameObjectsWithTag("VFXtarget");
-
-                            TargetInstances[c].SetActive(false);
-
-                            TargetInstances[c].transform.position = raycastHit.point;
-                            TargetInstances[c].SetActive(true);
-                            c++;
-                        }
-                    }
-                    else
-                    {
-                        if ((OtherHitInstances == null || OtherHitInstances.Length < DesiredInstanceAmount))
-                        {
-                            Instantiate(VFXhitOther, raycastHit.point, Quaternion.identity);
-                            OtherHitInstances = GameObject.FindGameObjectsWithTag("VFXother");
-                        }
-                        else
-                        {
-                            if (co == (DesiredInstanceAmount))
+                            else
                             {
-                                co = 0;
+                                if (co == (DesiredInstanceAmount))
+                                {
+                                    co = 0;
 
+                                }
+
+                                OtherHitInstances = GameObject.FindGameObjectsWithTag("VFXother");
+
+                                OtherHitInstances[co].SetActive(false);
+
+                                OtherHitInstances[co].transform.position = raycastHit.point;
+                                OtherHitInstances[co].SetActive(true);
+                                co++;
                             }
-
-                            OtherHitInstances = GameObject.FindGameObjectsWithTag("VFXother");
-
-                            OtherHitInstances[co].SetActive(false);
-
-                            OtherHitInstances[co].transform.position = raycastHit.point;
-                            OtherHitInstances[co].SetActive(true);
-                            co++;
                         }
+
                     }
-            
                 }
-                
-
+                else
+                {
+                    ýsShooting = false;
+                    animator.SetBool("Shooting", false);
+                    EnemyHit = false;
+                }
             }
 
 

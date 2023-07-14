@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,26 @@ public class GetEnemies : MonoBehaviour
     GameObject[] enemiesPhase2;
 
     public GameObject phase2Parent;
+    
 
     bool[] enemyAliveState;
     bool[] enemyAliveStatePhaseTwo;
 
     public bool phase2CanStart = false;
+    public bool phase2IsDone = false;
+    public bool enteredStandBy;
 
     private bool pushedPlayerOnce = false;
     private bool afterBloodClear = false;
+    private bool shouldStay = false;
+    private bool triggeredStayStill = false;
+
+    public float speed = 2f;
+
+    [SerializeField]
+    float pushDuration = 0.006f;
+    float pushTimer = 0.0f;
+
 
     [SerializeField]
     float clearBloodDuration = 5f;
@@ -35,7 +48,10 @@ public class GetEnemies : MonoBehaviour
     float riseBloodDuration = 15f;
 
     [SerializeField]
-    CharacterController characterController;
+    Transform playerTransform;
+
+    [SerializeField]
+    GameObject lookObject;
 
     [SerializeField]
     Death deathScript;
@@ -48,6 +64,12 @@ public class GetEnemies : MonoBehaviour
 
     [SerializeField]
     GatePulse gatePulse;
+
+    [SerializeField]
+    CharacterController characterController;
+
+    [SerializeField]
+    GameObject standHerePlatform;
 
 
 
@@ -70,6 +92,21 @@ public class GetEnemies : MonoBehaviour
         CheckEnemyAliveState();
     }
 
+    private void FixedUpdate()
+    {
+        if (standHerePlatform && enteredStandBy && !shouldStay)
+        {
+            shouldStay = true;
+            standHerePlatform.SetActive(true);
+            ClearBlood();
+        }
+        if (shouldStay)
+        {
+            playerTransform.GetComponent<StarterAssetsInputs>().move.x = 0;
+            playerTransform.GetComponent<StarterAssetsInputs>().move.y = 0;
+        }
+    }
+
 
     public void CheckEnemyAliveState()
     {
@@ -89,6 +126,7 @@ public class GetEnemies : MonoBehaviour
             
             if(enemySpawned < enemies.Length)
             {
+                standHerePlatform.SetActive(true);
                 ClearBlood();
                 ActivateEnemies();
             }
@@ -125,6 +163,8 @@ public class GetEnemies : MonoBehaviour
             // Call Function if all the enemies are death
             //Debug.Log("All Enemies are Death");
 
+            phase2IsDone = true;
+
             Debug.Log("Do Something Here");
 
         }
@@ -134,37 +174,42 @@ public class GetEnemies : MonoBehaviour
 
     private IEnumerator ClearBloodCoroutine()
     {
-        yield return new WaitForSeconds(4);
-
-        Vector3 originalPosF = ThingsToMove[0].transform.position;
-        float targetY = originalPosF.y - 56.5f;
-
-        Vector3 originalPosS = ThingsToMove[1].transform.position;
-        float targetYS = originalPosS.y - 56.5f;
-
-        Vector3 originalPosT = ThingsToMove[2].transform.position;
-        float targetYT = originalPosT.y - 56.5f;
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < clearBloodDuration)
+        if(enteredStandBy)
         {
-            float t = elapsedTime / clearBloodDuration;
+            standHerePlatform.SetActive(false);
 
-            float newY = Mathf.Lerp(originalPosF.y, targetY, t);
-            float newYS = Mathf.Lerp(originalPosS.y, targetYS, t);
-            float newYT = Mathf.Lerp(originalPosT.y, targetYT, t);
 
-            // Set the new position of the objects
-            ThingsToMove[0].transform.position = new Vector3(originalPosF.x, newY, originalPosF.z);
-            ThingsToMove[1].transform.position = new Vector3(originalPosS.x, newYS, originalPosS.z);
-            ThingsToMove[2].transform.position = new Vector3(originalPosT.x, newYT, originalPosT.z);
+            yield return new WaitForSeconds(0.5f);
 
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            Vector3 originalPosF = ThingsToMove[0].transform.position;
+            float targetY = originalPosF.y - 56.5f;
+
+            Vector3 originalPosS = ThingsToMove[1].transform.position;
+            float targetYS = originalPosS.y - 56.5f;
+
+            Vector3 originalPosT = ThingsToMove[2].transform.position;
+            float targetYT = originalPosT.y - 56.5f;
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < clearBloodDuration)
+            {
+                float t = elapsedTime / clearBloodDuration;
+
+                float newY = Mathf.Lerp(originalPosF.y, targetY, t);
+                float newYS = Mathf.Lerp(originalPosS.y, targetYS, t);
+                float newYT = Mathf.Lerp(originalPosT.y, targetYT, t);
+
+                // Set the new position of the objects
+                ThingsToMove[0].transform.position = new Vector3(originalPosF.x, newY, originalPosF.z);
+                ThingsToMove[1].transform.position = new Vector3(originalPosS.x, newYS, originalPosS.z);
+                ThingsToMove[2].transform.position = new Vector3(originalPosT.x, newYT, originalPosT.z);
+
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            afterBloodClear = true;
         }
-        afterBloodClear = true;
-
     }
 
     private IEnumerator RiseBloodCoroutine()
@@ -283,7 +328,7 @@ public class GetEnemies : MonoBehaviour
             enemy.GetComponent<NavMeshAgent>().enabled = true;
             enemy.GetComponent<Enemy>().Health = 110;
             enemy.GetComponent<RagDollToggle>().RagdollEnable(false);
-            enemy.GetComponent<ProjectileAttack>().enabled = false;
+            enemy.GetComponent<ProjectileAttack>().projectileDistance = 58f;
             enemy.GetComponent<EnemyAI>().enabled = true;
            
 
@@ -301,10 +346,50 @@ public class GetEnemies : MonoBehaviour
 
     public void pushEnemyWithPulse()
     {
-        if(!pushedPlayerOnce && afterBloodClear)
+        if (!pushedPlayerOnce && afterBloodClear)
         {
-            characterController.Move(new Vector3(0f, 5f, 10f));
-            pushedPlayerOnce = true;
+            enteredStandBy = false;
+            shouldStay = false;
+
+            playerTransform.GetComponent<StarterAssetsInputs>().jump = true;
+
+            Vector3 lookDirection = lookObject.transform.position - playerTransform.position;
+            playerTransform.rotation = Quaternion.LookRotation(new Vector3(lookDirection.x, 0f, lookDirection.z));
+
+            // Start the coroutine to move the character smoothly
+            StartCoroutine(MoveTowardsLookObject());
         }
+    }
+
+    private IEnumerator MoveTowardsLookObject()
+    {
+        playerTransform.GetComponent<ThirdPersonController>().Grounded = true;
+
+        Vector3 targetPosition = lookObject.transform.position;
+        // targetPosition.y = playerTransform.position.y; // Maintain the same height
+
+        float elapsedTime = 0f;
+        Vector3 startingPosition = playerTransform.position;
+
+        while (elapsedTime < pushDuration)
+        {
+            float t = elapsedTime / pushDuration;
+            playerTransform.position = Vector3.Lerp(startingPosition, targetPosition, t);
+            elapsedTime += Time.deltaTime;
+
+            // Check if the distance to the target position is very close
+            if (Vector3.Distance(playerTransform.position, targetPosition) < 0.5f)
+            {
+                break; // Exit the loop early
+            }
+
+            yield return null;
+        }
+
+        // Ensure the character reaches the exact target position
+       // playerTransform.position = targetPosition;
+
+        // Mark the movement as complete
+        pushedPlayerOnce = true;
     }
 }

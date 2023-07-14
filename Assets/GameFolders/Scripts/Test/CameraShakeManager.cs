@@ -8,6 +8,9 @@ public class CameraShakeManager : MonoBehaviour
     [SerializeField]
     StarterAssetsInputs starterAssetsInputs;
 
+    [SerializeField]
+    ThirdPersonShooterController thirdPersonShooterController;
+
     bool Shaked = false;
     public bool mimicExplode = false;
 
@@ -18,7 +21,7 @@ public class CameraShakeManager : MonoBehaviour
     {
         if (starterAssetsInputs != null)
         {
-            if(starterAssetsInputs.shoot && !mimicExplode)
+            if(starterAssetsInputs.shoot && !mimicExplode && !thirdPersonShooterController.burnedOut)
             {
                 //Debug.Log("Inside shoot IF");
                 CinemachineCameraShaker.Instance.SetIntensityShakeAimManuel(ShakeIntesity);

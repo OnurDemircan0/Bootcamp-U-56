@@ -19,6 +19,8 @@ public class EnemyAI : MonoBehaviour
     
     Animator animator;
 
+    ProjectileAttack projectileAttack;
+
     [SerializeField]
     Death death;
 
@@ -41,17 +43,21 @@ public class EnemyAI : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GameObject.Find("MedBOT").transform;
         agent = GetComponent<NavMeshAgent>();
+        projectileAttack = GetComponent<ProjectileAttack>();
     }
 
     private void Update()
     {
+        float distance = Vector3.Distance(projectileAttack.bulletSpawnPoint.position, player.position);
+
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
+        if (!playerInSightRange && !playerInAttackRange && distance > projectileAttack.projectileDistance) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        if (distance < projectileAttack.projectileDistance && !playerInSightRange) StandBY();
     }
 
     private void Patroling()
@@ -142,6 +148,12 @@ public class EnemyAI : MonoBehaviour
             animator.SetLayerWeight(1,0);
             isDeathCharacter = true;
         }
+    }
+
+    public void StandBY()
+    {
+        animator.SetBool("Walking", false);
+        animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
     }
 
     private void OnDrawGizmosSelected()
