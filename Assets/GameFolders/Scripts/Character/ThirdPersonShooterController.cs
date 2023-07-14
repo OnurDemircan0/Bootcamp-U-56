@@ -51,12 +51,12 @@ public class ThirdPersonShooterController : MonoBehaviour
     public bool EnemyHit;
     bool AimWalkTriggered = false;
     bool AimSprintTriggered = false;
-    public bool �sAiming;
+    public bool ısAiming;
     bool OnWalk;
     bool OnSprint;
     bool AimIdleTriggered;
     bool IK_on = false;
-    public bool �sShooting = false;
+    public bool ısShooting = false;
 
     int c = 0;
     int co = 0;
@@ -83,7 +83,7 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     private void Update()
     {
-        if(�sAiming || �sShooting)
+        if(ısAiming || ısShooting)
         {
             SetIkWeightON();
         }
@@ -92,7 +92,7 @@ public class ThirdPersonShooterController : MonoBehaviour
             SetIkWeightOFF();
         }
         burnOutMeter = Mathf.Clamp(burnOutMeter, 0f, burnOutLimit + 5);
-       if(!�sShooting && !OnResetBurnOut) burnOutMeter = Mathf.Lerp(burnOutMeter, 0f, Time.deltaTime * burnOutTime);
+       if(!ısShooting && !OnResetBurnOut) burnOutMeter = Mathf.Lerp(burnOutMeter, 0f, Time.deltaTime * burnOutTime);
 
         if (burnOutMeter >= burnOutLimit)
         {
@@ -143,9 +143,9 @@ public class ThirdPersonShooterController : MonoBehaviour
 
             transform.forward = Vector3.Lerp(transform.forward, AimDirection, Time.deltaTime * 20f);
 
-            �sAiming = true;
+            ısAiming = true;
 
-            A�mAnim();
+            AımAnim();
 
         }
 
@@ -157,12 +157,12 @@ public class ThirdPersonShooterController : MonoBehaviour
             thirdPerson.SetSensitivity(NormalSensitivity);
             CrossHair.gameObject.SetActive(false);
 
-            �sAiming = false;
+            ısAiming = false;
 
-            A�mAnim();
+            AımAnim();
         }
 
-        //Mermi Kullanmadan An�nda Zarar ��in
+        //Mermi Kullanmadan Anında Zarar İçin
 
         if(assetsInputs.shoot)
         {
@@ -175,13 +175,19 @@ public class ThirdPersonShooterController : MonoBehaviour
                 if(!burnedOut)
                 {
 
-                    �sShooting = true;
+
+                    ısShooting = true;
                     animator.SetBool("Shooting", true);
                     RotateToBack(RayCastDebug.transform, 80f);
 
                     burnOutMeter += burnOutRate * Time.deltaTime;
 
                     if (hitTransform != null)
+
+                    //Hasan Ekledi --------------------------------------------------------------------------------------------------------------------------------
+                    Debug.Log("hitTransform Name: " + hitTransform.gameObject.name);
+                    if (hitTransform.gameObject.GetComponent<EnemyInVeinController>() != null)
+
                     {
                         //Hasan Ekledi --------------------------------------------------------------------------------------------------------------------------------
                         if (hitTransform.gameObject.GetComponent<EnemyInVeinController>() != null)
@@ -265,7 +271,7 @@ public class ThirdPersonShooterController : MonoBehaviour
                 }
                 else
                 {
-                    �sShooting = false;
+                    ısShooting = false;
                     animator.SetBool("Shooting", false);
                     EnemyHit = false;
                 }
@@ -288,12 +294,12 @@ public class ThirdPersonShooterController : MonoBehaviour
         }
         else
         {
-            �sShooting = false;
+            ısShooting = false;
             animator.SetBool("Shooting", false);
             EnemyHit = false;
         }
 
-        // Silah�n Prjectile Atmas� ��in
+        // Silahın Prjectile Atması İçin
 
         if(assetsInputs.shoot && trailSpawnLocation != null)
         {
@@ -318,9 +324,9 @@ public class ThirdPersonShooterController : MonoBehaviour
                 }
             }            
         }
-        void A�mAnim()
+        void AımAnim()
         {
-            if(�sAiming)
+            if(ısAiming)
             {
                 AimJump();
                 thirdPerson.IsAim = true;
