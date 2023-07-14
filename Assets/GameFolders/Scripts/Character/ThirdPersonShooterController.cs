@@ -183,11 +183,6 @@ public class ThirdPersonShooterController : MonoBehaviour
                     burnOutMeter += burnOutRate * Time.deltaTime;
 
                     if (hitTransform != null)
-
-                    //Hasan Ekledi --------------------------------------------------------------------------------------------------------------------------------
-                    Debug.Log("hitTransform Name: " + hitTransform.gameObject.name);
-                    if (hitTransform.gameObject.GetComponent<EnemyInVeinController>() != null)
-
                     {
                         //Hasan Ekledi --------------------------------------------------------------------------------------------------------------------------------
                         if (hitTransform.gameObject.GetComponent<EnemyInVeinController>() != null)

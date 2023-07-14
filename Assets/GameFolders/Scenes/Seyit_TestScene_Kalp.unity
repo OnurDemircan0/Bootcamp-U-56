@@ -25022,7 +25022,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 02c69bad5036d364eb1364a7879bb2e9, type: 2}
+  - {fileID: 2100000, guid: 0c868aa8a7b60bf4d8e16ab59b532ca8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25157,7 +25157,7 @@ MonoBehaviour:
   - {fileID: 903589137}
   skinnedMeshRenderer: {fileID: 0}
   skinnedMaterials:
-  - {fileID: 2100000, guid: 02c69bad5036d364eb1364a7879bb2e9, type: 2}
+  - {fileID: 2100000, guid: 0c868aa8a7b60bf4d8e16ab59b532ca8, type: 2}
   StartDissolving: 0
   insideBossVein: 0
   dissolveRate: 0.0125
