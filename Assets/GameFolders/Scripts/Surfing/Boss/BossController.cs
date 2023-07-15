@@ -6,6 +6,11 @@ public class BossController : MonoBehaviour
 {
     [SerializeField] private GameObject medBot;
     [SerializeField] private GameObject virusShowCamera;
+    [SerializeField] private GameObject virusDeadPartShowCamera;
+
+    [SerializeField] private GameObject explosion;
+    [SerializeField] private float minTimeForBetweenTwoExplosion;
+    [SerializeField] private float delayForMultiExplosion; // Üst üste gerçekleþecek patlamalarda min patlama bekleme süresine eklenecek çok kýsa bir süre olacak
 
     [SerializeField] private GameObject enemyAlyuvarForAtackCharacter;
 
@@ -13,13 +18,20 @@ public class BossController : MonoBehaviour
 
     [SerializeField] private CameraShakeControllerInVein cameraShakeControllerInVein;
 
-    [SerializeField] private float bossHealthCount;
+    [SerializeField] private AudioSource surfAlyuvarAudioSource;
+    [SerializeField] private AudioClip explosionSound;
+
+
+    [SerializeField] private int mutationLevel; //Virüs ne kadar mutasyon geçirdiyse leveli o kadar yüksektir
+
+    [SerializeField] private float bossMaxHealthCount;
+    private float bossHealthCount;
     [SerializeField] private float bossHealthCountDecreaseEveryHit;
     [SerializeField] private float bossHealthCountIncreaseEveryMutation;
     [SerializeField] private float bossHealthCountForDead;
 
-    [SerializeField] private float minCreateEnemyAlyuvarCount;
-    [SerializeField] private float maxCreateEnemyAlyuvarCount;
+    [SerializeField] private int minCreateEnemyAlyuvarCount;
+    [SerializeField] private int maxCreateEnemyAlyuvarCount;
     private float createEnemyAlyuvarCount;
 
     [SerializeField] private float waitTimeForCreateEnemyAlyuvar;
@@ -50,14 +62,18 @@ public class BossController : MonoBehaviour
 
     [SerializeField] private float delayActivateMedbotAfterCompleteMutation;
     [SerializeField] private float delayShowBossHealthBarAfterCompleteMutation;
+    [SerializeField] private float delayHideBossHealthBarAfterCompleteMutation;
 
     [SerializeField] private bool changeColorControl;
     [SerializeField] private bool changeColorCompleteControl;
+    [SerializeField] private float waitTimeForChangeColorAfterSockWave;
     private float changeColorSpeed;
     [Range(0.1f, 10f)] [SerializeField] private float minChangeColorSpeed;
     [Range(0.1f, 10f)] [SerializeField] private float maxChangeColorSpeed;
 
     private bool reachMaxSize = false;
+
+    private bool showExplosionControl = false;
 
     private float targetSize;
 
@@ -72,6 +88,26 @@ public class BossController : MonoBehaviour
 
 
     [SerializeField] private bool alyuvarEnemyCreateControl;
+    private bool alyuvarEnemyCreateCompleteControl;
+
+
+    [Header("Mutation Level")]
+    // Dizilerdeki 0. index level 1  - 1. index level 2 yi gösterir bu þekilde devam eder
+    [SerializeField] private float[] minWaitTimeChangeColorAccordiongToMutationLevel;
+    [SerializeField] private float[] maxWaitTimeChangeColorAccordiongToMutationLevel;
+    [SerializeField] private int[] alyuvarAtackFieldCount;
+    [SerializeField] private float[] minWaitTimeAtackWithAlyuvarAccordiongToMutationLevel;
+    [SerializeField] private float[] maxWaitTimeAtackWithAlyuvarAccordiongToMutationLevel;
+
+    private float waitTimeChangeColor = 0;
+    private float waitTimeAtackWithAlyuvar = 0;
+
+
+    [Header("Boss Dead")]
+    [SerializeField] private int sockWaveCount;
+    [SerializeField] private GameObject finalExplosion;
+    [SerializeField] private float waitTimeAfterAllSockWaveComplete;
+    private bool bossDeadControl = false;
 
 
     void Awake()
@@ -88,16 +124,162 @@ public class BossController : MonoBehaviour
 
         changeColorCompleteControl = true;
 
+        alyuvarEnemyCreateCompleteControl = true;
+
         changeColorControl = false;
 
 
         alyuvarEnemyCreateControl = false;
 
 
+        bossHealthCount = bossMaxHealthCount;
         bossHealthBarController.SetMaxHealth(bossHealthCount);
 
 
+        //showExplosion();
+
         //StartCoroutine(createEnemyAlyuvars());
+    }
+
+    private void showExplosionMultiTime(int explosionCount)
+    {
+        for(int i = 0; i < explosionCount; i++)
+        {
+            // ilk patlama beklemeden gerçekleþecek
+            if(i == 0)
+            {
+                Invoke("showExplosion", minTimeForBetweenTwoExplosion * i);
+            }
+            else
+            {
+                Invoke("showExplosion", minTimeForBetweenTwoExplosion * i + delayForMultiExplosion);
+
+            }
+        }
+    }
+
+    private void showExplosion()
+    {
+        if(showExplosionControl == false)
+        {
+            showExplosionControl = true;
+            explosion.SetActive(true);
+
+            surfAlyuvarAudioSource.PlayOneShot(explosionSound);
+
+            Invoke("activateShowExplosionControl", minTimeForBetweenTwoExplosion);
+        }
+    }
+
+    private void activateShowExplosionControl()
+    {
+        showExplosionControl = false;
+        explosion.SetActive(false);
+    }
+
+
+    public void mutateBossVirus()
+    {
+        mutationLevel++;
+
+        changeVirusColor();
+
+        bossMutatedIncreaseHealth();
+    }
+
+
+    private void changeVirusColor()
+    {
+        //showExplosionMultiTime(5);
+
+        if(changeColorCompleteControl == true)
+        {
+            showExplosion();
+
+            //changeColorControl = true;
+            Invoke("changeChangeColoControl", waitTimeForChangeColorAfterSockWave);
+        }
+    }
+    
+    private void changeChangeColoControl()
+    {
+        changeColorControl = true;
+    }
+
+    private void alyuvarEnemyCreate()
+    {
+        //showExplosion();
+
+
+        if (alyuvarEnemyCreateCompleteControl)
+        {
+            //showExplosionMultiTime(2);
+            showExplosionMultiTime(alyuvarAtackFieldCount[mutationLevel]);
+
+            alyuvarEnemyCreateControl = true;
+            alyuvarEnemyCreateCompleteControl = false;
+        }
+        
+    }
+
+
+    private IEnumerator mutateBySelfControl()
+    {
+        yield return null;
+
+        float waitSumTimeForChangeColor = 0;
+        float waitSumTimeForAtackWithAlyuvar = 0;
+        float waitTimeEachControl = 0.1f;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTimeEachControl);
+
+            waitSumTimeForChangeColor += waitTimeEachControl;
+            waitSumTimeForAtackWithAlyuvar += waitTimeEachControl;
+
+            if(mutationLevel > minWaitTimeChangeColorAccordiongToMutationLevel.Length - 1)
+            {
+                mutationLevel = minWaitTimeChangeColorAccordiongToMutationLevel.Length - 1;
+            }
+
+
+            // Renk Deðiþme ----------------------------------------------------------------------------------------------------------
+            if (waitTimeChangeColor == 0 || waitTimeChangeColor >= minWaitTimeChangeColorAccordiongToMutationLevel[mutationLevel])
+            {
+                waitTimeChangeColor = Random.Range(minWaitTimeChangeColorAccordiongToMutationLevel[mutationLevel], 
+                    maxWaitTimeChangeColorAccordiongToMutationLevel[mutationLevel]);
+            }
+
+
+            if(waitSumTimeForChangeColor >= waitTimeChangeColor)
+            {
+                changeVirusColor();
+
+                waitSumTimeForChangeColor = 0;
+                waitTimeChangeColor = 0;
+            }
+            // --------------------------------------------------------------------------------------------------------------------------
+
+
+            // Alyuvar Ýle Saldýrý Yapam ------------------------------------------------------------------------------------------------
+            if (waitTimeAtackWithAlyuvar == 0 || waitTimeAtackWithAlyuvar >= minWaitTimeAtackWithAlyuvarAccordiongToMutationLevel[mutationLevel])
+            {
+                waitTimeAtackWithAlyuvar = Random.Range(minWaitTimeAtackWithAlyuvarAccordiongToMutationLevel[mutationLevel],
+                    maxWaitTimeAtackWithAlyuvarAccordiongToMutationLevel[mutationLevel]);
+            }
+
+            if (waitSumTimeForAtackWithAlyuvar >= waitTimeAtackWithAlyuvar)
+            {
+                alyuvarEnemyCreate();
+
+                waitSumTimeForAtackWithAlyuvar = 0;
+                waitTimeAtackWithAlyuvar = 0;
+            }
+
+            // --------------------------------------------------------------------------------------------------------------------------
+
+        }
     }
 
 
@@ -131,7 +313,15 @@ public class BossController : MonoBehaviour
 
         if (alyuvarEnemyCreateControl)
         {
-            StartCoroutine(createEnemyAlyuvars());
+            //StartCoroutine(createEnemyAlyuvars());
+
+            if (mutationLevel > minWaitTimeChangeColorAccordiongToMutationLevel.Length - 1)
+            {
+                mutationLevel = minWaitTimeChangeColorAccordiongToMutationLevel.Length - 1;
+            }
+
+            createEnemyAlyuvarsDifferentFields(alyuvarAtackFieldCount[mutationLevel]);
+
 
             alyuvarEnemyCreateControl = false;
         }
@@ -140,7 +330,14 @@ public class BossController : MonoBehaviour
 
     public void bossGetDamaged()
     {
-        bossHealthCount -= bossHealthCountDecreaseEveryHit;
+        if(mutationLevel != 0)
+        {
+            bossHealthCount -= bossHealthCountDecreaseEveryHit * mutationLevel;
+        }
+        else
+        {
+            bossHealthCount -= bossHealthCountDecreaseEveryHit;
+        }
 
         bossHealthBarController.SetHealth(bossHealthCount);
 
@@ -148,7 +345,44 @@ public class BossController : MonoBehaviour
         if(bossHealthCount <= bossHealthCountForDead)
         {
             // Boss Öldü
+            if (bossDeadControl == false)
+            {
+                Debug.Log("Boss Öldü");
+
+                bossDead();
+                bossDeadControl = true;
+            }
+            
         }
+    }
+
+    private void bossDead()
+    {
+        virusDeadPartShowCamera.SetActive(true);
+
+        Invoke("showBossHealthBar", delayShowBossHealthBarAfterCompleteMutation);
+
+        showExplosionMultiTime(sockWaveCount);
+
+        Invoke("showFinalExplosion", (minTimeForBetweenTwoExplosion * sockWaveCount) + (delayForMultiExplosion * (sockWaveCount - 2)) + waitTimeAfterAllSockWaveComplete);
+    }
+
+    private void showFinalExplosion()
+    {
+        finalExplosion.SetActive(true);
+    }
+
+    public void bossMutatedIncreaseHealth()
+    {
+        bossHealthCount += bossHealthCountIncreaseEveryMutation;
+
+
+        if (bossHealthCount > bossMaxHealthCount)
+        {
+            bossHealthCount = bossMaxHealthCount;
+        }
+
+        bossHealthBarController.SetHealth(bossHealthCount);
     }
 
     private void activateMedBot()
@@ -166,6 +400,15 @@ public class BossController : MonoBehaviour
         }
     }
 
+    private void hideBossHealthBar()
+    {
+        foreach (GameObject gameObjects in bossHealthBarParts)
+        {
+            gameObjects.SetActive(false);
+        }
+    }
+
+
 
     public void magnificationBoss()
     {
@@ -179,20 +422,48 @@ public class BossController : MonoBehaviour
 
             dnaImageShow.showDna();
 
+            showExplosion();
+
+        }
+        else
+        {
+            StartCoroutine(mutateBySelfControl());
         }
     }
 
-    IEnumerator createEnemyAlyuvars()
+
+    private void createEnemyAlyuvarsDifferentFields(int fieldCount)
+    {
+        HashSet<int> uniqueValues = new HashSet<int>();
+
+        for(int i = 0; i < fieldCount; i = uniqueValues.Count)
+        {
+            uniqueValues.Add(Random.Range(1, 5));
+        }
+
+        foreach (int value in uniqueValues)
+        {
+            Debug.Log("uniqueValues: " + value);
+            //StartCoroutine(createEnemyAlyuvars(value));
+        }
+
+        StartCoroutine(createEnemyAlyuvars(new int[1] {4}));
+        //StartCoroutine(createEnemyAlyuvars(2));
+    }
+
+    IEnumerator createEnemyAlyuvars(int[] randomNumbers)
     {
         yield return null;
 
-        //yield return new WaitForSeconds(6);
+        Debug.Log("createEnemyAlyuvars çalýþtý ");
 
         int nowCreatedEnemyCount = 0;
 
         Vector3 enemyPosition;
 
-        createEnemyAlyuvarCount = Random.Range(minCreateEnemyAlyuvarCount, maxCreateEnemyAlyuvarCount);
+        //createEnemyAlyuvarCount = Random.Range(minCreateEnemyAlyuvarCount, maxCreateEnemyAlyuvarCount);
+
+        int createEnemyAlyuvarCount2 = Random.Range(minCreateEnemyAlyuvarCount, maxCreateEnemyAlyuvarCount);
 
         // 4 Farklý Bölgede Çýksýn
         // 1. Bölge Sað - Üst
@@ -200,9 +471,10 @@ public class BossController : MonoBehaviour
         // 3. Bölge Sol - Alt
         // 4. Bölge Sol - Üst
 
+        //int randomNumber = Random.Range(1, 5);
 
-
-        switch (Random.Range(1, 5))
+        /*
+        switch (randomNumber)
         {
             case 1:
                 // 1. Bölge Sað - Üst
@@ -244,21 +516,104 @@ public class BossController : MonoBehaviour
                 yMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
 
                 break;
-
         }
+        */
 
+        float xMinFarFromCenterForCreatingEnemyAlyuvarBeforeValue;
+        float saveFloatValue; // Ýki deðiþkeni birbirleriyle deðiþtirmek için kullanýlacak
 
-
-        while (nowCreatedEnemyCount < createEnemyAlyuvarCount)
+        while (nowCreatedEnemyCount < createEnemyAlyuvarCount2)
         {
             for(int i = 0; i< Random.Range(1, maxCreateEnemyAlyuvarEveryBetwewnWaitTime); i++)
             {
-                enemyPosition = new Vector3(transform.position.x + Random.Range(xMinFarFromCenterForCreatingEnemyAlyuvar, xMaxFarFromCenterForCreatingEnemyAlyuvar),
-                transform.position.y + Random.Range(yMinFarFromCenterForCreatingEnemyAlyuvar, yMaxFarFromCenterForCreatingEnemyAlyuvar),
-                transform.position.z);
+                //foreach (int randomNumber in randomNumbers)
 
-                //Instantiate(enemyAlyuvarForAtackCharacter, transform.position, Quaternion.identity);
-                Instantiate(enemyAlyuvarForAtackCharacter, enemyPosition, Quaternion.identity);
+
+                for (int j = 0; j < randomNumbers.Length; j++)
+                {
+                    Debug.Log("j sayýsý: " + j.ToString());
+
+                    Debug.Log("randomNumbers[j]) sayýsý: " + randomNumbers[j].ToString());
+
+                    switch (randomNumbers[j])
+                    {
+                        case 1:
+                            // 1. Bölge Sað - Üst
+
+                            xMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
+
+                            yMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            yMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
+
+                            break;
+                        case 2:
+                            // 2. Bölge Sað - Alt
+
+                            xMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
+
+                            saveFloatValue = yMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                            yMinFarFromCenterForCreatingEnemyAlyuvar = yMaxFarFromCenterForCreatingEnemyAlyuvar  * - 1;
+                            yMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * - 1;
+
+                            break;
+                        case 3:
+                            // 3. Bölge Sol - Alt
+
+                            saveFloatValue = xMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                            xMinFarFromCenterForCreatingEnemyAlyuvar = xMaxFarFromCenterForCreatingEnemyAlyuvar  * - 1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * - 1;
+
+                            saveFloatValue = yMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                            yMinFarFromCenterForCreatingEnemyAlyuvar = yMaxFarFromCenterForCreatingEnemyAlyuvar  * - 1;
+                            yMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue  * - 1;
+
+                            break;
+                        case 4:
+                            // 4. Bölge Sol - Üst
+
+                            saveFloatValue = xMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                            xMinFarFromCenterForCreatingEnemyAlyuvar = xMaxFarFromCenterForCreatingEnemyAlyuvar * -1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * -1;
+
+                            saveFloatValue = yMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                            yMinFarFromCenterForCreatingEnemyAlyuvar = yMaxFarFromCenterForCreatingEnemyAlyuvar * -1;
+                            yMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * -1;
+
+                            break;
+                    }
+
+
+                    Debug.Log("xMinFarFromCenterForCreatingEnemyAlyuvar1: " + xMinFarFromCenterForCreatingEnemyAlyuvar);
+                    Debug.Log("xMaxFarFromCenterForCreatingEnemyAlyuvar1: " + xMaxFarFromCenterForCreatingEnemyAlyuvar);
+
+                    /*
+                    if (xMinFarFromCenterForCreatingEnemyAlyuvar > xMaxFarFromCenterForCreatingEnemyAlyuvar)
+                    {
+                        xMinFarFromCenterForCreatingEnemyAlyuvarBeforeValue = xMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                        xMinFarFromCenterForCreatingEnemyAlyuvar = xMaxFarFromCenterForCreatingEnemyAlyuvar;
+                        xMaxFarFromCenterForCreatingEnemyAlyuvar = xMinFarFromCenterForCreatingEnemyAlyuvarBeforeValue;
+                    }
+
+                    Debug.Log("xMinFarFromCenterForCreatingEnemyAlyuvar2: " + xMinFarFromCenterForCreatingEnemyAlyuvar);
+                    Debug.Log("xMaxFarFromCenterForCreatingEnemyAlyuvar2: " + xMaxFarFromCenterForCreatingEnemyAlyuvar);
+                    */
+
+                    enemyPosition = new Vector3(transform.position.x + Random.Range(xMinFarFromCenterForCreatingEnemyAlyuvar, xMaxFarFromCenterForCreatingEnemyAlyuvar),
+                    transform.position.y + Random.Range(yMinFarFromCenterForCreatingEnemyAlyuvar, yMaxFarFromCenterForCreatingEnemyAlyuvar),
+                    transform.position.z);
+
+                    //Instantiate(enemyAlyuvarForAtackCharacter, transform.position, Quaternion.identity);
+                    Instantiate(enemyAlyuvarForAtackCharacter, enemyPosition, Quaternion.identity);
+                }
+
 
                 nowCreatedEnemyCount++;
             }
@@ -267,9 +622,10 @@ public class BossController : MonoBehaviour
             yield return new WaitForSeconds(waitTimeForCreateEnemyAlyuvar);
         }
 
-
-
+        alyuvarEnemyCreateCompleteControl = true;
     }
+
+
 
     IEnumerator changeColorVirus()
     {

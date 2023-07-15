@@ -1131,6 +1131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachineVirtualCameraAim: {fileID: 837848934}
   cinemachineVirtualCameraFollow: {fileID: 1860835244}
+  cinemachineVirtualCameraVirusShow: {fileID: 0}
 --- !u!114 &458975224
 MonoBehaviour:
   m_ObjectHideFlags: 0

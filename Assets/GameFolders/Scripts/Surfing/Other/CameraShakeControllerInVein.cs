@@ -107,10 +107,40 @@ public class CameraShakeControllerInVein : MonoBehaviour
 
     IEnumerator cameraShakeIEnumerator(float intensity, float fullIntensityTime, float goToZeroTime)
     {
+        /*
         cinemachineBasicMultiChannelPerlinAim.m_AmplitudeGain = intensity;
         cinemachineBasicMultiChannelPerlinFollow.m_AmplitudeGain = intensity;
         cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;
+        */
 
+
+        try
+        {
+            cinemachineBasicMultiChannelPerlinAim.m_AmplitudeGain = intensity;
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        try
+        {
+            cinemachineBasicMultiChannelPerlinFollow.m_AmplitudeGain = intensity;
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        try
+        {
+            cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;
+        }
+        catch (Exception e)
+        {
+
+        }
+        
         yield return new WaitForSeconds(fullIntensityTime);
 
         //cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
@@ -119,9 +149,38 @@ public class CameraShakeControllerInVein : MonoBehaviour
         while (intensity > 0)
         {
             intensity -= intensity * 0.033f / goToZeroTime;
+
+            /*
             cinemachineBasicMultiChannelPerlinAim.m_AmplitudeGain = intensity;
             cinemachineBasicMultiChannelPerlinFollow.m_AmplitudeGain = intensity;
-            cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;
+            cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;*/
+
+            try
+            {
+                cinemachineBasicMultiChannelPerlinAim.m_AmplitudeGain = intensity;
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            try
+            {
+                cinemachineBasicMultiChannelPerlinFollow.m_AmplitudeGain = intensity;
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            try
+            {
+                cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;
+            }
+            catch (Exception e)
+            {
+
+            }
 
             yield return new WaitForSeconds(0.033f); //Saniyenin 30 da biri kadar bekle
 
@@ -139,9 +198,39 @@ public class CameraShakeControllerInVein : MonoBehaviour
             if (intensity < 0.3f)
             {
                 intensity = 0;
+
+                /*
                 cinemachineBasicMultiChannelPerlinAim.m_AmplitudeGain = intensity;
                 cinemachineBasicMultiChannelPerlinFollow.m_AmplitudeGain = intensity;
                 cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;
+                */
+
+                try
+                {
+                    cinemachineBasicMultiChannelPerlinAim.m_AmplitudeGain = intensity;
+                }
+                catch (Exception e)
+                {
+
+                }
+
+                try
+                {
+                    cinemachineBasicMultiChannelPerlinFollow.m_AmplitudeGain = intensity;
+                }
+                catch (Exception e)
+                {
+
+                }
+
+                try
+                {
+                    cinemachineBasicMultiChannelPerlinVirusShow.m_AmplitudeGain = intensity;
+                }
+                catch (Exception e)
+                {
+
+                }
             }
 
         }

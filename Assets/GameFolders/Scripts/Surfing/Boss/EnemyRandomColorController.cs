@@ -15,10 +15,15 @@ public class EnemyRandomColorController : MonoBehaviour
     {
         virusMaterial = gameObject.GetComponent<Renderer>().material;
 
+        /*
         if (nowVirusMaterialColorsNumber == -1)
         {
             nowVirusMaterialColorsNumber = Random.Range(0, virusMaterialColors.Length);
         }
+        */
+
+        nowVirusMaterialColorsNumber = Random.Range(0, virusMaterialColors.Length);
+
         virusMaterial.color = virusMaterialColors[nowVirusMaterialColorsNumber];
 
     }

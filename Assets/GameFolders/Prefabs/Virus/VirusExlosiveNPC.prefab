@@ -325,6 +325,28 @@ MonoBehaviour:
   maxChangeSizeValue: 50
   minRanmdomMutationNumberForDetermineMutations: 0
   maxRanmdomMutationNumberForDetermineMutations: 7
+--- !u!114 &414888698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276486494698968470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3aa58c3b390b74c9560e5b5beaabb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hittedControl: 0
+  explosion: {fileID: 0}
+  explosion2: {fileID: 0}
+  nowScale: 0
+  wantedScale: 0
+  changeScaleValueEachHit: 0
+  minScaleForExplosion: 0
+  maxScaleForExplosion: 350
+  changeSizeSpeed: 1000
+  detectHitTime: 0.2
 --- !u!4 &1944760198278008620 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: af9f6851d944f42469b8f113cfed961f, type: 3}

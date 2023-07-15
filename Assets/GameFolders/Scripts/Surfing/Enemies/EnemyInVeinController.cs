@@ -19,6 +19,8 @@ public class EnemyInVeinController : MonoBehaviour
 
     private BossController bossController;
 
+    private MutationControlForBrain mutationControlForBrain;
+
     private MedicineSwitching medicineSwitching;
 
     public float nowScale;
@@ -55,6 +57,8 @@ public class EnemyInVeinController : MonoBehaviour
 
         mutationControl = gameObject.GetComponent<MutationControl>();
 
+        mutationControlForBrain = gameObject.GetComponent<MutationControlForBrain>();
+
     }
 
 
@@ -85,7 +89,15 @@ public class EnemyInVeinController : MonoBehaviour
             }
             catch(Exception e)
             {
-                enemyColor = bossController.virusMaterialColors[bossController.targetVirusMaterialColorsNumber];
+                try
+                {
+                    enemyColor = bossController.virusMaterialColors[bossController.targetVirusMaterialColorsNumber];
+                }
+                catch(Exception e2)
+                {
+                    enemyColor = mutationControlForBrain.virusMaterialNormalColors[mutationControlForBrain.targetVirusMaterialColorsNumber];
+                }
+                
             }
 
             //Debug.Log("enemyColor: " + enemyColor);
@@ -96,7 +108,16 @@ public class EnemyInVeinController : MonoBehaviour
             }
             catch(Exception e)
             {
-                medicineColor = bossController.virusMaterialColors[medicineSwitching.currentSelectedWeapon];
+                try
+                {
+                    medicineColor = bossController.virusMaterialColors[medicineSwitching.currentSelectedWeapon];
+                }
+                catch (Exception e2)
+                {
+                    medicineColor = mutationControlForBrain.virusMaterialNormalColors[medicineSwitching.currentSelectedWeapon];
+                }
+
+
             }
 
             //Debug.Log("medicineColor: " + medicineColor);
@@ -120,7 +141,24 @@ public class EnemyInVeinController : MonoBehaviour
             }
             else
             {
-                hitFeelingController.wrongMedicine(mutationControl);
+                try
+                {
+                    hitFeelingController.wrongMedicine(mutationControl);
+                }
+                catch(Exception e)
+                {
+                    
+                }
+
+
+                try
+                {
+                    bossController.mutateBossVirus();
+                }
+                catch (Exception e)
+                {
+
+                }
             }
         }
 
