@@ -166,6 +166,40 @@ public class HitFeelingController : MonoBehaviour
         //Debug.Log("Mutasyon geçirdi");
     }
 
+
+    public void wrongMedicineForBrain(MutationControlForBrain mutationControlForBrain)
+    {
+        //Debug.Log("Mutasyon geçir");
+
+        if (mutationEfectFinishedControl == true)
+        {
+            StartCoroutine(changeScaleAndRotationCrossHairImageForMutate());
+
+            if (dnaImage != null)
+            {
+                StartCoroutine(changeColorAlphaDNAImage());
+            }
+
+
+            cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForMutate, cameraShakefullIntensityTimeForMutate, cameraShakeGoToZeroTimeForMutate);
+
+            try
+            {
+                mutationControlForBrain.mutateVirus();
+            }
+            catch (Exception e)
+            {
+
+            }
+
+
+            surfingAlyuvarAudioSource.PlayOneShot(mutateSound);
+        }
+
+
+        //Debug.Log("Mutasyon geçirdi");
+    }
+
     IEnumerator changeColorAlphaDNAImage()
     {
         //yield return null;

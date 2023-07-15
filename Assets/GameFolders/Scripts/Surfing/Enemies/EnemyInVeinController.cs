@@ -157,7 +157,15 @@ public class EnemyInVeinController : MonoBehaviour
                 }
                 catch(Exception e)
                 {
-                    
+                    try
+                    {
+                        mutationControlForBrain.mutateVirus();
+                        //hitFeelingController.wrongMedicineForBrain(mutationControlForBrain);
+                    }
+                    catch (Exception e2)
+                    {
+
+                    }
                 }
 
 

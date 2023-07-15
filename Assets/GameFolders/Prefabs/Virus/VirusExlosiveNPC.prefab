@@ -308,9 +308,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomMutationControl: 0
-  mutationDivideActiveControl: 0
+  mutationDivideActiveControl: 1
   changeColorActiveControl: 0
-  changeSizeActiveControl: 0
+  changeSizeActiveControl: 1
   mutationDivideControl: 0
   changeColorControl: 0
   changeSizeControl: 0

@@ -136,6 +136,7 @@ public class MutationControlForBrain : MonoBehaviour
 
         //Mutosyon 9 -> Etrafýnda Kalkan Oluþsun Diðer mutasyonlardan farklý random fankisyonuna koy
 
+        Debug.Log("Mutasyon çalýþtý");
 
         ranmdomMutationNumberForDetermineMutations = Random.Range(minRanmdomMutationNumberForDetermineMutations, maxRanmdomMutationNumberForDetermineMutations);
 
