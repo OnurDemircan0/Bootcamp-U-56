@@ -30,8 +30,10 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     [SerializeField] private float interpolationDuration2 = 0.15f;
 
-    float burnOutMeter = 0f;
-    [SerializeField] float burnOutLimit = 100f;
+    [HideInInspector]
+    public float burnOutMeter = 0f;
+    [SerializeField] CameraShakeManager cameraShakeManager;
+    public float burnOutLimit = 100f;
     [SerializeField] float burnOutTime = 10f;
     [SerializeField] float burnOutRate = 5.4f;
     [SerializeField] float afterBurntOutWait = 2.8f;
@@ -39,6 +41,8 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     bool OnResetBurnOut = false;
     bool triggeredSetTimer = false;
+    bool burnedOutEngaged = false;
+    bool triggeredBurNoutShoot = false;
 
     [HideInInspector]
     public bool burnedOut = false;
@@ -118,6 +122,22 @@ public class ThirdPersonShooterController : MonoBehaviour
             }
         }
 
+        
+        if(burnedOut)
+        {
+            if (cameraShakeManager != null)
+            {
+                cameraShakeManager.burnedOut = true;
+            }
+        }
+        else
+        {
+            if (cameraShakeManager != null)
+            {
+                cameraShakeManager.burnedOut = false;
+            }
+        }
+
         Vector3 WorldAimPoint = Vector3.zero;
 
         Vector2 ScreenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -181,6 +201,11 @@ public class ThirdPersonShooterController : MonoBehaviour
                     RotateToBack(RayCastDebug.transform, 80f);
 
                     burnOutMeter += burnOutRate * Time.deltaTime;
+                    burnedOutEngaged = false;
+                    animator.SetLayerWeight(6, Mathf.Lerp(animator.GetLayerWeight(6), 0f, Time.deltaTime * 10f));
+                    animator.SetBool("burnedOut", false);
+                    animator.SetBool("burnOutShoot", false);
+
 
                     if (hitTransform != null)
                     {
@@ -264,11 +289,34 @@ public class ThirdPersonShooterController : MonoBehaviour
 
                     }
                 }
+                else if (assetsInputs.shoot && burnedOut && burnedOutEngaged)
+                {
+                    animator.SetLayerWeight(6, Mathf.Lerp(animator.GetLayerWeight(6), 1f, Time.deltaTime * 10f));
+                    animator.SetBool("burnedOut", false);
+                    if(!triggeredBurNoutShoot)
+                    {
+                        animator.SetBool("burnOutShoot", true);
+                        triggeredBurNoutShoot = true;
+                    }
+                    else
+                    {
+                        animator.SetBool("burnOutShoot", false);
+                    }
+                    
+                    ısShooting = false;
+                    animator.SetBool("Shooting", false);
+                    EnemyHit = false;
+                }
                 else
                 {
                     ısShooting = false;
                     animator.SetBool("Shooting", false);
                     EnemyHit = false;
+
+                    animator.SetLayerWeight(6,Mathf.Lerp(animator.GetLayerWeight(6), 0f, Time.deltaTime * 10f));
+                    animator.SetBool("burnedOut", true);
+
+                    Invoke("SetEngageBurnOut", 0.125f);
                 }
             }
 
@@ -292,6 +340,10 @@ public class ThirdPersonShooterController : MonoBehaviour
             ısShooting = false;
             animator.SetBool("Shooting", false);
             EnemyHit = false;
+            animator.SetBool("burnedOut", false);
+
+            animator.SetBool("burnOutShoot", false);
+            triggeredBurNoutShoot = false;
         }
 
         // Silahın Prjectile Atması İçin
@@ -622,6 +674,11 @@ public class ThirdPersonShooterController : MonoBehaviour
             
         }
        
+    }
+
+    void SetEngageBurnOut()
+    {
+        burnedOutEngaged = true;
     }
 
     public void EnableScript()

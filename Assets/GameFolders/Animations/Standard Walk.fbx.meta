@@ -430,32 +430,32 @@ ModelImporter:
     - name: head1
       parentName: Idle_Shoot_ar(Clone)
       position: {x: -0, y: -176.9416, z: -6.1230974}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: -0.029251045, y: -0, z: -0, w: 1}
       scale: {x: 0.01, y: 0.01, z: 0.01}
     - name: Body1
       parentName: Idle_Shoot_ar(Clone)
       position: {x: -0.0000018693923, y: -129.49721, z: -6.0212374}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0.012678485, y: -0, z: -0, w: 1}
       scale: {x: 0.01, y: 0.01, z: 0.01}
     - name: Backpack1
       parentName: Idle_Shoot_ar(Clone)
       position: {x: -0, y: -138.49533, z: 34.48629}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0.0056677326, y: -0, z: -0, w: 1}
       scale: {x: 0.01, y: 0.01, z: 0.01}
     - name: Arm1
       parentName: Idle_Shoot_ar(Clone)
       position: {x: -0, y: -163.22968, z: -0.3527179}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0.00566943, y: -0, z: -0, w: 1}
       scale: {x: 0.01, y: 0.01, z: 0.01}
     - name: Leg1
       parentName: Idle_Shoot_ar(Clone)
       position: {x: -0, y: -96.69518, z: -8.197696}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0.029757546, y: -0, z: -0, w: 1}
       scale: {x: 0.01, y: 0.01, z: 0.01}
     - name: AssaultRifle
       parentName: Idle_Shoot_ar(Clone)
       position: {x: -118.131454, y: -98.01, z: -57.969975}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: -0.023352625, y: -0, z: -0, w: 1}
       scale: {x: 0.01, y: 0.01, z: 0.01}
     - name: Hips
       parentName: Idle_Shoot_ar(Clone)
@@ -465,7 +465,7 @@ ModelImporter:
     - name: Spine
       parentName: Hips
       position: {x: -21.090727, y: -7.1054274e-15, z: -3.663736e-15}
-      rotation: {x: 0.99452215, y: -0.10452637, z: -0, w: 0}
+      rotation: {x: 0.99452215, y: -0.10452637, z: -0, w: 0.40890262}
       scale: {x: 1.0000012, y: 1.0000029, z: 1.0000017}
     - name: Chest
       parentName: Spine
@@ -499,7 +499,7 @@ ModelImporter:
       scale: {x: 1.0000033, y: 1.0000008, z: 1.0000008}
     - name: UpperArm_Left
       parentName: Shoulder_Left
-      position: {x: -15.111847, y: 0, z: -3.7303494e-14}
+      position: {x: -15.111847, y: 0.020887, z: -3.7303494e-14}
       rotation: {x: -0.027606959, y: -0.1244145, z: -0.15636978, w: 0.97944236}
       scale: {x: 1.0000023, y: 0.99999815, z: 0.99999964}
     - name: LowerArm_Left
@@ -554,7 +554,7 @@ ModelImporter:
       scale: {x: 0.999997, y: 1.0000013, z: 1.0000021}
     - name: Thumb_Distal_Left
       parentName: Thumb_Intermediate_Left
-      position: {x: -8.816608, y: 0, z: 1.4210855e-14}
+      position: {x: -8.816608, y: 0.017237, z: 1.4210855e-14}
       rotation: {x: -0.017883109, y: -0.039745376, z: -0.025908222, w: 0.9987138}
       scale: {x: 0.99999857, y: 1.0000005, z: 1.000001}
     - name: ShoulderPadCTRL_Left
@@ -579,12 +579,12 @@ ModelImporter:
       scale: {x: 1.0000068, y: 1.0000019, z: 1.0000069}
     - name: UpperArm_Right
       parentName: Shoulder_Right
-      position: {x: -15.111769, y: 0, z: -3.1974423e-14}
+      position: {x: -15.111769, y: 0.23623899, z: -3.1974423e-14}
       rotation: {x: 0.027604498, y: 0.124418765, z: -0.15636711, w: 0.97944236}
       scale: {x: 1.0000043, y: 0.99999774, z: 0.99999994}
     - name: LowerArm_Right
       parentName: UpperArm_Right
-      position: {x: -33.666927, y: 0, z: -1.4432899e-15}
+      position: {x: -33.666927, y: 0.052010998, z: -1.4432899e-15}
       rotation: {x: 0.000000048428763, y: -0.04958575, z: 0.00000006379558, w: 0.9987699}
       scale: {x: 1.0000042, y: 1.0000001, z: 1.0000033}
     - name: Hand_Right
@@ -634,7 +634,7 @@ ModelImporter:
       scale: {x: 1.0000054, y: 1.0000002, z: 1.0000062}
     - name: Thumb_Distal_Right
       parentName: Thumb_Intermediate_Right
-      position: {x: -8.816269, y: 0, z: -1.4210855e-14}
+      position: {x: -8.816269, y: 0.021718, z: -1.4210855e-14}
       rotation: {x: 0.0017342155, y: 0.008320092, z: -0.005799874, w: 0.99994713}
       scale: {x: 1.0000046, y: 1.0000008, z: 1.0000025}
     - name: ShoulderPadCTRL_Right
