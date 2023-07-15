@@ -9,6 +9,7 @@ public class EnemyInVeinController : MonoBehaviour
     // Virüs ya da çok küçüldüðü için patlayacak (Ölecek)
 
     public bool hittedControl = false;
+    private bool checkKillVirusControl = false;
 
     [SerializeField] private GameObject explosion;
     [SerializeField] private GameObject explosion2;
@@ -59,6 +60,13 @@ public class EnemyInVeinController : MonoBehaviour
 
         mutationControlForBrain = gameObject.GetComponent<MutationControlForBrain>();
 
+        Invoke("changeCheckKillVirusControl", 0.5f);
+
+    }
+
+    private void changeCheckKillVirusControl()
+    {
+        checkKillVirusControl = true;
     }
 
 
@@ -67,6 +75,8 @@ public class EnemyInVeinController : MonoBehaviour
         if (detectControl)
         {
             //Debug.Log("enemyGetDamaged çalýþtý");
+
+            //wantedScale = 0;
 
             wantedScale -= changeScaleValueEachHit; // Virüsü Küçültüp patlatmak için
 
@@ -203,8 +213,9 @@ public class EnemyInVeinController : MonoBehaviour
 
         }
 
+        //Debug.Log("nowScale: " + nowScale.ToString());
 
-        if (nowScale >= maxScaleForExplosion || nowScale <= minScaleForExplosion)
+        if ((nowScale >= maxScaleForExplosion || nowScale <= minScaleForExplosion) && checkKillVirusControl)
         {
             Debug.Log("Enemey patladý (Öldü)");
 
@@ -214,7 +225,7 @@ public class EnemyInVeinController : MonoBehaviour
             {
                 //Instantiate(explosion, transform.position, Quaternion.identity);
 
-                explosion2.SetActive(true);
+                //explosion2.SetActive(true);
                 gameObject.transform.localScale = new Vector3(0, 0, 0);
 
                 explodedControl = true;

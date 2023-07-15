@@ -227,10 +227,10 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0.73821163, a: 0}
   nowVirusMaterialColorsNumber: -1
   targetVirusMaterialColorsNumber: -1
-  minChangeSizeSpeed: 100
-  maxChangeSizeSpeed: 200
-  minChangeSizeValue: 0.25
-  maxChangeSizeValue: 0.6
+  minChangeSizeSpeed: 1750
+  maxChangeSizeSpeed: 2000
+  minChangeSizeValue: 35
+  maxChangeSizeValue: 50
   minRanmdomMutationNumberForDetermineMutations: 0
   maxRanmdomMutationNumberForDetermineMutations: 7
 --- !u!1001 &2806305521052263195

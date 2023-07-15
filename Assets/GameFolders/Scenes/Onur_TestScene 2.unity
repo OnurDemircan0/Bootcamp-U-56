@@ -21777,6 +21777,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 414888698, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 1872943892}
+    - target: {fileID: 414888698, guid: f305ead889b9373418fb30922b57a419, type: 3}
+      propertyPath: explosion2
+      value: 
+      objectReference: {fileID: 1872943892}
     - target: {fileID: 562257183623465314, guid: f305ead889b9373418fb30922b57a419, type: 3}
       propertyPath: m_Name
       value: VirusExlosiveNPC

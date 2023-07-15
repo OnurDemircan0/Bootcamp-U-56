@@ -115,7 +115,15 @@ public class HitFeelingController : MonoBehaviour
 
         killedControl = true;
 
-        cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForKill, cameraShakefullIntensityTimeForKill, cameraShakeGoToZeroTimeForKill);
+        try
+        {
+            cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForKill, cameraShakefullIntensityTimeForKill, cameraShakeGoToZeroTimeForKill);
+        }
+        catch(Exception e)
+        {
+
+        }
+        
 
         StartCoroutine(changeScaleCrossHairImageForKill());
 

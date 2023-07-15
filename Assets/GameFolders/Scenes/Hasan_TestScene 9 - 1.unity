@@ -3939,13 +3939,17 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 643883468}
+    - target: {fileID: 2806305522079614458, guid: d39f85ec0f71fa348b2fc755a2a0e35d, type: 3}
+      propertyPath: maxChangeSizeSpeed
+      value: 4000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806305522079614458, guid: d39f85ec0f71fa348b2fc755a2a0e35d, type: 3}
+      propertyPath: minChangeSizeSpeed
+      value: 3500
+      objectReference: {fileID: 0}
     - target: {fileID: 3040890521062753492, guid: d39f85ec0f71fa348b2fc755a2a0e35d, type: 3}
       propertyPath: m_Name
       value: Virus Vein Main
-      objectReference: {fileID: 0}
-    - target: {fileID: 3040890521062753492, guid: d39f85ec0f71fa348b2fc755a2a0e35d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d39f85ec0f71fa348b2fc755a2a0e35d, type: 3}

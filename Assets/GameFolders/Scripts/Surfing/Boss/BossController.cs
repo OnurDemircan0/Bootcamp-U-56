@@ -8,6 +8,8 @@ public class BossController : MonoBehaviour
     [SerializeField] private GameObject virusShowCamera;
     [SerializeField] private GameObject virusDeadPartShowCamera;
 
+    
+
     [SerializeField] private GameObject explosion;
     [SerializeField] private float minTimeForBetweenTwoExplosion;
     [SerializeField] private float delayForMultiExplosion; // Üst üste gerçekleþecek patlamalarda min patlama bekleme süresine eklenecek çok kýsa bir süre olacak
@@ -106,7 +108,11 @@ public class BossController : MonoBehaviour
     [Header("Boss Dead")]
     [SerializeField] private int sockWaveCount;
     [SerializeField] private GameObject finalExplosion;
+    [SerializeField] private float waitTimeForFinalExplosionAfterBossSmallAndDestroy;
     [SerializeField] private float waitTimeAfterAllSockWaveComplete;
+    [SerializeField] private float waitTimeForHideMedBot;
+    [SerializeField] private float shrinkSpeed;
+    [SerializeField] private float minSizeForExplode;
     private bool bossDeadControl = false;
 
 
@@ -210,11 +216,15 @@ public class BossController : MonoBehaviour
     {
         //showExplosion();
 
+        
+
 
         if (alyuvarEnemyCreateCompleteControl)
         {
             //showExplosionMultiTime(2);
-            showExplosionMultiTime(alyuvarAtackFieldCount[mutationLevel]);
+            //showExplosionMultiTime(alyuvarAtackFieldCount[mutationLevel]);
+
+            Debug.Log("alyuvarEnemyCreate çalýþtý: " + Time.time.ToString());
 
             alyuvarEnemyCreateControl = true;
             alyuvarEnemyCreateCompleteControl = false;
@@ -301,17 +311,18 @@ public class BossController : MonoBehaviour
             Invoke("showBossHealthBar", delayShowBossHealthBarAfterCompleteMutation);
         }
 
-        if (changeColorControl && changeColorCompleteControl)
+        if (changeColorControl && changeColorCompleteControl && bossDeadControl == false)
         {
             //Debug.Log("Renk deðiþtirme Baþladý");
 
             StartCoroutine(changeColorVirus());
 
             changeColorControl = false;
+            changeColorCompleteControl = false;
         }
 
 
-        if (alyuvarEnemyCreateControl)
+        if (alyuvarEnemyCreateControl && bossDeadControl == false)
         {
             //StartCoroutine(createEnemyAlyuvars());
 
@@ -349,11 +360,18 @@ public class BossController : MonoBehaviour
             {
                 Debug.Log("Boss Öldü");
 
+                Invoke("hideMedBot", waitTimeForHideMedBot);
+
                 bossDead();
                 bossDeadControl = true;
             }
             
         }
+    }
+
+    private void hideMedBot()
+    {
+        medBot.SetActive(false);
     }
 
     private void bossDead()
@@ -364,12 +382,31 @@ public class BossController : MonoBehaviour
 
         showExplosionMultiTime(sockWaveCount);
 
-        Invoke("showFinalExplosion", (minTimeForBetweenTwoExplosion * sockWaveCount) + (delayForMultiExplosion * (sockWaveCount - 2)) + waitTimeAfterAllSockWaveComplete);
+        //Invoke("showFinalExplosion", (minTimeForBetweenTwoExplosion * sockWaveCount) + (delayForMultiExplosion * (sockWaveCount - 2)) + waitTimeAfterAllSockWaveComplete);
+        Invoke("startShrinkBoss", (minTimeForBetweenTwoExplosion * sockWaveCount) + (delayForMultiExplosion * (sockWaveCount - 2)) + waitTimeAfterAllSockWaveComplete);
+    }
+
+    private void startShrinkBoss()
+    {
+
+    }
+
+    private IEnumerator shrinkBoss()
+    {
+        while (transform.localScale.x > minSizeForExplode)
+        {
+            transform.localScale -= new Vector3(0.01f, 0.01f, 0.01f) * shrinkSpeed * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        
+
+        Invoke("showFinalExplosion", waitTimeForFinalExplosionAfterBossSmallAndDestroy);
     }
 
     private void showFinalExplosion()
     {
         finalExplosion.SetActive(true);
+        
     }
 
     public void bossMutatedIncreaseHealth()
@@ -441,13 +478,20 @@ public class BossController : MonoBehaviour
             uniqueValues.Add(Random.Range(1, 5));
         }
 
+        int[] uniqueValuesArray = new int[uniqueValues.Count];
+
+        int j = 0;
         foreach (int value in uniqueValues)
         {
             Debug.Log("uniqueValues: " + value);
             //StartCoroutine(createEnemyAlyuvars(value));
+
+            uniqueValuesArray[j++] = value;
         }
 
-        StartCoroutine(createEnemyAlyuvars(new int[1] {4}));
+
+        //StartCoroutine(createEnemyAlyuvars(new int[4] {1,2,3,4}));
+        StartCoroutine(createEnemyAlyuvars(uniqueValuesArray));
         //StartCoroutine(createEnemyAlyuvars(2));
     }
 
@@ -550,13 +594,13 @@ public class BossController : MonoBehaviour
                         case 2:
                             // 2. Bölge Sað - Alt
 
-                            xMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
-                            xMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            saveFloatValue = xMinFarFromCenterForCreatingEnemyAlyuvar;
 
-                            saveFloatValue = yMinFarFromCenterForCreatingEnemyAlyuvar;
+                            xMinFarFromCenterForCreatingEnemyAlyuvar = xMaxFarFromCenterForCreatingEnemyAlyuvar * -1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * -1;
 
-                            yMinFarFromCenterForCreatingEnemyAlyuvar = yMaxFarFromCenterForCreatingEnemyAlyuvar  * - 1;
-                            yMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * - 1;
+                            yMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            yMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
 
                             break;
                         case 3:
@@ -576,10 +620,8 @@ public class BossController : MonoBehaviour
                         case 4:
                             // 4. Bölge Sol - Üst
 
-                            saveFloatValue = xMinFarFromCenterForCreatingEnemyAlyuvar;
-
-                            xMinFarFromCenterForCreatingEnemyAlyuvar = xMaxFarFromCenterForCreatingEnemyAlyuvar * -1;
-                            xMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * -1;
+                            xMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
 
                             saveFloatValue = yMinFarFromCenterForCreatingEnemyAlyuvar;
 
@@ -590,8 +632,8 @@ public class BossController : MonoBehaviour
                     }
 
 
-                    Debug.Log("xMinFarFromCenterForCreatingEnemyAlyuvar1: " + xMinFarFromCenterForCreatingEnemyAlyuvar);
-                    Debug.Log("xMaxFarFromCenterForCreatingEnemyAlyuvar1: " + xMaxFarFromCenterForCreatingEnemyAlyuvar);
+                    //Debug.Log("xMinFarFromCenterForCreatingEnemyAlyuvar1: " + xMinFarFromCenterForCreatingEnemyAlyuvar);
+                    //Debug.Log("xMaxFarFromCenterForCreatingEnemyAlyuvar1: " + xMaxFarFromCenterForCreatingEnemyAlyuvar);
 
                     /*
                     if (xMinFarFromCenterForCreatingEnemyAlyuvar > xMaxFarFromCenterForCreatingEnemyAlyuvar)
@@ -612,6 +654,65 @@ public class BossController : MonoBehaviour
 
                     //Instantiate(enemyAlyuvarForAtackCharacter, transform.position, Quaternion.identity);
                     Instantiate(enemyAlyuvarForAtackCharacter, enemyPosition, Quaternion.identity);
+
+
+                    switch (randomNumbers[j])
+                    {
+                        case 1:
+                            // 1. Bölge Sað - Üst
+
+                            xMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
+
+                            yMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            yMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
+
+                            break;
+                        case 2:
+                            // 2. Bölge Sað - Alt
+
+                            saveFloatValue = xMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                            xMinFarFromCenterForCreatingEnemyAlyuvar = xMaxFarFromCenterForCreatingEnemyAlyuvar * -1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * -1;
+
+                            yMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            yMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
+
+                            break;
+                        case 3:
+                            // 3. Bölge Sol - Alt
+
+                            saveFloatValue = xMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                            xMinFarFromCenterForCreatingEnemyAlyuvar = xMaxFarFromCenterForCreatingEnemyAlyuvar * -1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * -1;
+
+                            saveFloatValue = yMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                            yMinFarFromCenterForCreatingEnemyAlyuvar = yMaxFarFromCenterForCreatingEnemyAlyuvar * -1;
+                            yMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * -1;
+
+                            break;
+                        case 4:
+                            // 4. Bölge Sol - Üst
+
+                            xMinFarFromCenterForCreatingEnemyAlyuvar *= 1;
+                            xMaxFarFromCenterForCreatingEnemyAlyuvar *= 1;
+
+                            saveFloatValue = yMinFarFromCenterForCreatingEnemyAlyuvar;
+
+                            yMinFarFromCenterForCreatingEnemyAlyuvar = yMaxFarFromCenterForCreatingEnemyAlyuvar * -1;
+                            yMaxFarFromCenterForCreatingEnemyAlyuvar = saveFloatValue * -1;
+
+                            break;
+                    }
+
+
+                    //Debug.Log("xMinFarFromCenterForCreatingEnemyAlyuvar2: " + xMinFarFromCenterForCreatingEnemyAlyuvar);
+                    //Debug.Log("xMaxFarFromCenterForCreatingEnemyAlyuvar2: " + xMaxFarFromCenterForCreatingEnemyAlyuvar);
+
+
                 }
 
 
