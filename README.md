@@ -102,7 +102,7 @@ https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/de61c189-da5f-4c
   [BackLog](https://miro.com/app/board/uXjVM9lHoZU=/?share_link_id=845679339362)
   
   * Sprint İçinde Tamamlanması Tahmin Edilen Puan: 125
-  * Puan Tamamlama Mantığı: Genel olarak oyunun özelliklerini düzenleeme ve bir araya getirmeyi 3.sprinte bıraktığımız için 2. ve 1. sprinte göre daha az puanlama gerektiğini düşündük.
+  * Puan Tamamlama Mantığı: Genel olarak oyunun özelliklerini düzenleme ve bir araya getirmeyi 3.sprinte bıraktığımız için 2. ve 1. sprinte göre daha az puanlama gerektiğini düşündük.
   * Daily Scrum: Daily Scrum toplantılarımız önceki Sprintlerde de olduğu gibi genellikle giscorda sesli kanal üzerinden gerçekleşmiştir. Ama bunun yanında Whatsapp Grubumuzda vardır. (Açılan Dosyada Linkler Kopyalanıp Adres Bölümüne Yapıştırılmalıdır) [Daily Scrum](https://docs.google.com/document/d/1UC72Vu-PwMKpMh91CdAyolfpue9bUSVzrx5eJggxqDg/edit?usp=sharing)
  
   + Sprint Board ScreenShotları:
@@ -132,6 +132,15 @@ https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/de61c189-da5f-4c
 ![Gate Opening](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/3e1ece4b-2602-4225-90a5-11008fbc6dc2)
 
 ![Hasan](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/bf8226c1-f39e-41dc-a7a8-c12a39acea43)
+
++ Sprint Review: 1. Sprintten itibaren istediğimiz çoğu şeyi bu sprintte eklemiş bulunuyoruz 3. sprint backlogundaki ve 2.Sprintten kalan herşey tamamlanmıştır, 
+
++ Sprint NOT: Bazı özellikler (Özellikle 2.Sprintte tamamlanmayanlar) Backlogdan silinmiştir. 2. Sprintten kalan görevlerin silinmeyen kısımı bu sprintte tamamlanmıştır.
+
+## Sprint Retrospective:
+* Bazı görevlere gerekildiğinden fazla zaman ayrılmıştır. Bunun engellenmesi bazı görevlerin daha iyi şekilde tamamlanmasını sağlaya bilirdi.
+* Bu sprint için ayrılan görevlerin zamanlandırması çoğunlukla doğru yapılmış olsada, 2.Sprintten kalan görevler tempoyu aksatmıştır.
+* Takım üyellerinin bazılarının müsaitlik ve koşullar nedeniyle bazı görevleri almaması görev eşitsizliğine neden olmuştur.
 
 
 
