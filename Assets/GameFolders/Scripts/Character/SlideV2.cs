@@ -2,6 +2,7 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SlideV2 : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class SlideV2 : MonoBehaviour
     [SerializeField]
     StarterAssetsInputs assetsInputs;
 
+    PlayerInput playerInput;
+
 
     private void OnDrawGizmos()
     {
@@ -48,6 +51,7 @@ public class SlideV2 : MonoBehaviour
         Scripts = GetComponents<MonoBehaviour>();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void FixedUpdate()
@@ -62,6 +66,12 @@ public class SlideV2 : MonoBehaviour
         {
             StopSliding();
         }
+    }
+
+    private void Update()
+    {
+        if (pressed) playerInput.enabled = false;
+
     }
 
     void StartSliding()
@@ -109,6 +119,7 @@ public class SlideV2 : MonoBehaviour
         animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 0f, Time.deltaTime * 10f));
         shooterController.enabled = true;
         muzzleEffect.enabled = true;
+        playerInput.enabled = true;
 
         this.enabled = false;
     }

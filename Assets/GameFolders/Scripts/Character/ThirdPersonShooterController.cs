@@ -30,11 +30,11 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     [SerializeField] private float interpolationDuration2 = 0.15f;
 
-    [HideInInspector]
+    
     public float burnOutMeter = 0f;
     [SerializeField] CameraShakeManager cameraShakeManager;
     public float burnOutLimit = 100f;
-    [SerializeField] float burnOutTime = 10f;
+    public float burnOutTime = 10f;
     [SerializeField] float burnOutRate = 5.4f;
     [SerializeField] float afterBurntOutWait = 2.8f;
     float timerForBurntOut = 0f;
