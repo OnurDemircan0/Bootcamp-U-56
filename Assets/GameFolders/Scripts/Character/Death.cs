@@ -3,6 +3,8 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 //using EZCameraShake;
 
@@ -11,6 +13,8 @@ public class Death : MonoBehaviour
     public bool death = false;
     bool onAim;
     bool onShoot;
+
+    public string scene;
 
     public bool onMimicStage = false;
 
@@ -44,6 +48,12 @@ public class Death : MonoBehaviour
     [SerializeField]
     GameObject CrossHair;
 
+    [SerializeField]
+    AudioSource burnOutMeterSound;
+
+    [SerializeField]
+    PlayerInput playerInput;
+    
     //public CameraShaker cameraShaker;
 
     ThirdPersonController personController;
@@ -88,7 +98,23 @@ public class Death : MonoBehaviour
                 Debug.LogWarning("Disable Script is not assigned");
             }
             if (muzzle != null) muzzle.SetActive(false);
+            Invoke("Fade", 5f);
+            Invoke("ResetLevel", 10f);
 
+            if(burnOutMeterSound != null)
+            {
+                burnOutMeterSound.Stop();
+            }
+
+            if(playerInput != null)
+            {
+                playerInput.enabled = false;
+            }
+
+            if(CrossHair != null) 
+            {
+                CrossHair.SetActive(false);
+            }
         }
     }
 
@@ -124,6 +150,23 @@ public class Death : MonoBehaviour
             
             if(muzzle != null) muzzle.SetActive(false );
             Invoke("Fade", 5f);
+            Invoke("ResetLevel", 10f);
+
+            if (burnOutMeterSound != null)
+            {
+                burnOutMeterSound.Stop();
+            }
+
+            if (playerInput != null)
+            {
+                playerInput.enabled = false;
+            }
+
+            if (CrossHair != null)
+            {
+                CrossHair.SetActive(false);
+            }
+
         }
     }
 
@@ -207,6 +250,11 @@ public class Death : MonoBehaviour
         {
             throw new System.Exception("ShakeManager is not present");
         }
+    }
+
+    void ResetLevel()
+    {
+        SceneManager.LoadScene(scene);
     }
 
 

@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,6 +73,12 @@ namespace MimicSpace
 
         [SerializeField]
         Animator mainVirusAnimator;
+
+        [SerializeField]
+        BossCutSceneManage bossCutSceneManage;
+
+        [SerializeField]
+        GameObject cutsceneManage;
         private void OnDrawGizmos()
         {
 
@@ -117,6 +124,7 @@ namespace MimicSpace
                 attackDistance = 0f;
                 agent.SetDestination(transform.position);
                 deathParticle.gameObject.SetActive(true);
+                cutsceneManage.SetActive(true);
 
                 StartDecreaseVolume();
 
@@ -247,13 +255,15 @@ namespace MimicSpace
 
         void SetMainVirusEscapeCam()
         {
-            if(!VirusEscapeSceneTriggered)
+            if (!VirusEscapeSceneTriggered)
             {
-                MainVirus.SetActive(true);
+                bossCutSceneManage.onCutSceneBoss = true;
 
+                MainVirus.SetActive(true);
                 mainVirusAnimator.SetBool("Enabled", true);
 
                 MainVirusEscapeCamera.SetActive(true);
+
                 Invoke("SetOFFMainVirusEscapeCam", MainVirusEscapeSceneTime);
 
                 VirusEscapeSceneTriggered = true;
@@ -262,6 +272,8 @@ namespace MimicSpace
 
         void SetOFFMainVirusEscapeCam()
         {
+            bossCutSceneManage.onCutSceneBoss = false;
+
             MainVirusEscapeCamera.SetActive(false);
             MainVirus.SetActive(false);
         }

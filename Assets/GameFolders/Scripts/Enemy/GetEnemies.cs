@@ -19,6 +19,9 @@ public class GetEnemies : MonoBehaviour
 
     GameObject[] enemiesPhase2;
 
+    public ProjectileAttack virus2;
+    public ProjectileAttack virus6;
+
     public GameObject phase2Parent;
     
 
@@ -129,6 +132,9 @@ public class GetEnemies : MonoBehaviour
                 standHerePlatform.SetActive(true);
                 ClearBlood();
                 ActivateEnemies();
+
+                virus2.enabled = false;
+                virus6.enabled = false;
             }
             else if (enemySpawned >= enemies.Length)
             {
@@ -366,7 +372,6 @@ public class GetEnemies : MonoBehaviour
         playerTransform.GetComponent<ThirdPersonController>().Grounded = true;
 
         Vector3 targetPosition = lookObject.transform.position;
-        // targetPosition.y = playerTransform.position.y; // Maintain the same height
 
         float elapsedTime = 0f;
         Vector3 startingPosition = playerTransform.position;
@@ -377,19 +382,17 @@ public class GetEnemies : MonoBehaviour
             playerTransform.position = Vector3.Lerp(startingPosition, targetPosition, t);
             elapsedTime += Time.deltaTime;
 
-            // Check if the distance to the target position is very close
             if (Vector3.Distance(playerTransform.position, targetPosition) < 0.5f)
             {
-                break; // Exit the loop early
+                break;
             }
 
             yield return null;
         }
 
-        // Ensure the character reaches the exact target position
-       // playerTransform.position = targetPosition;
-
-        // Mark the movement as complete
         pushedPlayerOnce = true;
+
+        virus2.enabled = true;
+        virus6.enabled = true;
     }
 }

@@ -22,6 +22,7 @@ public class EndOfTheLevelHeart : MonoBehaviour
     FadeCamera fadeCamera;
 
     bool triggerEntered = false;
+    bool invoked;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,7 +35,12 @@ public class EndOfTheLevelHeart : MonoBehaviour
         {
             stopAllMovement();
 
-            Invoke("FadeEffectON", 1.2f);
+            if(!invoked)
+            {
+                Invoke("FadeEffectON", 1.2f);
+                invoked = true;
+            }
+            
         }
     }
 

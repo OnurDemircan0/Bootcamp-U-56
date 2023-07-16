@@ -1,4 +1,5 @@
 using Cinemachine;
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,10 +21,17 @@ public class CheckBossStage : MonoBehaviour
     [SerializeField]
     float returnToPlayerTime = 4f;
 
+    [SerializeField]
+    ThirdPersonController thirdPersonController;
+
+    [SerializeField]
+    StarterAssetsInputs assetsInputs;
+
     bool startBossPath = false;
     bool InvokedReturnToPlayer = false;
     bool onTriggeredEnterTriggeredOnce = false;
     bool invokeIsCalled = false;
+    bool onCutScene;
     private void OnTriggerEnter(Collider other)
     {
         if (!onTriggeredEnterTriggeredOnce)
@@ -54,11 +62,21 @@ public class CheckBossStage : MonoBehaviour
             }
             
         }
+
+        if(onCutScene)
+        {
+            assetsInputs.shoot = false;
+            assetsInputs.aim = false;
+            assetsInputs.move = Vector2.zero;
+            assetsInputs.look = Vector2.zero;
+
+        }
     }
 
 
     void StartBossCamPath()
     {
+        onCutScene = true;
 
         bossCam.gameObject.SetActive(true);
  
@@ -67,6 +85,8 @@ public class CheckBossStage : MonoBehaviour
 
     void ReturnToPlayer()
     {
+        onCutScene=false;
+
         bossCam.gameObject.SetActive(false);
         InvokedReturnToPlayer = true;
     }

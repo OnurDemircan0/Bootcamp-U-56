@@ -14,6 +14,8 @@ public class SlideV2 : MonoBehaviour
 
     bool pressed = false;
 
+    bool lockedCamera;
+
     [SerializeField]
     GameObject slideChecker;
 
@@ -40,6 +42,8 @@ public class SlideV2 : MonoBehaviour
 
     PlayerInput playerInput;
 
+    ThirdPersonController thirdPersonController;
+
 
     private void OnDrawGizmos()
     {
@@ -52,6 +56,7 @@ public class SlideV2 : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
+        thirdPersonController = GetComponent<ThirdPersonController>();
     }
 
     private void FixedUpdate()
@@ -70,13 +75,28 @@ public class SlideV2 : MonoBehaviour
 
     private void Update()
     {
-        if (pressed) playerInput.enabled = false;
+      //  assetsInputs.move.x = 0f;
+        assetsInputs.shoot = false;
+        assetsInputs.aim = false;
+      //  if (!lockedCamera) { thirdPersonController.LockCameraPosition = true; lockedCamera = true; }
+      //  if (pressed) playerInput.enabled = false;
 
     }
 
     void StartSliding()
     {
         Invoke("pressW", 0.6f);
+
+        // Disables
+
+        if(pressed)
+        {
+           // assetsInputs.enabled = false;
+           // playerInput.enabled = false;
+           // thirdPersonController.enabled = false;  
+        }
+
+
 
         animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 1f, Time.deltaTime * 10f));
 
@@ -86,11 +106,6 @@ public class SlideV2 : MonoBehaviour
 
         shooterController.enabled = false;
         muzzleEffect.enabled = false;
-
-       if (Input.GetAxis("Horizontal") != 0)
-       {
-           forwardDirection.x = (-1 * Input.GetAxis("Horizontal")) * horizontalSpeed;
-       }
 
         Vector3 moveVector = forwardDirection * speed * Time.deltaTime;
         characterController.Move(moveVector);
@@ -120,6 +135,7 @@ public class SlideV2 : MonoBehaviour
         shooterController.enabled = true;
         muzzleEffect.enabled = true;
         playerInput.enabled = true;
+        thirdPersonController.LockCameraPosition = false;
 
         this.enabled = false;
     }
