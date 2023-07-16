@@ -128,6 +128,7 @@ MonoBehaviour:
   maxFarValueFromDivededVirusesY: 0.5
   minFarValueFromDivededVirusesZ: 0.2
   maxFarValueFromDivededVirusesZ: 0.5
+  multiplyLocalSizeForMoveAfterDivideMutation: 0
   minChangeColorSpeed: 5
   maxChangeColorSpeed: 10
   virusMaterialColors:
@@ -215,6 +216,7 @@ MonoBehaviour:
   cameraShakeIntensityForGetDamage: 1.5
   cameraShakefullIntensityTimeForGetDamage: 0.3
   cameraShakeGoToZeroTimeForGetDamage: 0.3
+  destroyWaitTimeAfterPassCharacter: 0
 --- !u!1001 &8412023202332148487
 PrefabInstance:
   m_ObjectHideFlags: 0

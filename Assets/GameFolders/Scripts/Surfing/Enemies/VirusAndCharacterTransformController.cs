@@ -35,6 +35,8 @@ public class VirusAndCharacterTransformController : MonoBehaviour
     [SerializeField] private float cameraShakefullIntensityTimeForGetDamage;
     [SerializeField] private float cameraShakeGoToZeroTimeForGetDamage;
 
+    [SerializeField] private float destroyWaitTimeAfterPassCharacter;
+
 
     private bool changeColorToZeroCompleteControl;
     private bool changeColorToOneCompleteControl;
@@ -80,6 +82,8 @@ public class VirusAndCharacterTransformController : MonoBehaviour
                 //gameObject.transform.localScale = new Vector3(0, 0, 0);
 
                 beforeDamaged = true;
+
+                Destroy(gameObject, destroyWaitTimeAfterPassCharacter);
             }
             
         }

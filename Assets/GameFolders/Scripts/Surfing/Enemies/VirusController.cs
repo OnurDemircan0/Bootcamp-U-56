@@ -48,7 +48,15 @@ public class VirusController : MonoBehaviour
         {
             Debug.Log("pathCreator null");
 
-            pathCreator = GameObject.Find("path for enemy").gameObject.GetComponent<PathCreator>();
+            try
+            {
+                pathCreator = GameObject.Find("path for enemy").gameObject.GetComponent<PathCreator>();
+            }
+            catch(System.Exception e)
+            {
+                pathCreator = GameObject.Find("path").gameObject.GetComponent<PathCreator>();
+            }
+            
         }
 
         nowPositionX = transform.position.x - pathCreator.path.GetPointAtDistance(dstTravelled, end).x;

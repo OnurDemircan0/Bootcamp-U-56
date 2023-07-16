@@ -378,7 +378,7 @@ public class SurfingControllerV2 : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(new Vector3(pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.x + alyuvarNowRotationValueX * -1
             , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.y
-            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.z + 90 + alyuvarNowRotationValueZ));
+            , pathCreator.path.GetRotationAtDistance(dstTravelled, end).eulerAngles.z + 64 + alyuvarNowRotationValueZ));
         }
         else
         {
