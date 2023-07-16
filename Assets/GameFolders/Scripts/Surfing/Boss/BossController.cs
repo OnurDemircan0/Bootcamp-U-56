@@ -8,7 +8,9 @@ public class BossController : MonoBehaviour
     [SerializeField] private GameObject virusShowCamera;
     [SerializeField] private GameObject virusDeadPartShowCamera;
 
-    
+    [SerializeField] private SurfingControllerV2 surfingControllerV2;
+
+    private bool virusShowCameraWorkedForFirstContactWithBoss;
 
     [SerializeField] private GameObject explosion;
     [SerializeField] private float minTimeForBetweenTwoExplosion;
@@ -108,16 +110,20 @@ public class BossController : MonoBehaviour
     [Header("Boss Dead")]
     [SerializeField] private int sockWaveCount;
     [SerializeField] private GameObject finalExplosion;
+    [SerializeField] private float waitTimeHideVirusCameraAfterFinalExplosion;
     [SerializeField] private float waitTimeForFinalExplosionAfterBossSmallAndDestroy;
     [SerializeField] private float waitTimeAfterAllSockWaveComplete;
     [SerializeField] private float waitTimeForHideMedBot;
     [SerializeField] private float shrinkSpeed;
     [SerializeField] private float minSizeForExplode;
+
     private bool bossDeadControl = false;
 
 
     void Awake()
     {
+        virusShowCameraWorkedForFirstContactWithBoss = false;
+
         virusMaterial = gameObject.GetComponent<Renderer>().material;
 
         if (nowVirusMaterialColorsNumber == -1)
@@ -140,6 +146,8 @@ public class BossController : MonoBehaviour
 
         bossHealthCount = bossMaxHealthCount;
         bossHealthBarController.SetMaxHealth(bossHealthCount);
+
+        //virusShowCamera.SetActive(true);
 
 
         //showExplosion();
@@ -296,6 +304,19 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
+
+        if (surfingControllerV2.contactBossControl)
+        {
+            if (virusShowCameraWorkedForFirstContactWithBoss == false)
+            {
+                virusShowCamera.SetActive(true);
+
+                virusShowCameraWorkedForFirstContactWithBoss = true;
+            }
+            
+        }
+
+
         if(transform.localScale.x < targetSize && reachMaxSize == false)
         {
             transform.localScale += new Vector3(0.01f, 0.01f, 0.01f) * magnificationSizeSpeed * Time.deltaTime;
@@ -376,7 +397,8 @@ public class BossController : MonoBehaviour
 
     private void bossDead()
     {
-        virusDeadPartShowCamera.SetActive(true);
+        //virusDeadPartShowCamera.SetActive(true);
+        virusShowCamera.SetActive(true);
 
         Invoke("showBossHealthBar", delayShowBossHealthBarAfterCompleteMutation);
 
@@ -388,7 +410,7 @@ public class BossController : MonoBehaviour
 
     private void startShrinkBoss()
     {
-
+        StartCoroutine(shrinkBoss());
     }
 
     private IEnumerator shrinkBoss()
@@ -406,7 +428,13 @@ public class BossController : MonoBehaviour
     private void showFinalExplosion()
     {
         finalExplosion.SetActive(true);
-        
+
+        Invoke("hideVirusShowCamera", waitTimeHideVirusCameraAfterFinalExplosion);
+    }
+
+    private void hideVirusShowCamera()
+    {
+        virusShowCamera.SetActive(false);
     }
 
     public void bossMutatedIncreaseHealth()

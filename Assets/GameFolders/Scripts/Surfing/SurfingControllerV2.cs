@@ -15,8 +15,13 @@ public class SurfingControllerV2 : MonoBehaviour
 
     [SerializeField] private Image imageBlack;
 
+    [SerializeField] private CreateOtherAlyuvarsComeFromBehind createOtherAlyuvarsComeFromBehind;
+    [SerializeField] private EnemyCreator enemyCreator;
+
 
     [SerializeField] private bool alyuvarVerticalAndHorizontalMovementControl = true;
+
+    public bool contactBossControl;
 
 
     
@@ -41,6 +46,10 @@ public class SurfingControllerV2 : MonoBehaviour
     private float maxDistanceFromPathPointX;
 
     public float turnNormalRotationSpeed = 10.0f;
+
+    [SerializeField] private float stopPointForFightBoss;
+    [SerializeField] private float stopPointForCreateAlyuvar;
+    [SerializeField] private float stopPointForCreateVirus;
 
     public float finishPoint = 1025.0f;
     public float certainFinishPoint = 1065.0f;
@@ -163,8 +172,6 @@ public class SurfingControllerV2 : MonoBehaviour
         {
             //Debug.Log("gameObject.transform.GetChild(0).gameObject.transform.GetChild(0): " + gameObject.transform.GetChild(0).gameObject.transform.GetChild(0));
 
-            
-
             try
             {
                 gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition
@@ -174,9 +181,6 @@ public class SurfingControllerV2 : MonoBehaviour
             {
 
             }
-
-
-
 
 
             followPath();
@@ -193,6 +197,7 @@ public class SurfingControllerV2 : MonoBehaviour
 
     private void followPath()
     {
+
         if (dstTravelled > 780 && speed < maxSpeed)
         {
             speed += speedAcceleration * Time.deltaTime;
@@ -210,6 +215,25 @@ public class SurfingControllerV2 : MonoBehaviour
         {
             imageBlack.color = new Color(0, 0, 0, 1);
         }
+
+
+
+        if(dstTravelled >= stopPointForFightBoss)
+        {
+            speed = 0;
+            contactBossControl = true;
+        }
+
+        if (dstTravelled >= stopPointForCreateAlyuvar)
+        {
+            createOtherAlyuvarsComeFromBehind.createOtherAlyuvarControl = false;
+        }
+
+        if (dstTravelled >=  stopPointForCreateVirus)
+        {
+            enemyCreator.createVirusEnemyControl = false;
+        }
+
 
         dstTravelled += speed * Time.deltaTime;
         //transform.position = pathCreator.path.GetPointAtDistance(dstTravelled, end);
@@ -521,7 +545,7 @@ public class SurfingControllerV2 : MonoBehaviour
 
             Debug.Log("rotateAlyuvarNormalRatationControlX");
 
-            if (alyuvarNowRotationValueX < 1.5f && alyuvarNowRotationValueX > -1.5f)
+            if (alyuvarNowRotationValueX < 2.5f && alyuvarNowRotationValueX > -2.5f)
             {
                 alyuvarNowRotationValueX = 0;
 
@@ -545,7 +569,7 @@ public class SurfingControllerV2 : MonoBehaviour
         // Z
         if (rotateAlyuvarNormalRatationControlZ)
         {
-            if (alyuvarNowRotationValueZ < 1.5f && alyuvarNowRotationValueZ > -1.5f)
+            if (alyuvarNowRotationValueZ < 2.5f && alyuvarNowRotationValueZ > -2.5f)
             {
                 alyuvarNowRotationValueZ = 0;
             }

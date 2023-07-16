@@ -7,6 +7,9 @@ public class EnemyCreator : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private SurfingControllerV2 surfingControllerV2;
 
+
+    public bool createVirusEnemyControl;
+
     [SerializeField] private float minFarFromCharacter;
     [SerializeField] private float maxFarFromCharacter;
 
@@ -44,48 +47,55 @@ public class EnemyCreator : MonoBehaviour
     {
         while (true)
         {
-            if(firstEnemyCreatingControl == true)
+            
+            if (createVirusEnemyControl)
             {
-                yield return new WaitForSeconds(Random.Range(minBetweenTimeEachCreate, maxBetweenTimeEachCreate));
-
-                for (int i = 0; i < Random.Range(1, maxEnemyCountEachCreate); i++)
+                if (firstEnemyCreatingControl == true)
                 {
-                    VirusController virusController = Instantiate(enemy, transform.position, transform.rotation).GetComponent<VirusController>();
+                    yield return new WaitForSeconds(Random.Range(minBetweenTimeEachCreate, maxBetweenTimeEachCreate));
 
-                    virusController.minDistanceFromStartPoint = surfingControllerV2.dstTravelled + maxFarFromCharacter;
-                    virusController.maxDistanceFromStartPoint = surfingControllerV2.dstTravelled + minFarFromCharacter;
+                    for (int i = 0; i < Random.Range(1, maxEnemyCountEachCreate); i++)
+                    {
+                        VirusController virusController = Instantiate(enemy, transform.position, transform.rotation).GetComponent<VirusController>();
 
-                    virusController.minSpeedForRandom = surfingControllerV2.speed - maxSubtractSpeed;
-                    virusController.maxSpeedForRandom = surfingControllerV2.speed - minSubtractSpeed;
+                        virusController.minDistanceFromStartPoint = surfingControllerV2.dstTravelled + maxFarFromCharacter;
+                        virusController.maxDistanceFromStartPoint = surfingControllerV2.dstTravelled + minFarFromCharacter;
+
+                        virusController.minSpeedForRandom = surfingControllerV2.speed - maxSubtractSpeed;
+                        virusController.maxSpeedForRandom = surfingControllerV2.speed - minSubtractSpeed;
 
 
-                    virusController.minDistanceFromPathPoint = minDistanceFromPathPoint;
-                    virusController.maxDistanceFromPathPoint = maxDistanceFromPathPoint;
+                        virusController.minDistanceFromPathPoint = minDistanceFromPathPoint;
+                        virusController.maxDistanceFromPathPoint = maxDistanceFromPathPoint;
+                    }
+                }
+                else
+                {
+                    yield return null;
+
+                    for (int i = 0; i < Random.Range(minEnemyCountForFistCreatingEnemies, maxEnemyCountForFistCreatingEnemies); i++)
+                    {
+                        VirusController virusController = Instantiate(enemy, transform.position, transform.rotation).GetComponent<VirusController>();
+
+                        virusController.minDistanceFromStartPoint = surfingControllerV2.dstTravelled + maxFarFromCharacterForFirstCreatingEnemies;
+                        virusController.maxDistanceFromStartPoint = surfingControllerV2.dstTravelled + minFarFromCharacterForFirstCreatingEnemies;
+
+                        virusController.minSpeedForRandom = surfingControllerV2.speed - maxSubtractSpeed;
+                        virusController.maxSpeedForRandom = surfingControllerV2.speed - minSubtractSpeed;
+
+
+                        virusController.minDistanceFromPathPoint = minDistanceFromPathPoint;
+                        virusController.maxDistanceFromPathPoint = maxDistanceFromPathPoint;
+                    }
+
+                    firstEnemyCreatingControl = true;
                 }
             }
             else
             {
-                yield return null;
-
-                for (int i = 0; i < Random.Range(minEnemyCountForFistCreatingEnemies, maxEnemyCountForFistCreatingEnemies); i++)
-                {
-                    VirusController virusController = Instantiate(enemy, transform.position, transform.rotation).GetComponent<VirusController>();
-
-                    virusController.minDistanceFromStartPoint = surfingControllerV2.dstTravelled + maxFarFromCharacterForFirstCreatingEnemies;
-                    virusController.maxDistanceFromStartPoint = surfingControllerV2.dstTravelled + minFarFromCharacterForFirstCreatingEnemies;
-
-                    virusController.minSpeedForRandom = surfingControllerV2.speed - maxSubtractSpeed;
-                    virusController.maxSpeedForRandom = surfingControllerV2.speed - minSubtractSpeed;
-
-
-                    virusController.minDistanceFromPathPoint = minDistanceFromPathPoint;
-                    virusController.maxDistanceFromPathPoint = maxDistanceFromPathPoint;
-                }
-
-                firstEnemyCreatingControl = true;
+                break;
             }
             
-
         }
 
     }

@@ -102,6 +102,7 @@ public class VirusController : MonoBehaviour
 
     private void followPath()
     {
+        /*
         if (dstTravelled > 780 && speed < maxSpeed)
         {
             speed += speedAcceleration * Time.deltaTime;
@@ -110,6 +111,7 @@ public class VirusController : MonoBehaviour
         {
             speed = maxSpeed;
         }
+        */
 
         dstTravelled += speed * Time.deltaTime;
 
