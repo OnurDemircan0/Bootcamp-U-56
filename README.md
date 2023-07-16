@@ -1,4 +1,3 @@
-# Takım İsmi
 ## | M.E.D. 56 |
 
 # Takım Üyeleri
@@ -105,8 +104,34 @@ https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/de61c189-da5f-4c
   * Sprint İçinde Tamamlanması Tahmin Edilen Puan: 125
   * Puan Tamamlama Mantığı: Genel olarak oyunun özelliklerini düzenleeme ve bir araya getirmeyi 3.sprinte bıraktığımız için 2. ve 1. sprinte göre daha az puanlama gerektiğini düşündük.
   * Daily Scrum: Daily Scrum toplantılarımız önceki Sprintlerde de olduğu gibi genellikle giscorda sesli kanal üzerinden gerçekleşmiştir. Ama bunun yanında Whatsapp Grubumuzda vardır. (Açılan Dosyada Linkler Kopyalanıp Adres Bölümüne Yapıştırılmalıdır) [Daily Scrum](https://docs.google.com/document/d/1UC72Vu-PwMKpMh91CdAyolfpue9bUSVzrx5eJggxqDg/edit?usp=sharing)
+ 
+  + Sprint Board ScreenShotları:
+
+![Start](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/c0b5356a-be65-46fe-8f5b-777fd73409e2)
+
+![After Start 1](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/0388725e-72ff-4e73-873b-bc447018afcf)
+![After Start 2](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/bd305c6f-0712-41ca-9277-87cd72cd8d12)
+![After Start 3](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/c5cca780-1644-4a3f-bf37-7d51aeea7bdf)
+![After Start 4](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/0fac04fd-30c1-41bf-be70-137cb2285892)
+![Final Board](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/f4be38ea-da46-4d38-a6b2-e57d7a54a17e)
+
++ Ürün Durumu: Ürünün genel olarak %60'nın tamamlandığını düşünmekteyiz. Ekran Görüntüleri:
 
 
+
+![Ekran Alıntısı](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/e12868b1-799b-4493-bf8f-d8f14b6e36c2)
+
+![mimic boss scene](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/7d1efb2a-497f-4e65-8cd7-cb6c1c446270)
+
+![Mimic](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/53ac04e4-5410-41f3-afba-9000d2f1b57b)
+
+
+![Kalp Scene](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/d083faac-5caf-4f62-b4dd-1359f0160ade)
+
+
+![Gate Opening](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/3e1ece4b-2602-4225-90a5-11008fbc6dc2)
+
+![Hasan](https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/bf8226c1-f39e-41dc-a7a8-c12a39acea43)
 
 
 
