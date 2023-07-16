@@ -16077,8 +16077,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPC: {fileID: 562257183623465314, guid: f305ead889b9373418fb30922b57a419, type: 3}
-  range: 30
-  spawnDelay: 2
+  range: 60
+  spawnDelay: 5
 --- !u!82 &1950061210 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 6692256194045475043, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
