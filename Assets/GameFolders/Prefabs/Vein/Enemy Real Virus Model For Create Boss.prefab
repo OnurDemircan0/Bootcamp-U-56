@@ -4998,7 +4998,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd0ddfd07ea38941b6b03def7758396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationAngle: 2
+  surfingControllerV2: {fileID: 0}
+  bossController: {fileID: 0}
+  forBossVirusControl: 0
+  changeRotationLerpTime: 0
+  maxRotationAngleBeforeCompleteGrow: 0
+  maxRotationAngleAfterCompleteGrow: 0
+  maxRotationAngleForNormalObjects: 0
 --- !u!114 &828181924559110157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5030,8 +5036,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   bossController: {fileID: 0}
-  minSpeed: 35
-  maxSpeed: 50
+  minSpeed: 0
+  maxSpeed: 0
   minFarForDestroyX: 0.5
   minFarForDestroyY: 0.5
   minFarForDestroyZ: 0.5

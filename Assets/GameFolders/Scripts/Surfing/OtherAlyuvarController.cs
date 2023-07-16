@@ -19,6 +19,8 @@ public class OtherAlyuvarController : MonoBehaviour
     public float maxSpeedForRandom;
     [SerializeField] private float maxRotationAngle;
 
+    [SerializeField] private float destroyPoint;
+
     public float minDistanceFromPathPoint = 0.0f;
     public float maxDistanceFromPathPoint = 0.5f;
     
@@ -92,6 +94,13 @@ public class OtherAlyuvarController : MonoBehaviour
         {
             speed = maxSpeed;
         }
+
+        if (dstTravelled >= destroyPoint)
+        {
+            Destroy(gameObject);
+        }
+
+        
 
         dstTravelled += speed * Time.deltaTime;
         //transform.position = pathCreator.path.GetPointAtDistance(dstTravelled, end);

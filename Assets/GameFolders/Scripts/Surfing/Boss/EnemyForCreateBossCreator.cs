@@ -11,6 +11,8 @@ public class EnemyForCreateBossCreator : MonoBehaviour
     [SerializeField] private Transform characterTransform;
     [SerializeField] private Transform bossTransform;
 
+    [SerializeField] private float waitForCreateEnemyAfterVirusShowCameraActiveted;
+
     [SerializeField] private float enemyMinFarFromCharacter;
     [SerializeField] private float enemyMinFarFromBoss;
 
@@ -51,8 +53,12 @@ public class EnemyForCreateBossCreator : MonoBehaviour
         {
             if (surfingControllerV2.contactBossControl)
             {
-                createEnemies();
+                //createEnemies();
+                //Invoke("createEnemies", waitForCreateEnemyAfterVirusShowCameraActiveted);
+                Invoke("createEnemies", surfingControllerV2.waitTimeForShowVirusCameraAfterContactBoss);
                 enemyCreatedControl = true;
+
+                Debug.Log("waitTimeForShowVirusCameraAfterContactBoss: " + surfingControllerV2.waitTimeForShowVirusCameraAfterContactBoss);
 
 
                 Debug.Log("characterTransform.transform.position.x: " + characterTransform.transform.position.x);

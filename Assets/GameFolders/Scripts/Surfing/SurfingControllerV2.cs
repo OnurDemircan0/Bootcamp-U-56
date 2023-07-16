@@ -13,6 +13,13 @@ public class SurfingControllerV2 : MonoBehaviour
     public EndOfPathInstruction end;
     public float dstTravelled;
 
+    [SerializeField] private HeartIconShowController heartIconShowController;
+
+    public float waitTimeForShowVirusCameraAfterContactBoss;
+
+
+    [SerializeField] private GameObject[] canvasHealthAndMedicineImages;
+
     [SerializeField] private Image imageBlack;
 
     [SerializeField] private CreateOtherAlyuvarsComeFromBehind createOtherAlyuvarsComeFromBehind;
@@ -23,7 +30,7 @@ public class SurfingControllerV2 : MonoBehaviour
 
     public bool contactBossControl;
 
-
+    private bool hideUiImagesControl = false;
     
 
     //[SerializeField] private float startPoint;
@@ -120,6 +127,19 @@ public class SurfingControllerV2 : MonoBehaviour
 
 
     }
+
+    private void hideUiImages()
+    {
+        foreach (GameObject gameObjects in canvasHealthAndMedicineImages)
+        {
+            gameObjects.SetActive(false);
+        }
+
+        heartIconShowController.setHealth(100);
+    }
+
+
+
 
 
     void Update()
@@ -222,6 +242,14 @@ public class SurfingControllerV2 : MonoBehaviour
         {
             speed = 0;
             contactBossControl = true;
+
+            if (hideUiImagesControl == false)
+            {
+                hideUiImages();
+
+                hideUiImagesControl = true;
+            }
+            
         }
 
         if (dstTravelled >= stopPointForCreateAlyuvar)

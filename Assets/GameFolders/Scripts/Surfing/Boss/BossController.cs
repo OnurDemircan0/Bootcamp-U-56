@@ -12,6 +12,8 @@ public class BossController : MonoBehaviour
 
     private bool virusShowCameraWorkedForFirstContactWithBoss;
 
+    private bool startMagnificationControl = false;
+
     [SerializeField] private GameObject explosion;
     [SerializeField] private float minTimeForBetweenTwoExplosion;
     [SerializeField] private float delayForMultiExplosion; // Üst üste gerçekleþecek patlamalarda min patlama bekleme süresine eklenecek çok kýsa bir süre olacak
@@ -75,7 +77,7 @@ public class BossController : MonoBehaviour
     [Range(0.1f, 10f)] [SerializeField] private float minChangeColorSpeed;
     [Range(0.1f, 10f)] [SerializeField] private float maxChangeColorSpeed;
 
-    private bool reachMaxSize = false;
+    public bool reachMaxSize = false;
 
     private bool showExplosionControl = false;
 
@@ -89,6 +91,7 @@ public class BossController : MonoBehaviour
     public Color[] virusMaterialColors;
 
     [SerializeField] private GameObject[] bossHealthBarParts;
+    [SerializeField] private GameObject[] canvasHealthAndMedicineImages;
 
 
     [SerializeField] private bool alyuvarEnemyCreateControl;
@@ -146,6 +149,8 @@ public class BossController : MonoBehaviour
 
         bossHealthCount = bossMaxHealthCount;
         bossHealthBarController.SetMaxHealth(bossHealthCount);
+
+        StartCoroutine(firstContactshowExplosion());
 
         //virusShowCamera.SetActive(true);
 
@@ -459,10 +464,18 @@ public class BossController : MonoBehaviour
 
     private void showBossHealthBar()
     {
+        foreach (GameObject gameObjects in canvasHealthAndMedicineImages)
+        {
+            gameObjects.SetActive(true);
+        }
+
         foreach (GameObject gameObjects in bossHealthBarParts)
         {
             gameObjects.SetActive(true);
         }
+
+
+        
     }
 
     private void hideBossHealthBar()
@@ -474,9 +487,35 @@ public class BossController : MonoBehaviour
     }
 
 
+    IEnumerator firstContactshowExplosion()
+    {
+        yield return new WaitForSeconds(0.6f);
+
+        while (true)
+        {
+            if (surfingControllerV2.contactBossControl)
+            {
+                if (startMagnificationControl == false)
+                {
+                    showExplosion();
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+        
+    }
+
+
 
     public void magnificationBoss()
     {
+        startMagnificationControl = true;
+
         targetSize += magnificationSizeEachIngestCell;
 
         

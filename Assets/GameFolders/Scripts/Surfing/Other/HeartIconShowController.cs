@@ -72,6 +72,15 @@ public class HeartIconShowController : MonoBehaviour
         healthCountText.SetText(nowHealth.ToString());
     }
 
+    public void setHealth(int health)
+    {
+        nowHealth = health;
+
+        surfingAlyuvarAudioSource.Stop();
+
+        healthCountText.SetText(nowHealth.ToString());
+    }
+
 
     void Awake()
     {

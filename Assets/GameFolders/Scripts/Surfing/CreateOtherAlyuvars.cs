@@ -8,12 +8,28 @@ public class CreateOtherAlyuvars : MonoBehaviour
 
     [SerializeField] private int otherAlyuvarsCount;
 
+    [SerializeField] private bool createAlyuvarControl;
+
     void Start()
     {
-        for(int i=0; i < otherAlyuvarsCount; i++)
+        //createAlyuvars();
+    }
+
+    private void createAlyuvars()
+    {
+        for (int i = 0; i < otherAlyuvarsCount; i++)
         {
             Instantiate(otherAlyuvars, transform.position, transform.rotation);
+        }
+    }
 
+
+    private void Update()
+    {
+        if (createAlyuvarControl)
+        {
+            createAlyuvars();
+            createAlyuvarControl = false;
         }
     }
 

@@ -119,6 +119,7 @@ MonoBehaviour:
   minSpeedForRandom: 20
   maxSpeedForRandom: 22
   maxRotationAngle: 2
+  destroyPoint: 4000
   minDistanceFromPathPoint: 2
   maxDistanceFromPathPoint: 2.5
   minDistanceFromStartPoint: 10

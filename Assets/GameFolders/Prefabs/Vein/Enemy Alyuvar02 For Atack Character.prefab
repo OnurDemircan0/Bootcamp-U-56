@@ -98,7 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd0ddfd07ea38941b6b03def7758396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationAngle: 8
+  surfingControllerV2: {fileID: 0}
+  bossController: {fileID: 0}
+  forBossVirusControl: 0
+  changeRotationLerpTime: 0
+  maxRotationAngleBeforeCompleteGrow: 0
+  maxRotationAngleAfterCompleteGrow: 0
+  maxRotationAngleForNormalObjects: 8
 --- !u!114 &7066189445901362000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +120,7 @@ MonoBehaviour:
   minSpeed: 30
   maxSpeed: 32
   heartIconShowController: {fileID: 0}
+  bossEnemyVirus: {fileID: 0}
   damageCountEveryTrigger: 2
 --- !u!65 &494913295
 BoxCollider:

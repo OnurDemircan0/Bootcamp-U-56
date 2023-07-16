@@ -15,6 +15,8 @@ public class HitFeelingController : MonoBehaviour
 
     [SerializeField] private AudioSource surfingAlyuvarAudioSource;
 
+    [SerializeField] BossController bossController;
+
     [SerializeField] private AudioClip killExplosionSound;
     [SerializeField] private AudioClip mutateSound;
 
@@ -137,30 +139,40 @@ public class HitFeelingController : MonoBehaviour
     {
         //Debug.Log("Mutasyon geçir");
 
+        Debug.Log("mutationControl: " + mutationControl);
+        Debug.Log("mutationControl == null : " +( mutationControl == null).ToString());
+        Debug.Log("mutationControl bossController.reachMaxSize : " + bossController.reachMaxSize);
+
         if(mutationEfectFinishedControl == true)
         {
-            StartCoroutine(changeScaleAndRotationCrossHairImageForMutate());
-
-            if(dnaImage != null)
+            if(mutationControl != null || (bossController.reachMaxSize == true))
             {
-                StartCoroutine(changeColorAlphaDNAImage());
+                StartCoroutine(changeScaleAndRotationCrossHairImageForMutate());
+
+                if (dnaImage != null)
+                {
+                    StartCoroutine(changeColorAlphaDNAImage());
+                }
+
+
+                cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForMutate, cameraShakefullIntensityTimeForMutate, cameraShakeGoToZeroTimeForMutate);
+
+                try
+                {
+                    mutationControl.mutateVirus();
+                }
+                catch (Exception e)
+                {
+
+                }
+
+
+                surfingAlyuvarAudioSource.PlayOneShot(mutateSound);
             }
             
-
-            cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForMutate, cameraShakefullIntensityTimeForMutate, cameraShakeGoToZeroTimeForMutate);
-
-            try
-            {
-                mutationControl.mutateVirus();
-            }
-            catch(Exception e)
-            {
-
-            }
-
-
-            surfingAlyuvarAudioSource.PlayOneShot(mutateSound);
         }
+
+
         
 
         //Debug.Log("Mutasyon geçirdi");

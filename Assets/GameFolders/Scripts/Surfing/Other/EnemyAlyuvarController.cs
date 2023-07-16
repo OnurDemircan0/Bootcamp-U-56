@@ -11,15 +11,23 @@ public class EnemyAlyuvarController : MonoBehaviour
 
     [SerializeField] private HeartIconShowController heartIconShowController;
 
+    [SerializeField] private GameObject enemyAlyuvarForwardDirection;
+
     [SerializeField] private float damageCountEveryTrigger;
 
+    private Vector3 bossEnemyVirusTransformForward;
 
+    private void Awake()
+    {
+        bossEnemyVirusTransformForward = enemyAlyuvarForwardDirection.transform.forward;
+    }
 
     void Start()
     {
         speed = Random.Range(minSpeed, maxSpeed);
 
         heartIconShowController = GameObject.Find("GameManager").gameObject.GetComponent<HeartIconShowController>();
+        enemyAlyuvarForwardDirection = GameObject.Find("Enemy Atack Show Way").gameObject;
 
         Destroy(gameObject, 20);
     }
@@ -27,7 +35,9 @@ public class EnemyAlyuvarController : MonoBehaviour
 
     void Update()
     {
-        transform.position += Vector3.forward * speed * Time.deltaTime * -1;
+        //transform.position += Vector3.forward * speed * Time.deltaTime * -1;
+
+        transform.position += bossEnemyVirusTransformForward * speed * Time.deltaTime * -1;
     }
 
 
