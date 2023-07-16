@@ -9,8 +9,11 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            checkPointTriggered = true;
-            lastCheckPointPosition = transform.position;
+            if(!checkPointTriggered)
+            {
+                lastCheckPointPosition = transform.position;
+                checkPointTriggered = true;
+            }
         }
     }
 }
