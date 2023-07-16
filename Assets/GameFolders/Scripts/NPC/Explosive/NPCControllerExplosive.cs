@@ -9,10 +9,9 @@ public class NPCControllerExplosive : MonoBehaviour
 
     GameObject Player;
     Animator animator;
-    [SerializeField] int healthNPC = 100;
-    private int _currentHealthNPC;
     private bool isDead;
     private bool attack;
+    private float explosionDistance;
 
     
     // Start is called before the first frame update
@@ -27,7 +26,7 @@ public class NPCControllerExplosive : MonoBehaviour
 
         isDead = false;
         attack = false;
-        _currentHealthNPC = healthNPC;
+        explosionDistance = transform.GetChild(0).gameObject.transform.localScale.x / 20.0f;
     }
 
     private void OnEnable()
@@ -39,10 +38,11 @@ public class NPCControllerExplosive : MonoBehaviour
     void Update()
     {
         distance =Vector3.Distance(transform.position, Player.transform.position);
+        explosionDistance = transform.GetChild(0).gameObject.transform.localScale.x / 20.0f;
 
-        if(!attack && !isDead)
+        if (!attack && !isDead)
         {
-            if (distance <= 5)
+            if (distance <= explosionDistance)
             {
                 _agent.isStopped = true;
                 _agent.ResetPath();
@@ -56,13 +56,6 @@ public class NPCControllerExplosive : MonoBehaviour
                 {
                     _agent.SetDestination(Player.transform.position);
                 }
-            }
-
-
-            if (_currentHealthNPC <= 0)
-            {
-                isDead = true;
-                DisableObject();
             }
         }
 

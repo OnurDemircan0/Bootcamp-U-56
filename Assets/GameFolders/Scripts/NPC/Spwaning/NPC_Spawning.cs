@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class NPC_Spawning : MonoBehaviour
 {
-    [SerializeField] GameObject NPC;
+    [SerializeField] GameObject[] NPC;
     [SerializeField] float range = 30.0f;
     [SerializeField] float spawnDelay = 1f;
 

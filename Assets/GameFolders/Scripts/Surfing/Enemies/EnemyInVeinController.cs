@@ -231,9 +231,8 @@ public class EnemyInVeinController : MonoBehaviour
 
             if (explodedControl == false)
             {
-                //Instantiate(explosion, transform.position, Quaternion.identity);
-
-                explosion2.SetActive(true);
+                Instantiate(explosion2, transform.position, Quaternion.identity);
+                //explosion2.SetActive(true);
                 gameObject.transform.localScale = new Vector3(0, 0, 0);
 
                 explodedControl = true;

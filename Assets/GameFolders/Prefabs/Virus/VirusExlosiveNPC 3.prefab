@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 816606029124740374}
   - component: {fileID: 7321543510968816324}
   m_Layer: 0
-  m_Name: VirusExlosiveNPC
+  m_Name: VirusExlosiveNPC 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,15 +148,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af9f6851d944f42469b8f113cfed961f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af9f6851d944f42469b8f113cfed961f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af9f6851d944f42469b8f113cfed961f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af9f6851d944f42469b8f113cfed961f, type: 3}
       propertyPath: m_LocalPosition.x
