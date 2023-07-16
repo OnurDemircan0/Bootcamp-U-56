@@ -99,9 +99,10 @@ public class HitFeelingController : MonoBehaviour
 
     public void hittedVirus()
     {
-       // Debug.Log("Virüs Vuruldu");
+        // Debug.Log("Virüs Vuruldu");
 
-        if(changeSizeCompleteControl == true && killedControl == false)
+
+        if (changeSizeCompleteControl == true && killedControl == false)
         {
             StartCoroutine(changeScaleCrossHairImageForHit());
         }
@@ -114,7 +115,15 @@ public class HitFeelingController : MonoBehaviour
 
         killedControl = true;
 
-        cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForKill, cameraShakefullIntensityTimeForKill, cameraShakeGoToZeroTimeForKill);
+        try
+        {
+            cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForKill, cameraShakefullIntensityTimeForKill, cameraShakeGoToZeroTimeForKill);
+        }
+        catch(Exception e)
+        {
+
+        }
+        
 
         StartCoroutine(changeScaleCrossHairImageForKill());
 
@@ -131,7 +140,12 @@ public class HitFeelingController : MonoBehaviour
         if(mutationEfectFinishedControl == true)
         {
             StartCoroutine(changeScaleAndRotationCrossHairImageForMutate());
-            StartCoroutine(changeColorAlphaDNAImage());
+
+            if(dnaImage != null)
+            {
+                StartCoroutine(changeColorAlphaDNAImage());
+            }
+            
 
             cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForMutate, cameraShakefullIntensityTimeForMutate, cameraShakeGoToZeroTimeForMutate);
 
@@ -148,6 +162,40 @@ public class HitFeelingController : MonoBehaviour
             surfingAlyuvarAudioSource.PlayOneShot(mutateSound);
         }
         
+
+        //Debug.Log("Mutasyon geçirdi");
+    }
+
+
+    public void wrongMedicineForBrain(MutationControlForBrain mutationControlForBrain)
+    {
+        //Debug.Log("Mutasyon geçir");
+
+        if (mutationEfectFinishedControl == true)
+        {
+            StartCoroutine(changeScaleAndRotationCrossHairImageForMutate());
+
+            if (dnaImage != null)
+            {
+                StartCoroutine(changeColorAlphaDNAImage());
+            }
+
+
+            cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForMutate, cameraShakefullIntensityTimeForMutate, cameraShakeGoToZeroTimeForMutate);
+
+            try
+            {
+                mutationControlForBrain.mutateVirus();
+            }
+            catch (Exception e)
+            {
+
+            }
+
+
+            surfingAlyuvarAudioSource.PlayOneShot(mutateSound);
+        }
+
 
         //Debug.Log("Mutasyon geçirdi");
     }
@@ -203,6 +251,7 @@ public class HitFeelingController : MonoBehaviour
 
     IEnumerator changeScaleCrossHairImageForHit()
     {
+
         changeSizeCompleteControl = false;
 
         changeSizeToMinCompleteControl = false;
@@ -216,7 +265,10 @@ public class HitFeelingController : MonoBehaviour
         {
             yield return null;
 
-            if(changeSizeToMaxCompleteControl == false)
+
+            //Debug.Log("crossHair boyutu çalýþýyor");
+
+            if (changeSizeToMaxCompleteControl == false)
             {
                 //Debug.Log("crossHair boyutu büyüyor");
 

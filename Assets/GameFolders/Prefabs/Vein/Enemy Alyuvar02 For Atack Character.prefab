@@ -114,7 +114,7 @@ MonoBehaviour:
   minSpeed: 30
   maxSpeed: 32
   heartIconShowController: {fileID: 0}
-  damageCountEveryTrigger: 3
+  damageCountEveryTrigger: 2
 --- !u!65 &494913295
 BoxCollider:
   m_ObjectHideFlags: 0

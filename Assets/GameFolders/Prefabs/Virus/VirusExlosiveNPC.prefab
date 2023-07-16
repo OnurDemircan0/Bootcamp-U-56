@@ -273,6 +273,28 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.011
   m_Center: {x: -0.0004436602, y: -0.00038542034, z: 0.00015218134}
+--- !u!114 &414888698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276486494698968470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3aa58c3b390b74c9560e5b5beaabb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hittedControl: 0
+  explosion: {fileID: 0}
+  explosion2: {fileID: 0}
+  nowScale: 0
+  wantedScale: 0
+  changeScaleValueEachHit: 20
+  minScaleForExplosion: 0
+  maxScaleForExplosion: 3000
+  changeSizeSpeed: 5000
+  detectHitTime: 0.2
 --- !u!114 &6340378973824770077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,9 +308,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomMutationControl: 0
-  mutationDivideActiveControl: 0
+  mutationDivideActiveControl: 1
   changeColorActiveControl: 0
-  changeSizeActiveControl: 0
+  changeSizeActiveControl: 1
   mutationDivideControl: 0
   changeColorControl: 0
   changeSizeControl: 0

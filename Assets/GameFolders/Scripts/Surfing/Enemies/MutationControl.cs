@@ -45,8 +45,8 @@ public class MutationControl : MonoBehaviour
     public int nowVirusMaterialColorsNumber = -1;
     public int targetVirusMaterialColorsNumber = -1;
 
-    [Range(10f, 200f)] [SerializeField] private float minChangeSizeSpeed;
-    [Range(10f, 200f)] [SerializeField] private float maxChangeSizeSpeed;
+    [Range(10f, 4000f)] [SerializeField] private float minChangeSizeSpeed;
+    [Range(10f, 4000f)] [SerializeField] private float maxChangeSizeSpeed;
     private float changeSizeSpeed;
     [SerializeField] private float minChangeSizeValue;
     [SerializeField] private float maxChangeSizeValue;

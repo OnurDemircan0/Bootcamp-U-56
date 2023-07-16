@@ -9,6 +9,7 @@ public class EnemyInVeinController : MonoBehaviour
     // Virüs ya da çok küçüldüðü için patlayacak (Ölecek)
 
     public bool hittedControl = false;
+    private bool checkKillVirusControl = false;
 
     [SerializeField] private GameObject explosion;
     [SerializeField] private GameObject explosion2;
@@ -18,6 +19,8 @@ public class EnemyInVeinController : MonoBehaviour
     private MutationControl mutationControl;
 
     private BossController bossController;
+
+    private MutationControlForBrain mutationControlForBrain;
 
     private MedicineSwitching medicineSwitching;
 
@@ -55,6 +58,15 @@ public class EnemyInVeinController : MonoBehaviour
 
         mutationControl = gameObject.GetComponent<MutationControl>();
 
+        mutationControlForBrain = gameObject.GetComponent<MutationControlForBrain>();
+
+        Invoke("changeCheckKillVirusControl", 0.5f);
+
+    }
+
+    private void changeCheckKillVirusControl()
+    {
+        checkKillVirusControl = true;
     }
 
 
@@ -63,6 +75,8 @@ public class EnemyInVeinController : MonoBehaviour
         if (detectControl)
         {
             //Debug.Log("enemyGetDamaged çalýþtý");
+
+            //wantedScale = 0;
 
             wantedScale -= changeScaleValueEachHit; // Virüsü Küçültüp patlatmak için
 
@@ -85,7 +99,15 @@ public class EnemyInVeinController : MonoBehaviour
             }
             catch(Exception e)
             {
-                enemyColor = bossController.virusMaterialColors[bossController.targetVirusMaterialColorsNumber];
+                try
+                {
+                    enemyColor = bossController.virusMaterialColors[bossController.targetVirusMaterialColorsNumber];
+                }
+                catch(Exception e2)
+                {
+                    enemyColor = mutationControlForBrain.virusMaterialNormalColors[mutationControlForBrain.targetVirusMaterialColorsNumber];
+                }
+                
             }
 
             //Debug.Log("enemyColor: " + enemyColor);
@@ -96,7 +118,16 @@ public class EnemyInVeinController : MonoBehaviour
             }
             catch(Exception e)
             {
-                medicineColor = bossController.virusMaterialColors[medicineSwitching.currentSelectedWeapon];
+                try
+                {
+                    medicineColor = bossController.virusMaterialColors[medicineSwitching.currentSelectedWeapon];
+                }
+                catch (Exception e2)
+                {
+                    medicineColor = mutationControlForBrain.virusMaterialNormalColors[medicineSwitching.currentSelectedWeapon];
+                }
+
+
             }
 
             //Debug.Log("medicineColor: " + medicineColor);
@@ -120,7 +151,32 @@ public class EnemyInVeinController : MonoBehaviour
             }
             else
             {
-                hitFeelingController.wrongMedicine(mutationControl);
+                try
+                {
+                    hitFeelingController.wrongMedicine(mutationControl);
+                }
+                catch(Exception e)
+                {
+                    try
+                    {
+                        mutationControlForBrain.mutateVirus();
+                        //hitFeelingController.wrongMedicineForBrain(mutationControlForBrain);
+                    }
+                    catch (Exception e2)
+                    {
+
+                    }
+                }
+
+
+                try
+                {
+                    bossController.mutateBossVirus();
+                }
+                catch (Exception e)
+                {
+
+                }
             }
         }
 
@@ -165,8 +221,9 @@ public class EnemyInVeinController : MonoBehaviour
 
         }
 
+        //Debug.Log("nowScale: " + nowScale.ToString());
 
-        if (nowScale >= maxScaleForExplosion || nowScale <= minScaleForExplosion)
+        if ((nowScale >= maxScaleForExplosion || nowScale <= minScaleForExplosion) && checkKillVirusControl)
         {
             Debug.Log("Enemey patladý (Öldü)");
 
