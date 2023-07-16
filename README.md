@@ -97,6 +97,15 @@ https://github.com/OnurDemircan0/Bootcamp-U-56/assets/129950748/de61c189-da5f-4c
 * Yakın dövüş mekaniğinin tamamlanma süreci tahmin ile uyuşmaması nedeniyle görevlere verilen süreler üzerinde daha dikkatli düşünülmelidir.
 * Projeye adanan zaman herkes tarafından artırılmalıdır
 
+  # Sprint 3
+
+  ## Product Backlog Sprint 3
+  [BackLog](https://miro.com/app/board/uXjVM9lHoZU=/?share_link_id=845679339362)
+  
+  * Sprint İçinde Tamamlanması Tahmin Edilen Puan: 125
+  * Puan Tamamlama Mantığı: Genel olarak oyunun özelliklerini düzenleeme ve bir araya getirmeyi 3.sprinte bıraktığımız için 2. ve 1. sprinte göre daha az puanlama gerektiğini düşündük.
+  * Daily Scrum: Daily Scrum toplantılarımız önceki Sprintlerde de olduğu gibi genellikle giscorda sesli kanal üzerinden gerçekleşmiştir. Ama bunun yanında Whatsapp Grubumuzda vardır. (Açılan Dosyada Linkler Kopyalanıp Adres Bölümüne Yapıştırılmalıdır) [Daily Scrum](https://docs.google.com/document/d/1UC72Vu-PwMKpMh91CdAyolfpue9bUSVzrx5eJggxqDg/edit?usp=sharing)
+
 
 
 
