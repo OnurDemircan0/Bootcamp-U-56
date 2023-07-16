@@ -12,14 +12,14 @@ public class WeaponSwitchingUI : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
 
-        currentSelectedWeapon = WeaponSwitching.selectedWeapon;
+        currentSelectedWeapon = MedicineSwitching.selectedWeapon;
     }
 
     void Update()
     {
-        if(currentSelectedWeapon != WeaponSwitching.selectedWeapon)
+        if(currentSelectedWeapon != MedicineSwitching.selectedWeapon)
         {
-            currentSelectedWeapon = WeaponSwitching.selectedWeapon;
+            currentSelectedWeapon = MedicineSwitching.selectedWeapon;
             _animator.SetTrigger("WeaponChanged");
             _animator.SetInteger("SelectedWeapon", currentSelectedWeapon);
         }
