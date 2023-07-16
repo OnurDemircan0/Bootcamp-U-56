@@ -3993,7 +3993,7 @@ MonoBehaviour:
   followLight: {fileID: 8500562882407038321, guid: 904ed710d04ae2c47a1f65ee5f9500bb, type: 3}
   followLightParent: {fileID: 1762731660}
   sumLongPathCount: 5200
-  distanteEveryFollowLight: 50
+  distanteEveryFollowLight: 120
 --- !u!4 &645033464
 Transform:
   m_ObjectHideFlags: 0
@@ -4007,7 +4007,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &657843538 stripped
 GameObject:
@@ -15770,7 +15770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1762731661
 Transform:
   m_ObjectHideFlags: 0
@@ -15785,7 +15785,7 @@ Transform:
   m_Children:
   - {fileID: 2448457733472205516}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1772758900
 PrefabInstance:
@@ -18673,6 +18673,7 @@ GameObject:
   - component: {fileID: 2032438107}
   - component: {fileID: 2032438105}
   - component: {fileID: 2032438104}
+  - component: {fileID: 2032438114}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -18797,6 +18798,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2032438114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032438103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac6b1f4a6ca46346a510029329a58ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followLight: {fileID: 1762731660}
 --- !u!1001 &2037006029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22494,60 +22508,3 @@ PrefabInstance:
       objectReference: {fileID: 1968448139}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904ed710d04ae2c47a1f65ee5f9500bb, type: 3}
---- !u!1001 &9223371115362721577
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_RootOrder
-      value: 29
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227432, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9223371113877227433, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
-      propertyPath: m_Name
-      value: FollowLight
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 952ac04f2dcc873449e0d5b51d8349bb, type: 3}
