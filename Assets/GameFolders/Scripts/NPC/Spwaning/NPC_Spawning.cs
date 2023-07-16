@@ -8,7 +8,8 @@ public class NPC_Spawning : MonoBehaviour
     [SerializeField] GameObject[] NPC;
     [SerializeField] float range = 30.0f;
     [SerializeField] float spawnDelay = 1f;
-
+    [SerializeField] int border1 = 4; //border1 must be smaller than border2.
+    [SerializeField] int border2 = 10;
     private bool canSpawn;
 
     private void Start()
@@ -34,7 +35,20 @@ public class NPC_Spawning : MonoBehaviour
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomPoint, out hit, 3.0f, NavMesh.AllAreas))
         {
-            Instantiate(NPC, hit.position, Quaternion.identity);
+            int randomNPC = Random.Range(0, 21);
+            if(randomNPC <= border1)
+            {
+                Instantiate(NPC[0], hit.position, Quaternion.identity);
+            }
+            else if(randomNPC <= border2)
+            {
+                Instantiate(NPC[1], hit.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(NPC[2], hit.position, Quaternion.identity);
+            }
+            
             canSpawn = false;
             Invoke(nameof(SetSpawnTrue), spawnDelay);
         }
