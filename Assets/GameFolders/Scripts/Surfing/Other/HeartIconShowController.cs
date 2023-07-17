@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -8,7 +9,11 @@ public class HeartIconShowController : MonoBehaviour
 {
     [SerializeField] private RectTransform heartIconImageRectTransform;
 
+    [SerializeField] private Death death;
+
     private Image heartIconImage;
+
+    [SerializeField] private float waitTimeForReloadThisScene;
 
     [SerializeField] private TMP_Text healthCountText;
 
@@ -41,6 +46,16 @@ public class HeartIconShowController : MonoBehaviour
     private bool changeSizeToMinCompleteControl;
     private bool changeSizeToMaxCompleteControl;
 
+    private void Start()
+    {
+
+    }
+
+    private void reloadThisScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 
     public void decreaseHealth(float decreaseCount)
     {
@@ -51,6 +66,13 @@ public class HeartIconShowController : MonoBehaviour
             nowHealth = 0;
 
             heartPulseShowController.deadControl = true;
+
+            if(death != null)
+            {
+                death.health = -1;
+
+                Invoke("reloadThisScene", waitTimeForReloadThisScene);
+            }
         }
 
 

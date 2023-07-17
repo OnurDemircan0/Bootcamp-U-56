@@ -248,11 +248,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &22715501 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4823795425574239158, guid: dfc75a899f8e2e142baf2dee8c89f813, type: 3}
-  m_PrefabInstance: {fileID: 430806136}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &22770795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4298340573179181033, guid: fc78e15aa78130b48bf90c51200fa639, type: 3}
@@ -11306,7 +11301,7 @@ MonoBehaviour:
   pulseShowSpeed: 30
   firstPositionX: -6
   lastPositionX: -58
-  deadFirstPositionX: -137
+  deadFirstPositionX: -221
   onePulseSizeX: -17
   deadControl: 0
 --- !u!114 &458975225
@@ -11322,6 +11317,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartIconImageRectTransform: {fileID: 687424910}
+  death: {fileID: 1981601545}
+  waitTimeForReloadThisScene: 4
   healthCountText: {fileID: 612394401}
   surfingAlyuvarAudioSource: {fileID: 1986916219}
   heartPulseDanger: {fileID: 8300000, guid: 5e69149918bb43943bfbe3c68a00ca4b, type: 3}
@@ -11553,7 +11550,7 @@ PrefabInstance:
     - target: {fileID: 5319603990208060926, guid: 1cf170e8bbd46b54a9f6374a429766fb, type: 3}
       propertyPath: deathCam
       value: 
-      objectReference: {fileID: 22715501}
+      objectReference: {fileID: 1491387215}
     - target: {fileID: 6311579242712855252, guid: 1cf170e8bbd46b54a9f6374a429766fb, type: 3}
       propertyPath: TopClamp
       value: 40
@@ -24141,6 +24138,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1491387215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5024137007037135602, guid: 3ca4b64f5f0413547ada69fa2682351a, type: 3}
+  m_PrefabInstance: {fileID: 1637485231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1495908137 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1286464574254877769, guid: df0d8059a5a4c714a96e41e80e64d2c3, type: 3}
@@ -34774,7 +34776,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5024137007037135628, guid: 3ca4b64f5f0413547ada69fa2682351a, type: 3}
   m_PrefabInstance: {fileID: 1637485231}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1491387215}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
@@ -40120,6 +40122,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surfAlyuvarTable: {fileID: 1986916215}
+--- !u!114 &1981601545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5319603990208060926, guid: 1cf170e8bbd46b54a9f6374a429766fb, type: 3}
+  m_PrefabInstance: {fileID: 478500427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981601530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd284356e294b44a970ba64a8051522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1986916215
 GameObject:
   m_ObjectHideFlags: 0

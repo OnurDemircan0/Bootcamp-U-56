@@ -168,7 +168,7 @@ MonoBehaviour:
   changeScaleValueEachHit: 8
   minScaleForExplosion: 20
   maxScaleForExplosion: 100
-  changeSizeSpeed: 3500
+  changeSizeSpeed: 5000
   detectHitTime: 0.2
 --- !u!114 &2806305522079614457
 MonoBehaviour:
@@ -227,7 +227,7 @@ MonoBehaviour:
   minFarValueFromDivededVirusesZ: 0.2
   maxFarValueFromDivededVirusesZ: 0.5
   multiplyLocalSizeForMoveAfterDivideMutation: 50
-  minChangeColorSpeed: 5
+  minChangeColorSpeed: 6
   maxChangeColorSpeed: 10
   virusMaterialColors:
   - {r: 0, g: 1, b: 0, a: 0}
@@ -238,7 +238,7 @@ MonoBehaviour:
   minChangeSizeSpeed: 3500
   maxChangeSizeSpeed: 4000
   minChangeSizeValue: 10
-  maxChangeSizeValue: 30
+  maxChangeSizeValue: 25
   minRanmdomMutationNumberForDetermineMutations: 0
   maxRanmdomMutationNumberForDetermineMutations: 7
 --- !u!1001 &2806305521052263195

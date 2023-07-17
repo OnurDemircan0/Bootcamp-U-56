@@ -13,6 +13,10 @@ public class CollectDatas : MonoBehaviour
                                 
     private string fullLink = "";
 
+    private string beforeSceneName = "";
+    private string nowSceneName = "";
+
+
     private string appName = "BootcampMedBotGame";
 
     private int numberOfEnteringToApp;
@@ -44,6 +48,14 @@ public class CollectDatas : MonoBehaviour
 
     private float spentTime;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+
+        beforeSceneName = SceneManager.GetActiveScene().name;
+        nowSceneName = SceneManager.GetActiveScene().name;
+    }
+
 
     void Start()
     {
@@ -59,6 +71,12 @@ public class CollectDatas : MonoBehaviour
 
         getChangeableFirstDatas();
         InvokeRepeating("getChangeableLastDatas", 1, 2);
+
+
+        InvokeRepeating("controlChangeScene", 0.25f, 0.5f);
+
+
+
         
     }
 
@@ -178,6 +196,23 @@ public class CollectDatas : MonoBehaviour
         }
 
 
+    }
+
+    private void controlChangeScene()
+    {
+        nowSceneName = SceneManager.GetActiveScene().name;
+
+        //Debug.Log("nowSceneName: " + nowSceneName);
+        //Debug.Log("beforeSceneName: " + beforeSceneName);
+
+        if(nowSceneName != beforeSceneName)
+        {
+            //Debug.Log("nowSceneName ile beforeSceneName birbirinden farklý");
+
+            getChangeableFirstDatas();
+
+            beforeSceneName = nowSceneName;
+        }
     }
 
     private void getChangeableFirstDatas()

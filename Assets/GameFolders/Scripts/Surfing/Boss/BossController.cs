@@ -755,7 +755,7 @@ public class BossController : MonoBehaviour
         float xMinFarFromCenterForCreatingEnemyAlyuvarBeforeValue;
         float saveFloatValue; // Ýki deðiþkeni birbirleriyle deðiþtirmek için kullanýlacak
 
-        while (nowCreatedEnemyCount < createEnemyAlyuvarCount2)
+        while (nowCreatedEnemyCount < createEnemyAlyuvarCount2 && bossDeadControl == false)
         {
             for(int i = 0; i< Random.Range(1, maxCreateEnemyAlyuvarEveryBetwewnWaitTime); i++)
             {
@@ -851,7 +851,11 @@ public class BossController : MonoBehaviour
                     
 
                     //Instantiate(enemyAlyuvarForAtackCharacter, transform.position, Quaternion.identity);
-                    Instantiate(enemyAlyuvarForAtackCharacter, enemyPosition, Quaternion.identity);
+                    if(bossDeadControl == false)
+                    {
+                        Instantiate(enemyAlyuvarForAtackCharacter, enemyPosition, Quaternion.identity);
+                    }
+                    
 
 
                     switch (randomNumbers[j])
