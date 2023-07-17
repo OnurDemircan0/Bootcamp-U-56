@@ -32,6 +32,9 @@ public class GetEnemies : MonoBehaviour
     public bool phase2IsDone = false;
     public bool enteredStandBy;
 
+    public bool enteryEnemiesAreDeath;
+    public bool phase1EnemiesAreDeath;
+
     private bool pushedPlayerOnce = false;
     private bool afterBloodClear = false;
     private bool shouldStay = false;
@@ -133,6 +136,8 @@ public class GetEnemies : MonoBehaviour
                 ClearBlood();
                 ActivateEnemies();
 
+                enteryEnemiesAreDeath = true;
+
                 virus2.enabled = false;
                 virus6.enabled = false;
             }
@@ -146,6 +151,8 @@ public class GetEnemies : MonoBehaviour
                 }
 
                 phase2CanStart = true;
+
+                phase1EnemiesAreDeath = true;
 
                 RiseBlood();
                 StartPhaseTwo();

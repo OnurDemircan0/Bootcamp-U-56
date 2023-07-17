@@ -51,9 +51,9 @@ public class DissolveObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider other)
     {
-        if(GetEnemies.Instance.phase2CanStart && !firstPhaseDone)
+        if(GetEnemies.Instance.phase2CanStart && !firstPhaseDone && other.CompareTag("Player"))
         {
             StartCoroutine(Dissolve());
 
@@ -70,7 +70,7 @@ public class DissolveObject : MonoBehaviour
 
             firstPhaseDone = true;
         }
-        else if(GetEnemies.Instance.phase2IsDone && !secondOneIsTriggered)
+        else if(GetEnemies.Instance.phase2IsDone && !secondOneIsTriggered && other.CompareTag("Player"))
         {
             StartCoroutine(Dissolve());
 
@@ -87,7 +87,7 @@ public class DissolveObject : MonoBehaviour
             secondOneIsTriggered = true;
         }
 
-        else if(insideBossVein && !thirdOneIsTriggered)
+        else if(insideBossVein && !thirdOneIsTriggered && other.CompareTag("Player"))
         {
             StartCoroutine(Dissolve());
 

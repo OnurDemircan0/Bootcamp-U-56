@@ -32,6 +32,8 @@ public class CheckBossStage : MonoBehaviour
     bool onTriggeredEnterTriggeredOnce = false;
     bool invokeIsCalled = false;
     bool onCutScene;
+
+    public bool cutSceneIsOver;
     private void OnTriggerEnter(Collider other)
     {
         if (!onTriggeredEnterTriggeredOnce)
@@ -86,6 +88,7 @@ public class CheckBossStage : MonoBehaviour
     void ReturnToPlayer()
     {
         onCutScene=false;
+        cutSceneIsOver = true;
 
         bossCam.gameObject.SetActive(false);
         InvokedReturnToPlayer = true;

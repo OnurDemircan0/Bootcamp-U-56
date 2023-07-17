@@ -14,6 +14,7 @@ public class CheckPoint : MonoBehaviour
                 lastCheckPointPosition = transform.position;
                 checkPointTriggered = true;
             }
+
         }
     }
 }
