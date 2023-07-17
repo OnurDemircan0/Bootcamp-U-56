@@ -12,6 +12,14 @@ public class NPC_Spawning : MonoBehaviour
     [SerializeField] int border2 = 10;
     private bool canSpawn = true;
 
+    private void Start()
+    {
+        if(CheckPointSystem.checkPointNumber == 4)
+        {
+            this.enabled = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CheckPoint"))
