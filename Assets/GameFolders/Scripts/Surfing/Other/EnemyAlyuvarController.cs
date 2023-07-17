@@ -28,6 +28,8 @@ public class EnemyAlyuvarController : MonoBehaviour
     [SerializeField] private GameObject shockwave;
     [SerializeField] private GameObject shockwave2;
 
+    public bool destroyAndExplodeControl = false;
+
     private Vector3 bossEnemyVirusTransformForward;
 
     private void Awake()
@@ -52,6 +54,23 @@ public class EnemyAlyuvarController : MonoBehaviour
         //transform.position += Vector3.forward * speed * Time.deltaTime * -1;
 
         transform.position += bossEnemyVirusTransformForward * speed * Time.deltaTime * -1;
+
+        if (destroyAndExplodeControl)
+        {
+            destroyAndExplode();
+        }
+    }
+
+    public void destroyAndExplode(float waitTimeForExplosion = 0)
+    {
+        Invoke("destroyAndExplodeNow", waitTimeForExplosion);
+    }
+
+    private void destroyAndExplodeNow()
+    {
+        surfingAlyuvarAudioSource.PlayOneShot(shockwaveSound);
+        Instantiate(shockwave2, gameObject.transform.position, Quaternion.identity);
+        Destroy(gameObject, 0.1f);
     }
 
 
@@ -64,13 +83,18 @@ public class EnemyAlyuvarController : MonoBehaviour
             heartIconShowController.decreaseHealth(damageCountEveryTrigger);
 
             cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForEnemyAlyuvarAtack, cameraShakefullIntensityTimeForEnemyAlyuvarAtack, cameraShakeGoToZeroTimeForEnemyAlyuvarAtack);
-            shockwave.SetActive(true);
+            //shockwave.SetActive(true);
             surfingAlyuvarAudioSource.PlayOneShot(shockwaveSound);
             Instantiate(shockwave2, surfingControllerV2.gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject,0.1f);
 
 
             Debug.Log("çarpýþan Nesne Robot");
+        }
+
+        if (other.gameObject.name.Contains("Destroy Enemy"))
+        {
+            Destroy(gameObject, 0.1f);
         }
     }
 }

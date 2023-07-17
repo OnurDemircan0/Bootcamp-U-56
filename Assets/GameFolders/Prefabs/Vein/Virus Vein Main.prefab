@@ -120,11 +120,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surfingControllerV2: {fileID: 0}
   bossController: {fileID: 0}
-  forBossVirusControl: 1
+  forBossVirusControl: 0
   changeRotationLerpTime: 0
   maxRotationAngleBeforeCompleteGrow: 0
   maxRotationAngleAfterCompleteGrow: 0
-  maxRotationAngleForNormalObjects: 0
+  maxRotationAngleForNormalObjects: 3
 --- !u!114 &2806305522079614463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,8 +237,8 @@ MonoBehaviour:
   targetVirusMaterialColorsNumber: -1
   minChangeSizeSpeed: 3500
   maxChangeSizeSpeed: 4000
-  minChangeSizeValue: 35
-  maxChangeSizeValue: 50
+  minChangeSizeValue: 10
+  maxChangeSizeValue: 30
   minRanmdomMutationNumberForDetermineMutations: 0
   maxRanmdomMutationNumberForDetermineMutations: 7
 --- !u!1001 &2806305521052263195

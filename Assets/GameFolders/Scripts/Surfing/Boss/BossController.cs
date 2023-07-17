@@ -10,6 +10,8 @@ public class BossController : MonoBehaviour
 
     [SerializeField] private SurfingControllerV2 surfingControllerV2;
 
+    [SerializeField] private float maxHealthForMaxMutationLevel;
+
     private bool virusShowCameraWorkedForFirstContactWithBoss;
 
     private bool startMagnificationControl = false;
@@ -135,6 +137,8 @@ public class BossController : MonoBehaviour
     [SerializeField] private float waitTimeForHideMedBot;
     [SerializeField] private float shrinkSpeed;
     [SerializeField] private float minSizeForExplode;
+    [SerializeField] private float MaxWaitTimeForExplodeEnemyAlyuvarForBossDead;
+    [SerializeField] private float waitTimeForRunBossDead;
 
     private bool bossDeadControl = false;
 
@@ -215,6 +219,21 @@ public class BossController : MonoBehaviour
         explosion.SetActive(false);
     }
 
+    public void mutateBossVirusNotBySelf()
+    {
+        //changeVirusColor();
+
+        if(changeColorCompleteControl == true)
+        {
+            //changeColorControl = true;
+        }
+        
+
+        bossMutatedIncreaseHealth();
+
+        Debug.Log("Mutasyon Algýnlandý Renk Deðiþecek");
+
+    }
 
     public void mutateBossVirus()
     {
@@ -412,6 +431,14 @@ public class BossController : MonoBehaviour
 
             alyuvarEnemyCreateControl = false;
         }
+
+
+
+           
+        if(maxHealthForMaxMutationLevel >= bossHealthCount)
+        {
+            mutationLevel = minWaitTimeChangeColorAccordiongToMutationLevel.Length - 1;
+        }
     }
 
 
@@ -439,7 +466,18 @@ public class BossController : MonoBehaviour
 
                 Invoke("hideMedBot", waitTimeForHideMedBot);
 
-                bossDead();
+                Invoke("bossDead", waitTimeForRunBossDead);
+
+
+
+                EnemyAlyuvarController[] objects = GameObject.FindObjectsOfType<EnemyAlyuvarController>();
+
+                foreach (EnemyAlyuvarController obj in objects)
+                {
+                    obj.destroyAndExplode(Random.Range(0, MaxWaitTimeForExplodeEnemyAlyuvarForBossDead));
+                }
+
+                //bossDead();
                 bossDeadControl = true;
             }
             
@@ -453,8 +491,8 @@ public class BossController : MonoBehaviour
 
     private void bossDead()
     {
-        //virusDeadPartShowCamera.SetActive(true);
-        virusShowCamera.SetActive(true);
+        virusDeadPartShowCamera.SetActive(true);
+        //virusShowCamera.SetActive(true);
 
         Invoke("hideBossHealthBar", delayHideBossHealthBarAfterBossDead);
 
@@ -488,6 +526,9 @@ public class BossController : MonoBehaviour
     private void showFinalExplosion()
     {
         finalExplosion.SetActive(true);
+        surfAlyuvarAudioSource.PlayOneShot(explosionSound);
+        surfAlyuvarAudioSource.PlayOneShot(explosionSound);
+        surfAlyuvarAudioSource.PlayOneShot(explosionSound);
 
         Invoke("hideVirusShowCamera", waitTimeHideVirusCameraAfterFinalExplosion);
     }
@@ -528,6 +569,8 @@ public class BossController : MonoBehaviour
             Debug.Log("Boss Caný Fullendi");
             bossHealthCount = bossMaxHealthCount;
             bossHealthBarController.SetMaxHealth(bossHealthCount);
+
+            mutationLevel = 0;
 
             foreach (GameObject gameObjects in canvasHealthAndMedicineImages)
             {

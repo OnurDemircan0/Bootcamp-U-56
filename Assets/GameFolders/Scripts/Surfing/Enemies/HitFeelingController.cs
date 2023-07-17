@@ -168,9 +168,10 @@ public class HitFeelingController : MonoBehaviour
 
                 try
                 {
-                    bossController.mutateBossVirus();
+                    //bossController.mutateBossVirus();
+                    bossController.mutateBossVirusNotBySelf();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
 
                 }
