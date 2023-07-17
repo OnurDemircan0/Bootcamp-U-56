@@ -10,12 +10,7 @@ public class NPC_Spawning : MonoBehaviour
     [SerializeField] float spawnDelay = 1f;
     [SerializeField] int border1 = 4; //border1 must be smaller than border2.
     [SerializeField] int border2 = 10;
-    private bool canSpawn;
-
-    private void Start()
-    {
-        canSpawn = true;
-    }
+    private bool canSpawn = true;
 
     private void OnTriggerEnter(Collider other)
     {
