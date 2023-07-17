@@ -19,6 +19,7 @@ TagManager:
   - GreenVirus
   - RedVirus
   - CheckPoint
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
