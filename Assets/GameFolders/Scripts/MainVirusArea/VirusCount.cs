@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class VirusCount : MonoBehaviour
 {
-    public static int virusCount;
+    public static int virusCount = 0;
 }
