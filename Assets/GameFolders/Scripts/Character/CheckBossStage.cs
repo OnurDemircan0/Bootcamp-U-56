@@ -7,6 +7,9 @@ using UnityEngine;
 public class CheckBossStage : MonoBehaviour
 {
     [SerializeField]
+    WaitBeforeReady[] waitBeforeReady;
+
+    [SerializeField]
     Death death;
 
     [SerializeField]
@@ -38,6 +41,16 @@ public class CheckBossStage : MonoBehaviour
     {
         if (!onTriggeredEnterTriggeredOnce)
         {
+            if(waitBeforeReady.Length != 0)
+            {
+                for(int i = 0; i < waitBeforeReady.Length; i++)
+                {
+                    if (waitBeforeReady[i] != null )waitBeforeReady[i].enabled = true;
+
+                    Debug.Log("Try to activate");
+                }
+            }
+
             death.onMimicStage = true;
 
             mimic.SetActive(true);

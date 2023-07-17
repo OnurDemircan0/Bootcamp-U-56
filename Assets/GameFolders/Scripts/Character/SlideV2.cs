@@ -6,15 +6,12 @@ using UnityEngine.InputSystem;
 
 public class SlideV2 : MonoBehaviour
 {
-    MonoBehaviour[] Scripts;
-
     CharacterController characterController;
 
     Animator animator;
 
     bool pressed = false;
-
-    bool lockedCamera;
+    public bool isSliding; 
 
     [SerializeField]
     GameObject slideChecker;
@@ -50,9 +47,9 @@ public class SlideV2 : MonoBehaviour
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(slideChecker.transform.position, checkRadius);
     }
+
     private void Start()
     {
-        Scripts = GetComponents<MonoBehaviour>();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
@@ -72,28 +69,24 @@ public class SlideV2 : MonoBehaviour
             StopSliding();
         }
     }
-
     private void Update()
     {
-      //  assetsInputs.move.x = 0f;
         assetsInputs.shoot = false;
         assetsInputs.aim = false;
-      //  if (!lockedCamera) { thirdPersonController.LockCameraPosition = true; lockedCamera = true; }
-      //  if (pressed) playerInput.enabled = false;
-
     }
 
     void StartSliding()
     {
         Invoke("pressW", 0.6f);
+        isSliding = true;
 
         // Disables
 
         if(pressed)
         {
-           // assetsInputs.enabled = false;
-           // playerInput.enabled = false;
-           // thirdPersonController.enabled = false;  
+            playerInput.enabled = false;
+            thirdPersonController.LockCameraPosition = true;
+            thirdPersonController.RotateAim = false;
         }
 
 
@@ -110,11 +103,13 @@ public class SlideV2 : MonoBehaviour
         Vector3 moveVector = forwardDirection * speed * Time.deltaTime;
         characterController.Move(moveVector);
 
-        Invoke("stopSlidingNoMatterWhat", 4.35f);
+        Invoke("stopSlidingNoMatterWhat", 5.35f);
     }
 
     void StopSliding()
     {
+        isSliding = false;
+
         animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 0f, Time.deltaTime * 10f));
         shooterController.enabled = true;
         muzzleEffect.enabled = true;
@@ -131,39 +126,16 @@ public class SlideV2 : MonoBehaviour
 
     void stopSlidingNoMatterWhat()
     {
+        isSliding = false;
+        assetsInputs.move.y = 0f;
         animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 0f, Time.deltaTime * 10f));
         shooterController.enabled = true;
         muzzleEffect.enabled = true;
         playerInput.enabled = true;
         thirdPersonController.LockCameraPosition = false;
+        thirdPersonController.RotateAim = true;
 
         this.enabled = false;
     }
-
-   // public void DisableAllScripts()
-   // {
-   //     foreach (MonoBehaviour script in Scripts)
-   //     {
-   //         if (script == this || script == personController) { continue; }
-   //
-   //         else
-   //         {
-   //             script.enabled = false;
-   //         }
-   //     }
-   // }
-   //
-   // public void EnableAllScripts()
-   // {
-   //     foreach (MonoBehaviour script in Scripts)
-   //     {
-   //         if (script == this) { this.enabled = false; continue; }
-   //
-   //         else
-   //         {
-   //             script.enabled = true;
-   //         }
-   //     }
-   // }
 }
 

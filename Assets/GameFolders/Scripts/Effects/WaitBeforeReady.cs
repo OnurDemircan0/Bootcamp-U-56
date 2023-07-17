@@ -21,6 +21,9 @@ public class WaitBeforeReady : MonoBehaviour
 
     [SerializeField]
     CameraShakeManager shakeManager;
+
+    [SerializeField]
+    CheckBossStage checkBossStage;
     
 
     public bool triggeed = false;

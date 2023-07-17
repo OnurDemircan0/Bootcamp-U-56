@@ -28,6 +28,8 @@ public class BurnOutMeterSound : MonoBehaviour
 
     float emissionDuration = 25f;
     float emissionTimer = 0f;
+    float burnOutMeterSoundStartTime;
+    float previousBurnOutMeter = 0f;
 
     bool insideTheFirst = false;
     bool insideTheSecond = false;
@@ -38,6 +40,7 @@ public class BurnOutMeterSound : MonoBehaviour
     bool playedBlankAudio;
     bool triggeredBurnOutOnce;
 
+
     private ParticleSystem.EmissionModule fireEmissionModule;
     private ParticleSystem.EmissionModule smokeEmissionModule;
     private void Awake()
@@ -47,24 +50,29 @@ public class BurnOutMeterSound : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-       // fireEmissionModule = particleFire.emission;
-       // smokeEmissionModule = particleSmoke.emission;
+        // fireEmissionModule = particleFire.emission;
+        // smokeEmissionModule = particleSmoke.emission;
     }
 
     private void Update()
     {
+
+        bool isBurnOutDecreasing = thirdPersonShooterController.burnOutMeter < previousBurnOutMeter;
+
+        previousBurnOutMeter = thirdPersonShooterController.burnOutMeter;
+
         if (thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit > 0.05f &&
     !(Mathf.Approximately(thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit, 1f) ||
       Mathf.Approximately(thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit, 0.98f)) && !played)
         {
-            
-                burnOutMeterSound.pitch = 1f;
-                burnOutMeterSound.Play();
-                played = true;
 
-               // insideTheFirst = true;
-               //
-               // insideTheSecond = false;
+            burnOutMeterSound.pitch = 1f;
+            burnOutMeterSound.Play();
+            played = true;
+
+            // insideTheFirst = true;
+            //
+            // insideTheSecond = false;
 
         }
         else if (thirdPersonShooterController.burnedOut)
@@ -75,69 +83,84 @@ public class BurnOutMeterSound : MonoBehaviour
             triggeredBurnOutOnce = true;
 
 
-           // insideTheFirst = false;
+            // insideTheFirst = false;
 
-           // fireEmissionModule.rateOverTime = new ParticleSystem.MinMaxCurve(0f);
-           // smokeEmissionModule.rateOverTime = new ParticleSystem.MinMaxCurve(0f);
+            // fireEmissionModule.rateOverTime = new ParticleSystem.MinMaxCurve(0f);
+            // smokeEmissionModule.rateOverTime = new ParticleSystem.MinMaxCurve(0f);
         }
 
-        else if (!assetsInputs.shoot && played && thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit > 0.05f)
+        else if (!assetsInputs.shoot && played && thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit > 0.05f && !thirdPersonShooterController.burnedOut)
         {
-            float targetPitch = (thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit) * 2 - 1; // Scale the burnOutMeter value to range from -1 to 1
-            float lerpSpeed = 1f / thirdPersonShooterController.burnOutTime;
+            //if (!burnOutMeterSound.isPlaying)
+            //{
+            //    burnOutMeterSound.time = burnOutMeterSound.clip.length;
+            //    burnOutMeterSound.Play();
+            //}
+
+            float targetPitch = (thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit) * 2 - 1;
+            float lerpSpeed = isBurnOutDecreasing ? 1f / thirdPersonShooterController.burnOutTime : 1f / (4 * thirdPersonShooterController.burnOutTime);
+
             burnOutMeterSound.pitch = Mathf.Lerp(-1f, targetPitch, Time.deltaTime * lerpSpeed);
+
+
 
             //insideTheFirst = false;
             //
             //insideTheSecond = true;
         }
 
-       else if( assetsInputs.shoot && played && thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit > 0.05f)
-       {
-           burnOutMeterSound.pitch = 1f;
-       }
+        else if (assetsInputs.shoot && played && thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit > 0.05f)
+        {
+            burnOutMeterSound.pitch = 1f;
+        }
 
         else if (thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit < 0.05f)
         {
             burnOutMeterSound.Stop();
             played = false;
 
-
-
-
-           // insideTheFirst = false;
+            // insideTheFirst = false;
         }
 
 
 
-      if(thirdPersonShooterController.burnedOut && assetsInputs.shoot && !playedBlankAudio) 
-      {
-          blankShotAudio.Play();
-          playedBlankAudio = true;
+        if (thirdPersonShooterController.burnedOut && assetsInputs.shoot && !playedBlankAudio)
+        {
+            blankShotAudio.Play();
+            playedBlankAudio = true;
 
-         // animator.SetBool("burnedOut", true);
-         //   Invoke("ResetAnim", 0.250f);
-      }
-      else if (!assetsInputs.shoot && playedBlankAudio)
-      {
-          playedBlankAudio = false;
-      }
+            // animator.SetBool("burnedOut", true);
+            //   Invoke("ResetAnim", 0.250f);
+        }
 
-      if(triggeredBurnOutOnce && !thirdPersonShooterController.burnedOut)
+        else if (!assetsInputs.shoot && playedBlankAudio)
+        {
+            playedBlankAudio = false;
+        }
+
+        if (triggeredBurnOutOnce && !thirdPersonShooterController.burnedOut)
         {
             RechargeAudio.PlayOneShot(RechargeAudio.clip);
             triggeredBurnOutOnce = false;
         }
-      
 
-       //if (insideTheFirst)
-       //{
-       //    HigerEmission();
-       //}
-       //if(insideTheSecond)
-       //{
-       //    LowerEmission();
-       //}
+        if (!burnOutMeterSound.isPlaying && played && !thirdPersonShooterController.burnedOut && thirdPersonShooterController.burnOutMeter / thirdPersonShooterController.burnOutLimit > 0.05f)
+        {
+            played = true;
+
+            burnOutMeterSound.pitch = 1;
+            burnOutMeterSound.Play();
+        }
+
+
+        //if (insideTheFirst)
+        //{
+        //    HigerEmission();
+        //}
+        //if(insideTheSecond)
+        //{
+        //    LowerEmission();
+        //}
     }
 
     void ResetAnim()
@@ -152,43 +175,43 @@ public class BurnOutMeterSound : MonoBehaviour
 
 
 
-   // void HigerEmission()
-   // {
-   //     emissionTimer += Time.deltaTime;
-   //
-   //     float normalizedTime = Mathf.Clamp01(emissionTimer / emissionDuration);
-   //     float targetRate = Mathf.Lerp(0f, 5f, normalizedTime);
-   //
-   //     ParticleSystem.EmissionModule fireEmission = particleFire.emission;
-   //     fireEmission.rateOverTime = targetRate;
-   //
-   //     ParticleSystem.EmissionModule smokeEmission = particleSmoke.emission;
-   //     smokeEmission.rateOverTime = targetRate;
-   //
-   //     if (emissionTimer >= emissionDuration)
-   //     {
-   //         emissionTimer = 0f;
-   //         insideTheFirst = false;
-   //     }
-   // }
-   //
-   // void LowerEmission()
-   // {
-   //     emissionTimer += Time.deltaTime;
-   //
-   //     float normalizedTime = Mathf.Clamp01(emissionTimer / emissionDuration);
-   //     float targetRate = Mathf.Lerp(fireEmissionModule.rateOverTime.constant, 0f, normalizedTime);
-   //
-   //     ParticleSystem.EmissionModule fireEmission = particleFire.emission;
-   //     fireEmission.rateOverTime = targetRate;
-   //
-   //     ParticleSystem.EmissionModule smokeEmission = particleSmoke.emission;
-   //     smokeEmission.rateOverTime = targetRate;
-   //
-   //     if (emissionTimer >= emissionDuration)
-   //     {
-   //         emissionTimer = 0f;
-   //         insideTheSecond = false;
-   //     }
-   // }
+    // void HigerEmission()
+    // {
+    //     emissionTimer += Time.deltaTime;
+    //
+    //     float normalizedTime = Mathf.Clamp01(emissionTimer / emissionDuration);
+    //     float targetRate = Mathf.Lerp(0f, 5f, normalizedTime);
+    //
+    //     ParticleSystem.EmissionModule fireEmission = particleFire.emission;
+    //     fireEmission.rateOverTime = targetRate;
+    //
+    //     ParticleSystem.EmissionModule smokeEmission = particleSmoke.emission;
+    //     smokeEmission.rateOverTime = targetRate;
+    //
+    //     if (emissionTimer >= emissionDuration)
+    //     {
+    //         emissionTimer = 0f;
+    //         insideTheFirst = false;
+    //     }
+    // }
+    //
+    // void LowerEmission()
+    // {
+    //     emissionTimer += Time.deltaTime;
+    //
+    //     float normalizedTime = Mathf.Clamp01(emissionTimer / emissionDuration);
+    //     float targetRate = Mathf.Lerp(fireEmissionModule.rateOverTime.constant, 0f, normalizedTime);
+    //
+    //     ParticleSystem.EmissionModule fireEmission = particleFire.emission;
+    //     fireEmission.rateOverTime = targetRate;
+    //
+    //     ParticleSystem.EmissionModule smokeEmission = particleSmoke.emission;
+    //     smokeEmission.rateOverTime = targetRate;
+    //
+    //     if (emissionTimer >= emissionDuration)
+    //     {
+    //         emissionTimer = 0f;
+    //         insideTheSecond = false;
+    //     }
+    // }
 }

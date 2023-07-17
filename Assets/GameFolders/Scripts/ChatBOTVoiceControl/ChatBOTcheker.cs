@@ -5,6 +5,12 @@ using UnityEngine;
 public class ChatBOTcheker : MonoBehaviour
 {
     [SerializeField]
+    SlideV2 slidev2;
+
+    [SerializeField]
+    AudioSource kalpGiriş;
+
+    [SerializeField]
     AudioSource kanBirikintisiUyarı;
 
     [SerializeField]
@@ -25,6 +31,7 @@ public class ChatBOTcheker : MonoBehaviour
     bool triggeredOnceKanBirikintisi;
     bool triggeredOnceGunkCheck;
     bool triggeredOnceCheckBossStage;
+    bool triggeredOnceKalpGiriş;
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player") && !getEnemies.enteryEnemiesAreDeath && !triggeredOnceKanBirikintisi && kanBirikintisiUyarı != null)
@@ -53,10 +60,21 @@ public class ChatBOTcheker : MonoBehaviour
             Invoke("CallAcidBloodChatBOT", 5f);
             triggeredOnceCheckBossStage = true;
         }
+
+        if(slidev2.isSliding && !triggeredOnceKalpGiriş && kalpGiriş != null && slidev2 != null)
+        {
+            Invoke("CallKalpGiriş", 0.45f);
+            triggeredOnceKalpGiriş = true;
+        }
     }
 
     void CallAcidBloodChatBOT()
     {
         asitliKanBirikintisi.Play();
+    }
+
+    void CallKalpGiriş()
+    {
+        kalpGiriş.Play();
     }
 }
