@@ -10,9 +10,10 @@ Material:
   m_Name: Brain
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
+  - _EMISSION
   - _NORMALMAP
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -27,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 63d788aa3be36b647a15d3462ddf7a81, type: 3}
+        m_Texture: {fileID: 2800000, guid: b143702a0ad0e5a498b036f502e0da72, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -109,9 +110,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.36640093, b: 0.45585936, a: 1}
-    - _Color: {r: 1, g: 0.3664009, b: 0.4558593, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 1, g: 0.6650944, b: 0.7126427, a: 1}
+    - _Color: {r: 1, g: 0.6650944, b: 0.7126427, a: 1}
+    - _EmissionColor: {r: 0.04405566, g: 0.0048280177, b: 0.007845528, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4237726633351676612

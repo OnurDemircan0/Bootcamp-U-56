@@ -92,6 +92,8 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private float _originalSprintSpeed;
+        private float _aimSprintSpeed;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -132,6 +134,9 @@ namespace StarterAssets
 
         private void Awake()
         {
+            _originalSprintSpeed = SprintSpeed;
+            _aimSprintSpeed = SprintSpeed / 2.6f;
+
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -224,11 +229,11 @@ namespace StarterAssets
             {
                 if (IsAim && (_input.move.x > 0f || _input.move.x < 0f || _input.move.y < 0f))
                 {
-                    SprintSpeed = 2.0f;
+                    SprintSpeed = _aimSprintSpeed;
                 }
                 else
                 {
-                    SprintSpeed = 5.335f;
+                    SprintSpeed = _originalSprintSpeed;
                 }
                 // set target speed based on move speed, sprint speed and if sprint is pressed
                 float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;

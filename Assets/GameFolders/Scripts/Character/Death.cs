@@ -120,7 +120,7 @@ public class Death : MonoBehaviour
 
     void DeathActive()
     {
-        if(health < 0f)
+        if(health <= 0f)
         {
             death = true;
             if(muzzle != null && gunSound != null)

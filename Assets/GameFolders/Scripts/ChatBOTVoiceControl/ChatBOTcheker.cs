@@ -19,6 +19,9 @@ public class ChatBOTcheker : MonoBehaviour
     [SerializeField]
     CheckBossStage CheckBossStage;
 
+    [SerializeField]
+    CheckBossVein checkBossVein;
+
     bool triggeredOnceKanBirikintisi;
     bool triggeredOnceGunkCheck;
     bool triggeredOnceCheckBossStage;
@@ -36,7 +39,7 @@ public class ChatBOTcheker : MonoBehaviour
             triggeredOnceGunkCheck = true;
         }
 
-        if(other.CompareTag("VFXother") && !triggeredOnceGunkCheck && gunkCheck != null)
+        if(other.CompareTag("VFXother") && !triggeredOnceGunkCheck && gunkCheck != null && checkBossVein.enteredBossVein)
         {
             gunkCheck.Play();
             triggeredOnceGunkCheck = true;

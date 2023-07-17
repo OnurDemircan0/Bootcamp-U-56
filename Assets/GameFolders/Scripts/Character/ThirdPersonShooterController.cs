@@ -48,6 +48,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     public bool burnedOut = false;
 
     private float interpolationTimer = 0f;
+    private float _originalSprintSpeed;
 
     StarterAssetsInputs assetsInputs;
     ThirdPersonController thirdPerson;
@@ -83,6 +84,8 @@ public class ThirdPersonShooterController : MonoBehaviour
         animator = GetComponent<Animator>();
         aimIK = GetComponent<AimIK>();
         CharacterTransform = GetComponent<Transform>();
+
+        _originalSprintSpeed = thirdPerson.SprintSpeed;
     }
 
     private void Update()
@@ -400,7 +403,7 @@ public class ThirdPersonShooterController : MonoBehaviour
 
                     }
                 }
-                else if (assetsInputs.sprint && (assetsInputs.move.x > 0f || assetsInputs.move.y > 0f) && !AimSprintTriggered && AimIdleTriggered && !OnWalk && !OnSprint && !AimWalkTriggered && thirdPerson.SprintSpeed == 5.335f)
+                else if (assetsInputs.sprint && (assetsInputs.move.x > 0f || assetsInputs.move.y > 0f) && !AimSprintTriggered && AimIdleTriggered && !OnWalk && !OnSprint && !AimWalkTriggered && thirdPerson.SprintSpeed == _originalSprintSpeed)
                 {
                     animator.SetBool("WalkBackAim", false);
                     animator.SetBool("ToMove", false);
@@ -411,7 +414,7 @@ public class ThirdPersonShooterController : MonoBehaviour
                     animator.SetBool("WalkBackAim", false);
                     animator.SetBool("ToMove", false);
                     OnWalk = true;
-                    if (assetsInputs.sprint && thirdPerson.SprintSpeed == 5.335f)
+                    if (assetsInputs.sprint && thirdPerson.SprintSpeed == _originalSprintSpeed)
                     {
                         OnSprint = true;
 
