@@ -33,7 +33,7 @@ public class MainVirusArea : MonoBehaviour
                 nextVirusCount = 3;
                 break;
             case 2:
-                nextVirusCount = 8;
+                nextVirusCount = 10;
                 break;
             case 3:
                 nextVirusCount = 15;
@@ -42,10 +42,10 @@ public class MainVirusArea : MonoBehaviour
                 nextVirusCount = 24;
                 break;
             case 5:
-                nextVirusCount = 31;
+                nextVirusCount = 32;
                 break;
             case 6:
-                nextVirusCount = 0;
+                nextVirusCount = 49;
                 break;
         }
     }

@@ -43,6 +43,7 @@ public class ChatBotBrain : MonoBehaviour
                     _animator.SetInteger("AnimationNumber", 1);
                 }
             }
+            /*
             else if (_animator.GetCurrentAnimatorStateInfo(0).IsName("ChatBotBrainContinue"))
             {
                 if (pass)
@@ -56,7 +57,7 @@ public class ChatBotBrain : MonoBehaviour
                 {
                     _animator.SetInteger("AnimationNumber", 3);
                 }
-            }
+            }*/
         }
         else if(CheckPointSystem.checkPointNumber == 4)
         {

@@ -26,9 +26,4 @@ public class PlayerCheckingArea : MonoBehaviour
             playerDetectedMainVirusArea = false;
         }
     }
-
-    private void Update()
-    {
-        Debug.Log("player detected : " + playerDetectedMainVirusArea);
-    }
 }
