@@ -122,9 +122,9 @@ public class RotateRandom : MonoBehaviour
             randomRotationY = Mathf.Lerp(randomRotationY, randomRotationNewY, changeRotationLerpTime);
             randomRotationZ = Mathf.Lerp(randomRotationZ, randomRotationNewZ, changeRotationLerpTime);
 
-            Debug.Log("randomRotationX: " + randomRotationX);
-            Debug.Log("randomRotationY: " + randomRotationY);
-            Debug.Log("randomRotationZ: " + randomRotationZ);
+            //Debug.Log("randomRotationX: " + randomRotationX);
+            //Debug.Log("randomRotationY: " + randomRotationY);
+            //Debug.Log("randomRotationZ: " + randomRotationZ);
 
         }
     }

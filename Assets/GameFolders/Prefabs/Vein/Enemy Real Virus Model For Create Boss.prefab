@@ -5004,7 +5004,7 @@ MonoBehaviour:
   changeRotationLerpTime: 0
   maxRotationAngleBeforeCompleteGrow: 0
   maxRotationAngleAfterCompleteGrow: 0
-  maxRotationAngleForNormalObjects: 0
+  maxRotationAngleForNormalObjects: 10
 --- !u!114 &828181924559110157
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -166,6 +166,15 @@ public class HitFeelingController : MonoBehaviour
 
                 }
 
+                try
+                {
+                    bossController.mutateBossVirus();
+                }
+                catch(Exception e)
+                {
+
+                }
+
 
                 surfingAlyuvarAudioSource.PlayOneShot(mutateSound);
             }

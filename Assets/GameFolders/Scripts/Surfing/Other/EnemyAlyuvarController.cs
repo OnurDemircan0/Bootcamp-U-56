@@ -11,26 +11,32 @@ public class EnemyAlyuvarController : MonoBehaviour
 
     [SerializeField] private HeartIconShowController heartIconShowController;
 
+    [SerializeField] private CameraShakeControllerInVein cameraShakeControllerInVein;
+
     [SerializeField] private GameObject enemyAlyuvarForwardDirection;
 
     [SerializeField] private float damageCountEveryTrigger;
+
+    [SerializeField] private float cameraShakeIntensityForEnemyAlyuvarAtack;
+    [SerializeField] private float cameraShakefullIntensityTimeForEnemyAlyuvarAtack;
+    [SerializeField] private float cameraShakeGoToZeroTimeForEnemyAlyuvarAtack;
+    [SerializeField] private GameObject shockwave;
 
     private Vector3 bossEnemyVirusTransformForward;
 
     private void Awake()
     {
-        bossEnemyVirusTransformForward = enemyAlyuvarForwardDirection.transform.forward;
-    }
-
-    void Start()
-    {
         speed = Random.Range(minSpeed, maxSpeed);
 
         heartIconShowController = GameObject.Find("GameManager").gameObject.GetComponent<HeartIconShowController>();
+        cameraShakeControllerInVein = GameObject.Find("GameManager").gameObject.GetComponent<CameraShakeControllerInVein>();
         enemyAlyuvarForwardDirection = GameObject.Find("Enemy Atack Show Way").gameObject;
 
-        Destroy(gameObject, 20);
+        //Destroy(gameObject, 20);
+
+        bossEnemyVirusTransformForward = enemyAlyuvarForwardDirection.transform.forward;
     }
+
 
 
     void Update()
@@ -48,6 +54,9 @@ public class EnemyAlyuvarController : MonoBehaviour
         if (other.gameObject.name.Contains("MedBOT"))
         {
             heartIconShowController.decreaseHealth(damageCountEveryTrigger);
+
+            cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForEnemyAlyuvarAtack, cameraShakefullIntensityTimeForEnemyAlyuvarAtack, cameraShakeGoToZeroTimeForEnemyAlyuvarAtack);
+            shockwave.SetActive(true);
 
             Debug.Log("çarpýþan Nesne Robot");
         }

@@ -48,6 +48,8 @@ public class BossController : MonoBehaviour
     [SerializeField] private float xMaxFarFromCenterForCreatingEnemyAlyuvar;
     [SerializeField] private float yMinFarFromCenterForCreatingEnemyAlyuvar;
     [SerializeField] private float yMaxFarFromCenterForCreatingEnemyAlyuvar;
+    [SerializeField] private float zMinFarFromCenterForCreatingEnemyAlyuvar;
+    [SerializeField] private float zMaxFarFromCenterForCreatingEnemyAlyuvar;
 
 
 
@@ -76,6 +78,8 @@ public class BossController : MonoBehaviour
     private float changeColorSpeed;
     [Range(0.1f, 10f)] [SerializeField] private float minChangeColorSpeed;
     [Range(0.1f, 10f)] [SerializeField] private float maxChangeColorSpeed;
+
+    //private bool changeColorBySelfMutationControl = false;
 
     public bool reachMaxSize = false;
 
@@ -128,6 +132,8 @@ public class BossController : MonoBehaviour
         virusShowCameraWorkedForFirstContactWithBoss = false;
 
         virusMaterial = gameObject.GetComponent<Renderer>().material;
+
+        enemyAlyuvarForAtackCharacter = GameObject.Find("Enemy Alyuvar02 For Atack Character").gameObject;
 
         if (nowVirusMaterialColorsNumber == -1)
         {
@@ -201,9 +207,13 @@ public class BossController : MonoBehaviour
     {
         mutationLevel++;
 
-        changeVirusColor();
+        //changeVirusColor();
+
+        changeColorControl = true;
 
         bossMutatedIncreaseHealth();
+
+        Debug.Log("Mutasyon Algýnlandý Renk Deðiþecek");
     }
 
 
@@ -211,9 +221,13 @@ public class BossController : MonoBehaviour
     {
         //showExplosionMultiTime(5);
 
+        //Debug.Log("Renk Deðiþmeye baþlýyor");
+
         if(changeColorCompleteControl == true)
         {
             showExplosion();
+
+            //Debug.Log("Renk Deðiþmeye baþladý");
 
             //changeColorControl = true;
             Invoke("changeChangeColoControl", waitTimeForChangeColorAfterSockWave);
@@ -228,9 +242,6 @@ public class BossController : MonoBehaviour
     private void alyuvarEnemyCreate()
     {
         //showExplosion();
-
-        
-
 
         if (alyuvarEnemyCreateCompleteControl)
         {
@@ -250,6 +261,8 @@ public class BossController : MonoBehaviour
     {
         yield return null;
 
+        Debug.Log("mutateBySelfControl çalýþmaya baþladý");
+
         float waitSumTimeForChangeColor = 0;
         float waitSumTimeForAtackWithAlyuvar = 0;
         float waitTimeEachControl = 0.1f;
@@ -257,6 +270,8 @@ public class BossController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(waitTimeEachControl);
+
+            Debug.Log("mutateBySelfControl çalýþmaya devam ediyor");
 
             waitSumTimeForChangeColor += waitTimeEachControl;
             waitSumTimeForAtackWithAlyuvar += waitTimeEachControl;
@@ -339,7 +354,7 @@ public class BossController : MonoBehaviour
 
         if (changeColorControl && changeColorCompleteControl && bossDeadControl == false)
         {
-            //Debug.Log("Renk deðiþtirme Baþladý");
+            Debug.Log("Mutasyon Renk deðiþtirme Baþladý");
 
             StartCoroutine(changeColorVirus());
 
@@ -425,7 +440,11 @@ public class BossController : MonoBehaviour
             transform.localScale -= new Vector3(0.01f, 0.01f, 0.01f) * shrinkSpeed * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        
+
+        transform.localScale = new Vector3(0, 0, 0);
+        bossDeadControl = true;
+
+
 
         Invoke("showFinalExplosion", waitTimeForFinalExplosionAfterBossSmallAndDestroy);
     }
@@ -518,7 +537,7 @@ public class BossController : MonoBehaviour
 
         targetSize += magnificationSizeEachIngestCell;
 
-        
+        Debug.Log("Virüs Büyümeye Baþladý");
 
         if (reachMaxSize == false)
         {
@@ -528,9 +547,13 @@ public class BossController : MonoBehaviour
 
             showExplosion();
 
+            Debug.Log("Virüs reachMaxSize hala ulaþýlmadý");
+
         }
         else
         {
+            Debug.Log("Virüs reachMaxSize ulaþtý ");
+
             StartCoroutine(mutateBySelfControl());
         }
     }
@@ -715,9 +738,18 @@ public class BossController : MonoBehaviour
                     Debug.Log("xMaxFarFromCenterForCreatingEnemyAlyuvar2: " + xMaxFarFromCenterForCreatingEnemyAlyuvar);
                     */
 
+                    /*
                     enemyPosition = new Vector3(transform.position.x + Random.Range(xMinFarFromCenterForCreatingEnemyAlyuvar, xMaxFarFromCenterForCreatingEnemyAlyuvar),
                     transform.position.y + Random.Range(yMinFarFromCenterForCreatingEnemyAlyuvar, yMaxFarFromCenterForCreatingEnemyAlyuvar),
                     transform.position.z);
+                    */
+
+                    enemyPosition = new Vector3(477,
+                    transform.position.y + Random.Range(yMinFarFromCenterForCreatingEnemyAlyuvar, yMaxFarFromCenterForCreatingEnemyAlyuvar),
+                    3472.5f + Random.Range(xMinFarFromCenterForCreatingEnemyAlyuvar, xMaxFarFromCenterForCreatingEnemyAlyuvar));
+
+
+                    
 
                     //Instantiate(enemyAlyuvarForAtackCharacter, transform.position, Quaternion.identity);
                     Instantiate(enemyAlyuvarForAtackCharacter, enemyPosition, Quaternion.identity);
@@ -814,13 +846,13 @@ public class BossController : MonoBehaviour
 
             yield return null;
 
-            //Debug.Log("Renk Deðiþiyor");
+            Debug.Log("Renk Deðiþiyor");
 
             if (virusMaterial.color == virusMaterialColors[targetVirusMaterialColorsNumber])
             {
                 nowVirusMaterialColorsNumber = targetVirusMaterialColorsNumber;
                 changeColorCompleteControl = true;
-                //Debug.Log("Hedef Renge Ulaþýldý");
+                Debug.Log("Hedef Renge Ulaþýldý");
                 break;
             }
         }

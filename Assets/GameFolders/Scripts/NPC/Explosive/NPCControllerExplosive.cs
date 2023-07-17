@@ -7,6 +7,8 @@ public class NPCControllerExplosive : MonoBehaviour
 {
     private float distance;
 
+    
+
     GameObject Player;
     Animator animator;
     private bool isDead;
@@ -23,6 +25,8 @@ public class NPCControllerExplosive : MonoBehaviour
         animator = GetComponent<Animator>();
         
         Player = GameObject.FindWithTag("Player");
+
+        
 
         isDead = false;
         attack = false;
@@ -60,6 +64,8 @@ public class NPCControllerExplosive : MonoBehaviour
         }
 
     }
+
+    
 
     private void DisableObject()
     {
