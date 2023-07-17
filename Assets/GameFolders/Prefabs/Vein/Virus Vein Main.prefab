@@ -118,7 +118,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd0ddfd07ea38941b6b03def7758396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationAngle: 2
+  surfingControllerV2: {fileID: 0}
+  bossController: {fileID: 0}
+  forBossVirusControl: 1
+  changeRotationLerpTime: 0
+  maxRotationAngleBeforeCompleteGrow: 0
+  maxRotationAngleAfterCompleteGrow: 0
+  maxRotationAngleForNormalObjects: 0
 --- !u!114 &2806305522079614463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hittedControl: 0
+  createWithInstantiate: 0
   explosion: {fileID: 2655004138857714408}
   explosion2: {fileID: 2655004138857714408}
   nowScale: 0
@@ -178,8 +185,8 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   end: 2
   dstTravelled: 0
-  speedAcceleration: 20
-  maxSpeed: 200
+  speedAcceleration: 0
+  maxSpeed: 70
   minSpeedForRandom: 20
   maxSpeedForRandom: 20
   maxRotationAngle: 0

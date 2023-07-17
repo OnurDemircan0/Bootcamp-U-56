@@ -11,6 +11,8 @@ public class EnemyInVeinController : MonoBehaviour
     public bool hittedControl = false;
     private bool checkKillVirusControl = false;
 
+    [SerializeField] private bool createWithInstantiate = true;
+
     [SerializeField] private GameObject explosion;
     [SerializeField] private GameObject explosion2;
 
@@ -231,8 +233,14 @@ public class EnemyInVeinController : MonoBehaviour
 
             if (explodedControl == false)
             {
-                Instantiate(explosion2, transform.position, Quaternion.identity);
-                //explosion2.SetActive(true);
+                if (createWithInstantiate)
+                {
+                    Instantiate(explosion2, transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    explosion2.SetActive(true);
+                }
                 gameObject.transform.localScale = new Vector3(0, 0, 0);
 
                 explodedControl = true;

@@ -11073,7 +11073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherAlyuvars: {fileID: 296558220900337536, guid: e1c5022c95b2be248bc07cffe5c682a1, type: 3}
   otherAlyuvarsCount: 20
-  createAlyuvarControl: 0
+  createAlyuvarControl: 1
 --- !u!4 &458975217
 Transform:
   m_ObjectHideFlags: 0
@@ -11101,7 +11101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9fc25202162fac4293f34397874efa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createOtherAlyuvarControl: 0
+  createOtherAlyuvarControl: 1
   otherAlyuvars: {fileID: 296558220900337536, guid: e1c5022c95b2be248bc07cffe5c682a1, type: 3}
   surfingControllerV2: {fileID: 1986916216}
   minFarFromCharacter: 10
@@ -11141,7 +11141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 3040890521062753492, guid: d39f85ec0f71fa348b2fc755a2a0e35d, type: 3}
   surfingControllerV2: {fileID: 1986916216}
-  createVirusEnemyControl: 0
+  createVirusEnemyControl: 1
   minFarFromCharacter: 100
   maxFarFromCharacter: 200
   minFarFromCharacterForFirstCreatingEnemies: 50
@@ -17206,7 +17206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &675887482
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35116,7 +35116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 18363398}
   end: 2
-  dstTravelled: 3700
+  dstTravelled: 4
   heartIconShowController: {fileID: 458975225}
   waitTimeForShowVirusCameraAfterContactBoss: 1.5
   canvasHealthAndMedicineImages:
