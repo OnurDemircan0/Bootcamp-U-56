@@ -11538,6 +11538,10 @@ PrefabInstance:
       propertyPath: TargetTransform
       value: 
       objectReference: {fileID: 2076979675}
+    - target: {fileID: 737683901382488578, guid: 1cf170e8bbd46b54a9f6374a429766fb, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
     - target: {fileID: 4284986724114438191, guid: 1cf170e8bbd46b54a9f6374a429766fb, type: 3}
       propertyPath: strength
       value: 3
