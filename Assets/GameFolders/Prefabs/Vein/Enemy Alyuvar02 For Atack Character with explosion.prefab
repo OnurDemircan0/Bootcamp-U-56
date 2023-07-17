@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &313599942822876535
 Transform:
   m_ObjectHideFlags: 0
@@ -4896,6 +4896,7 @@ GameObject:
   - component: {fileID: 7370708827286621759}
   - component: {fileID: 7370708827286621755}
   - component: {fileID: 313599943513090660}
+  - component: {fileID: 7066189444594445882}
   m_Layer: 0
   m_Name: Enemy Alyuvar02 For Atack Character with explosion
   m_TagString: Untagged
@@ -5003,13 +5004,17 @@ MonoBehaviour:
   minSpeed: 30
   maxSpeed: 32
   heartIconShowController: {fileID: 0}
+  surfingControllerV2: {fileID: 0}
   cameraShakeControllerInVein: {fileID: 0}
+  surfingAlyuvarAudioSource: {fileID: 0}
+  shockwaveSound: {fileID: 8300000, guid: e2ab63f756e86b24e918afd1013b570b, type: 3}
   enemyAlyuvarForwardDirection: {fileID: 0}
   damageCountEveryTrigger: 2
   cameraShakeIntensityForEnemyAlyuvarAtack: 1.5
   cameraShakefullIntensityTimeForEnemyAlyuvarAtack: 0.25
   cameraShakeGoToZeroTimeForEnemyAlyuvarAtack: 0.2
   shockwave: {fileID: 313599942822876536}
+  shockwave2: {fileID: 0}
 --- !u!65 &313599943513090660
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5023,3 +5028,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.016544592, y: 0.01658198, z: 0.0038455343}
   m_Center: {x: 4.656613e-10, y: 0.00001980364, z: -0.00014141272}
+--- !u!114 &7066189444594445882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370708827286621756}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b01ee80457a5ee34d9fe04903d06f586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shockWave: {fileID: 0}

@@ -70,7 +70,9 @@ public class BossController : MonoBehaviour
 
     [SerializeField] private float delayActivateMedbotAfterCompleteMutation;
     [SerializeField] private float delayShowBossHealthBarAfterCompleteMutation;
-    [SerializeField] private float delayHideBossHealthBarAfterCompleteMutation;
+    [SerializeField] private float delayHideBossHealthBarAfterBossDead;
+
+    private bool showBossHealthBarCompleteControl = false;
 
     [SerializeField] private bool changeColorControl;
     [SerializeField] private bool changeColorCompleteControl;
@@ -78,6 +80,9 @@ public class BossController : MonoBehaviour
     private float changeColorSpeed;
     [Range(0.1f, 10f)] [SerializeField] private float minChangeColorSpeed;
     [Range(0.1f, 10f)] [SerializeField] private float maxChangeColorSpeed;
+
+    private bool mutationLevelIncreaseControl = true;
+    [SerializeField] private float waitTimeChangeMutationLevelIncreaseControl;
 
     //private bool changeColorBySelfMutationControl = false;
 
@@ -104,6 +109,8 @@ public class BossController : MonoBehaviour
     private bool alyuvarEnemyCreateCompleteControl;
 
 
+
+
     [Header("Mutation Level")]
     // Dizilerdeki 0. index level 1  - 1. index level 2 yi gösterir bu þekilde devam eder
     [SerializeField] private float[] minWaitTimeChangeColorAccordiongToMutationLevel;
@@ -111,6 +118,9 @@ public class BossController : MonoBehaviour
     [SerializeField] private int[] alyuvarAtackFieldCount;
     [SerializeField] private float[] minWaitTimeAtackWithAlyuvarAccordiongToMutationLevel;
     [SerializeField] private float[] maxWaitTimeAtackWithAlyuvarAccordiongToMutationLevel;
+
+    
+
 
     private float waitTimeChangeColor = 0;
     private float waitTimeAtackWithAlyuvar = 0;
@@ -135,7 +145,8 @@ public class BossController : MonoBehaviour
 
         virusMaterial = gameObject.GetComponent<Renderer>().material;
 
-        enemyAlyuvarForAtackCharacter = GameObject.Find("Enemy Alyuvar02 For Atack Character").gameObject;
+        //enemyAlyuvarForAtackCharacter = GameObject.Find("Enemy Alyuvar02 For Atack Character").gameObject;
+        enemyAlyuvarForAtackCharacter = GameObject.Find("Enemy Alyuvar02 For Atack Character with explosion").gameObject;
 
         if (nowVirusMaterialColorsNumber == -1)
         {
@@ -207,15 +218,27 @@ public class BossController : MonoBehaviour
 
     public void mutateBossVirus()
     {
-        mutationLevel++;
+        if (mutationLevelIncreaseControl)
+        {
+            mutationLevel++;
 
-        //changeVirusColor();
+            //changeVirusColor();
 
-        changeColorControl = true;
+            changeColorControl = true;
 
-        bossMutatedIncreaseHealth();
+            bossMutatedIncreaseHealth();
 
-        Debug.Log("Mutasyon Algýnlandý Renk Deðiþecek");
+            Debug.Log("Mutasyon Algýnlandý Renk Deðiþecek");
+
+            mutationLevelIncreaseControl = false;
+            Invoke("changeMutationLevelIncreaseControl", waitTimeChangeMutationLevelIncreaseControl);
+        }
+        
+    }
+
+    private void changeMutationLevelIncreaseControl()
+    {
+        mutationLevelIncreaseControl = true;
     }
 
 
@@ -269,7 +292,7 @@ public class BossController : MonoBehaviour
         float waitSumTimeForAtackWithAlyuvar = 0;
         float waitTimeEachControl = 0.1f;
 
-        while (true)
+        while (true && bossDeadControl == false)
         {
             yield return new WaitForSeconds(waitTimeEachControl);
 
@@ -329,7 +352,7 @@ public class BossController : MonoBehaviour
 
         if (surfingControllerV2.contactBossControl)
         {
-            if (virusShowCameraWorkedForFirstContactWithBoss == false)
+            if (virusShowCameraWorkedForFirstContactWithBoss == false && bossDeadControl == false)
             {
                 virusShowCamera.SetActive(true);
 
@@ -413,6 +436,7 @@ public class BossController : MonoBehaviour
             {
                 Debug.Log("Boss Öldü");
 
+
                 Invoke("hideMedBot", waitTimeForHideMedBot);
 
                 bossDead();
@@ -432,7 +456,7 @@ public class BossController : MonoBehaviour
         //virusDeadPartShowCamera.SetActive(true);
         virusShowCamera.SetActive(true);
 
-        Invoke("showBossHealthBar", delayShowBossHealthBarAfterCompleteMutation);
+        Invoke("hideBossHealthBar", delayHideBossHealthBarAfterBossDead);
 
         showExplosionMultiTime(sockWaveCount);
 
@@ -470,6 +494,7 @@ public class BossController : MonoBehaviour
 
     private void hideVirusShowCamera()
     {
+        
         virusShowCamera.SetActive(false);
     }
 
@@ -495,15 +520,26 @@ public class BossController : MonoBehaviour
 
     private void showBossHealthBar()
     {
-        foreach (GameObject gameObjects in canvasHealthAndMedicineImages)
-        {
-            gameObjects.SetActive(true);
-        }
 
-        foreach (GameObject gameObjects in bossHealthBarParts)
+        if (showBossHealthBarCompleteControl == false)
         {
-            gameObjects.SetActive(true);
+            showBossHealthBarCompleteControl = true;
+
+            Debug.Log("Boss Caný Fullendi");
+            bossHealthCount = bossMaxHealthCount;
+            bossHealthBarController.SetMaxHealth(bossHealthCount);
+
+            foreach (GameObject gameObjects in canvasHealthAndMedicineImages)
+            {
+                gameObjects.SetActive(true);
+            }
+
+            foreach (GameObject gameObjects in bossHealthBarParts)
+            {
+                gameObjects.SetActive(true);
+            }
         }
+        
 
 
         
@@ -511,6 +547,11 @@ public class BossController : MonoBehaviour
 
     private void hideBossHealthBar()
     {
+        foreach (GameObject gameObjects in canvasHealthAndMedicineImages)
+        {
+            gameObjects.SetActive(false);
+        }
+
         foreach (GameObject gameObjects in bossHealthBarParts)
         {
             gameObjects.SetActive(false);
@@ -590,6 +631,9 @@ public class BossController : MonoBehaviour
 
             uniqueValuesArray[j++] = value;
         }
+
+        Debug.Log("uniqueValuesArray.Length: " + uniqueValuesArray.Length);
+        Debug.Log("uniqueValuesArray fieldCount: " + fieldCount);
 
 
         //StartCoroutine(createEnemyAlyuvars(new int[4] {1,2,3,4}));

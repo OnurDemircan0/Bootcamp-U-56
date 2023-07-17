@@ -11,7 +11,12 @@ public class EnemyAlyuvarController : MonoBehaviour
 
     [SerializeField] private HeartIconShowController heartIconShowController;
 
+    [SerializeField] private SurfingControllerV2 surfingControllerV2;
+
     [SerializeField] private CameraShakeControllerInVein cameraShakeControllerInVein;
+
+    [SerializeField] private AudioSource surfingAlyuvarAudioSource;
+    [SerializeField] private AudioClip shockwaveSound;
 
     [SerializeField] private GameObject enemyAlyuvarForwardDirection;
 
@@ -21,6 +26,7 @@ public class EnemyAlyuvarController : MonoBehaviour
     [SerializeField] private float cameraShakefullIntensityTimeForEnemyAlyuvarAtack;
     [SerializeField] private float cameraShakeGoToZeroTimeForEnemyAlyuvarAtack;
     [SerializeField] private GameObject shockwave;
+    [SerializeField] private GameObject shockwave2;
 
     private Vector3 bossEnemyVirusTransformForward;
 
@@ -29,6 +35,8 @@ public class EnemyAlyuvarController : MonoBehaviour
         speed = Random.Range(minSpeed, maxSpeed);
 
         heartIconShowController = GameObject.Find("GameManager").gameObject.GetComponent<HeartIconShowController>();
+        surfingControllerV2 = GameObject.Find("Surf Alyuvar 2").gameObject.GetComponent<SurfingControllerV2>();
+        surfingAlyuvarAudioSource = surfingControllerV2.gameObject.GetComponent<AudioSource>();
         cameraShakeControllerInVein = GameObject.Find("GameManager").gameObject.GetComponent<CameraShakeControllerInVein>();
         enemyAlyuvarForwardDirection = GameObject.Find("Enemy Atack Show Way").gameObject;
 
@@ -57,6 +65,10 @@ public class EnemyAlyuvarController : MonoBehaviour
 
             cameraShakeControllerInVein.cameraShake(cameraShakeIntensityForEnemyAlyuvarAtack, cameraShakefullIntensityTimeForEnemyAlyuvarAtack, cameraShakeGoToZeroTimeForEnemyAlyuvarAtack);
             shockwave.SetActive(true);
+            surfingAlyuvarAudioSource.PlayOneShot(shockwaveSound);
+            Instantiate(shockwave2, surfingControllerV2.gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject,0.1f);
+
 
             Debug.Log("çarpýþan Nesne Robot");
         }
