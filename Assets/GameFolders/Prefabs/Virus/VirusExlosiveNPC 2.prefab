@@ -247,11 +247,11 @@ PrefabInstance:
     - target: {fileID: -3887185075125053422, guid: af9f6851d944f42469b8f113cfed961f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fe71157c8dfaf47418801cbaf9338f41, type: 2}
+      objectReference: {fileID: 2100000, guid: d36649bdf5bd60d4db880efe780b4614, type: 2}
     - target: {fileID: -3887185075125053422, guid: af9f6851d944f42469b8f113cfed961f, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: f56941eefc9387b40b19995ce0d50c66, type: 2}
+      objectReference: {fileID: 2100000, guid: c3576324ae6d6254a86b24976d6c15a8, type: 2}
     - target: {fileID: -3887185075125053422, guid: af9f6851d944f42469b8f113cfed961f, type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
       value: 1
@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hittedControl: 0
+  createWithInstantiate: 1
   explosion: {fileID: 0}
   explosion2: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
   nowScale: 0
