@@ -83,6 +83,8 @@ public class BossController : MonoBehaviour
 
     public bool reachMaxSize = false;
 
+    private bool mutateBySelfWorkControl = false;
+
     private bool showExplosionControl = false;
 
     private float targetSize;
@@ -344,7 +346,17 @@ public class BossController : MonoBehaviour
 
         if(transform.localScale.x >= maxSizeBoss)
         {
+            Debug.Log("transform.localScale.x >= maxSizeBoss");
+
             reachMaxSize = true;
+
+            if(mutateBySelfWorkControl == false)
+            {
+                StartCoroutine(mutateBySelfControl());
+
+                mutateBySelfWorkControl = true;
+            }
+            
 
             dnaImageShow.hideDna();
 
@@ -554,7 +566,7 @@ public class BossController : MonoBehaviour
         {
             Debug.Log("Virüs reachMaxSize ulaþtý ");
 
-            StartCoroutine(mutateBySelfControl());
+            //StartCoroutine(mutateBySelfControl());
         }
     }
 
