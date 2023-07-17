@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class NPC_Spawning : MonoBehaviour
 {
     [SerializeField] GameObject[] NPC;
-    [SerializeField] float range = 30.0f;
+    [SerializeField] float range = 80.0f;
     [SerializeField] float spawnDelay = 1f;
     [SerializeField] int border1 = 4; //border1 must be smaller than border2.
     [SerializeField] int border2 = 10;
@@ -17,9 +17,46 @@ public class NPC_Spawning : MonoBehaviour
         canSpawn = true;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("CheckPoint"))
+        {
+            if(CheckPointSystem.checkPointNumber == 0)
+            {
+                spawnDelay = 7;
+                border1 = 20;
+                border2 = 20;
+            }
+            else if(CheckPointSystem.checkPointNumber == 1)
+            {
+                spawnDelay = 6;
+                border1 = 15;
+                border2 = 20;
+            }
+            else if (CheckPointSystem.checkPointNumber == 2)
+            {
+                spawnDelay = 5;
+                border1 = 12;
+                border2 = 20;
+            }
+            else if (CheckPointSystem.checkPointNumber == 3)
+            {
+                spawnDelay = 4;
+                border1 = 12;
+                border2 = 18;
+            }
+            else if (CheckPointSystem.checkPointNumber == 4)
+            {
+                spawnDelay = 4;
+                border1 = 7;
+                border2 = 15;
+            }
+        }
+    }
+
     private void Update()
     {
-        if (canSpawn && !StopSpawningNPCArea.stopSpawningNPC)
+        if (canSpawn)
         {
             Spawn();
         }

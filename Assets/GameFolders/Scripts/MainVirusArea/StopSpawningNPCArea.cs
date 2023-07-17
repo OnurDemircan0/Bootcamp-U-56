@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class StopSpawningNPCArea : MonoBehaviour
 {
-    public static bool stopSpawningNPC;
-
-    private void Start()
-    {
-        stopSpawningNPC = false;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            stopSpawningNPC = true;
+            other.gameObject.GetComponent<NPC_Spawning>().enabled = false;
         }
     }
 }

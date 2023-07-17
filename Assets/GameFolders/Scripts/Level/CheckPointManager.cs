@@ -21,6 +21,23 @@ public class CheckPointManager : MonoBehaviour
         if (CheckPoint.lastCheckPointPosition != Vector3.zero)
         {
             Player.position = CheckPoint.lastCheckPointPosition;
+            /*
+            if(SceneManager.GetActiveScene().name == "Onur_TestScenePathTest")
+            {
+                PlayerPrefs.SetFloat("BrainStartingPositionX", Player.position.x);
+                PlayerPrefs.SetFloat("BrainStartingPositionY", Player.position.y);
+                PlayerPrefs.SetFloat("BrainStartingPositionZ", Player.position.z);
+                PlayerPrefs.Save();
+            }
+            else if(SceneManager.GetActiveScene().name == "Kalp")
+            {
+                
+            }
+            else
+            {
+                Debug.Log("olamaaaAAAAAAAAZ");
+            }
+            */
         }
     }
 }
