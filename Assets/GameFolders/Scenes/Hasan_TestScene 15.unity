@@ -40149,7 +40149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 18363398}
   end: 2
-  dstTravelled: 0
+  dstTravelled: 4
   heartIconShowController: {fileID: 458975225}
   waitTimeForShowVirusCameraAfterContactBoss: 1.5
   canvasHealthAndMedicineImages:
@@ -40206,7 +40206,7 @@ AudioSource:
   m_GameObject: {fileID: 1986916215}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
