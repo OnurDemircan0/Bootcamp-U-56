@@ -21,6 +21,7 @@ public class CheckPointManager : MonoBehaviour
         if (CheckPoint.lastCheckPointPosition != Vector3.zero)
         {
             Player.position = CheckPoint.lastCheckPointPosition;
+
             /*
             if(SceneManager.GetActiveScene().name == "Onur_TestScenePathTest")
             {

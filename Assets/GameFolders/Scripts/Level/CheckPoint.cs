@@ -17,4 +17,9 @@ public class CheckPoint : MonoBehaviour
 
         }
     }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 }

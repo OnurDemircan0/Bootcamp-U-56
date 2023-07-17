@@ -39,6 +39,7 @@ public class GetEnemies : MonoBehaviour
     private bool afterBloodClear = false;
     private bool shouldStay = false;
     private bool triggeredStayStill = false;
+    private bool triggeredPowerUpTrigger;
 
     public float speed = 2f;
 
@@ -46,6 +47,8 @@ public class GetEnemies : MonoBehaviour
     float pushDuration = 0.006f;
     float pushTimer = 0.0f;
 
+    [SerializeField]
+    GameObject HealthPowerUP;
 
     [SerializeField]
     float clearBloodDuration = 5f;
@@ -61,6 +64,9 @@ public class GetEnemies : MonoBehaviour
 
     [SerializeField]
     Death deathScript;
+
+    [SerializeField]
+    AudioSource sparkle;
 
     float timer = 0.0f;
 
@@ -136,6 +142,11 @@ public class GetEnemies : MonoBehaviour
                 ClearBlood();
                 ActivateEnemies();
 
+                HealthPowerUP.SetActive(true);
+                if (!triggeredPowerUpTrigger) { HealthPowerUP.GetComponent<Animator>().SetTrigger("VeinFallDown"); triggeredPowerUpTrigger = true; }
+
+                Invoke("PlaySparkle", 2.13f);
+
                 enteryEnemiesAreDeath = true;
 
                 virus2.enabled = false;
@@ -157,7 +168,7 @@ public class GetEnemies : MonoBehaviour
                 RiseBlood();
                 StartPhaseTwo();
             }
-            deathScript.health = 100f;
+
         }
     }
 
@@ -401,5 +412,10 @@ public class GetEnemies : MonoBehaviour
 
         virus2.enabled = true;
         virus6.enabled = true;
+    }
+
+    void PlaySparkle()
+    {
+        sparkle.PlayOneShot(sparkle.clip);
     }
 }

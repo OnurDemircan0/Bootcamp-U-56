@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class ProjectileAttack : MonoBehaviour
 {
-    [SerializeField] 
-    GameObject bullet;
-
     public
     Transform bulletSpawnPoint;
 

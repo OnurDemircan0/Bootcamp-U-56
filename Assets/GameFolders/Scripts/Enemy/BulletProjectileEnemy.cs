@@ -11,6 +11,8 @@ public class BulletProjectileEnemy : MonoBehaviour, IPooledObject
     public Rigidbody _rigidBody;
     public int bulletDamage = 12;
 
+    public bool effectsOn;
+
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody>();
@@ -25,13 +27,13 @@ public class BulletProjectileEnemy : MonoBehaviour, IPooledObject
         if (other.gameObject.CompareTag("Player"))
         {
             _rigidBody.velocity = Vector3.zero;
-            ObjectPooler.instance.SpawnFromPool("HitEffectEnemy", _rigidBody.position, Quaternion.identity);
+            if (effectsOn) { ObjectPooler.instance.SpawnFromPool("HitEffectEnemy", _rigidBody.position, Quaternion.identity); }
             other.GetComponent<Death>().TakeHit(bulletDamage);
         }
         else
         {
             _rigidBody.velocity = Vector3.zero;
-            ObjectPooler.instance.SpawnFromPool("OtherEffectEnemy", _rigidBody.position, Quaternion.identity);
+            if (effectsOn) { ObjectPooler.instance.SpawnFromPool("OtherEffectEnemy", _rigidBody.position, Quaternion.identity); }
         }
         this.gameObject.SetActive(false);
     }
