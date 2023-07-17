@@ -108,8 +108,8 @@ public class MutationControlForBrain : MonoBehaviour
 
         virusMaterial1.color = virusMaterialNormalColors[nowVirusMaterialColorsNumber];
         virusMaterial1.SetColor("_EmissionColor", virusMaterialNormalColorsEmission[nowVirusMaterialColorsNumber]);
-        virusMaterial2.color = virusMaterialLightColors[nowVirusMaterialColorsNumber];
-        virusMaterial2.SetColor("_EmissionColor", virusMaterialLightColorsEmission[nowVirusMaterialColorsNumber]);
+        //virusMaterial2.color = virusMaterialLightColors[nowVirusMaterialColorsNumber];
+        //virusMaterial2.SetColor("_EmissionColor", virusMaterialLightColorsEmission[nowVirusMaterialColorsNumber]);
 
 
         targetVirusMaterialColorsNumber = nowVirusMaterialColorsNumber;
@@ -249,8 +249,8 @@ public class MutationControlForBrain : MonoBehaviour
 
             virusMaterial1.color = Color.Lerp(virusMaterial1.color, virusMaterialNormalColors[targetVirusMaterialColorsNumber], changeColorSpeed / 100);
             virusMaterial1.SetColor("_EmissionColor", Color.Lerp(virusMaterial1.color, virusMaterialNormalColorsEmission[targetVirusMaterialColorsNumber], changeColorSpeed / 100));
-            virusMaterial2.color = Color.Lerp(virusMaterial2.color, virusMaterialLightColors[targetVirusMaterialColorsNumber], changeColorSpeed / 100);
-            virusMaterial2.SetColor("_EmissionColor", Color.Lerp(virusMaterial2.color, virusMaterialLightColorsEmission[targetVirusMaterialColorsNumber], changeColorSpeed / 100));
+            //virusMaterial2.color = Color.Lerp(virusMaterial2.color, virusMaterialLightColors[targetVirusMaterialColorsNumber], changeColorSpeed / 100);
+            //virusMaterial2.SetColor("_EmissionColor", Color.Lerp(virusMaterial2.color, virusMaterialLightColorsEmission[targetVirusMaterialColorsNumber], changeColorSpeed / 100));
            
 
             yield return null;
@@ -293,8 +293,8 @@ public class MutationControlForBrain : MonoBehaviour
 
                 virusMaterial1.color = virusMaterialNormalColors[targetVirusMaterialColorsNumber];
                 virusMaterial1.SetColor("_EmissionColor", virusMaterialNormalColorsEmission[targetVirusMaterialColorsNumber]);
-                virusMaterial2.color = virusMaterialLightColors[targetVirusMaterialColorsNumber];
-                virusMaterial2.SetColor("_EmissionColor", virusMaterialLightColorsEmission[targetVirusMaterialColorsNumber]);
+                //virusMaterial2.color = virusMaterialLightColors[targetVirusMaterialColorsNumber];
+                //virusMaterial2.SetColor("_EmissionColor", virusMaterialLightColorsEmission[targetVirusMaterialColorsNumber]);
 
 
                 break;
