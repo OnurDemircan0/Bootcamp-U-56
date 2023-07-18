@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/GameFolders/Scenes/Vein_Scene.unity
     guid: fa88e3c1dae9f3c499ef3222d8f514f6
   - enabled: 1
+    path: Assets/GameFolders/Scenes/Onur Sahnesi Seyit.unity
+    guid: 87f4ef3e2fbff7149aded4bbea304fed
+  - enabled: 1
     path: Assets/GameFolders/Scenes/Win Scene.unity
     guid: 8a2a0ed71812a884c93294a6e3a7ba29
   m_configObjects:

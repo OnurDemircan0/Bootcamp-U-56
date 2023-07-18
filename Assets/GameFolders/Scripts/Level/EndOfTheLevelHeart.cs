@@ -2,6 +2,7 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndOfTheLevelHeart : MonoBehaviour
 {
@@ -27,6 +28,17 @@ public class EndOfTheLevelHeart : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         triggerEntered = true;
+    }
+
+    private void Start()
+    {
+        stopAllMovement();
+
+        if (!invoked)
+        {
+            Invoke("FadeEffectON", 1.2f);
+            invoked = true;
+        }
     }
 
     private void Update()
@@ -58,5 +70,13 @@ public class EndOfTheLevelHeart : MonoBehaviour
     void FadeEffectON()
     {
         fadeCamera.isDead = true;
+
+        //goNextLevel();
+        Invoke("goNextLevel", 2.5f);
+    }
+
+    private void goNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
