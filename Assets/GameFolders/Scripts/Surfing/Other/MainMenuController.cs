@@ -8,10 +8,25 @@ public class MainMenuController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI continueButton;
 
+    [SerializeField] private GameObject credits;
+    private GameObject virus;
+
+
+
+    private bool creditsOpenControl = false;
+
     private void Awake()
     {
         if (PlayerPrefs.GetInt("ContinueGame") == 0)
             continueButton.alpha = 0.2f;
+
+
+        
+    }
+
+    private void Start()
+    {
+        virus = GameObject.FindGameObjectWithTag("Enemy");
     }
 
     public void goFirstScene()
@@ -40,4 +55,21 @@ public class MainMenuController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void showOrHideCredits()
+    {
+        creditsOpenControl = !creditsOpenControl;
+
+        if (creditsOpenControl)
+        {
+            credits.SetActive(true);
+            virus.SetActive(false);
+        }
+        else
+        {
+            credits.SetActive(false);
+            virus.SetActive(true);
+        }
+    }
+
 }
