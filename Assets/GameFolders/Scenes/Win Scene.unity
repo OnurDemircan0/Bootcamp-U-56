@@ -183,8 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: HASTAYI KURTARDIN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ad13ccdd48f28c847b0e0191e64d736d, type: 2}
+  m_sharedMaterial: {fileID: 1148797378253249378, guid: ad13ccdd48f28c847b0e0191e64d736d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -768,12 +768,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u>PRODUCT OWNER</u>\nONUR DEM\u0130RCAN\n\n<u>SCRUM MASTER</u>\nSEY\u0130T
+  m_text: "<u><b>PRODUCT OWNER</b></u>\nONUR DEM\u0130RCAN\n\n<u>SCRUM MASTER</u>\nSEY\u0130T
     AHMET DEM\u0130R\n\n<u>DEVELOPERS</u>\nHASAN AKAY\n\u0130LKAY G\xD6K\nMEL\u0130KE
     NERG\u0130Z KAYA"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ad13ccdd48f28c847b0e0191e64d736d, type: 2}
+  m_sharedMaterial: {fileID: 1148797378253249378, guid: ad13ccdd48f28c847b0e0191e64d736d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -797,7 +797,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.05
+  m_fontSize: 39.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -997,7 +997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -35}
   m_SizeDelta: {x: 800, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1926443159
@@ -1022,8 +1022,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: MEDBOT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ad13ccdd48f28c847b0e0191e64d736d, type: 2}
+  m_sharedMaterial: {fileID: 1148797378253249378, guid: ad13ccdd48f28c847b0e0191e64d736d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1047,14 +1047,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 173.65
+  m_fontSize: 134.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 188.75
+  m_fontSizeMax: 184.85
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
