@@ -5695,6 +5695,10 @@ PrefabInstance:
       value: 0.5396745
       objectReference: {fileID: 0}
     - target: {fileID: 2247414625023530783, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
+      propertyPath: scene
+      value: OnurSahnesiSeyit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2247414625023530783, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
       propertyPath: health
       value: 100
       objectReference: {fileID: 0}
