@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossController : MonoBehaviour
 {
@@ -139,6 +140,9 @@ public class BossController : MonoBehaviour
     [SerializeField] private float minSizeForExplode;
     [SerializeField] private float MaxWaitTimeForExplodeEnemyAlyuvarForBossDead;
     [SerializeField] private float waitTimeForRunBossDead;
+    [SerializeField] private float waitTimeForPassNextLevel;
+
+
 
     private bool bossDeadControl = false;
 
@@ -531,6 +535,13 @@ public class BossController : MonoBehaviour
         surfAlyuvarAudioSource.PlayOneShot(explosionSound);
 
         Invoke("hideVirusShowCamera", waitTimeHideVirusCameraAfterFinalExplosion);
+
+        Invoke("goNextLevel", waitTimeForPassNextLevel);
+    }
+
+    private void goNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void hideVirusShowCamera()

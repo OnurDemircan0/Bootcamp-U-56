@@ -18579,6 +18579,7 @@ MonoBehaviour:
   minSizeForExplode: 2
   MaxWaitTimeForExplodeEnemyAlyuvarForBossDead: 0.75
   waitTimeForRunBossDead: 1.25
+  waitTimeForPassNextLevel: 2.5
 --- !u!114 &972932029
 MonoBehaviour:
   m_ObjectHideFlags: 0
