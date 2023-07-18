@@ -1999,6 +1999,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4677996954930189948, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
+    - target: {fileID: 4677996955274191182, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
+    - target: {fileID: 4677996955804417248, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
     - target: {fileID: 4677996955870473944, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
       propertyPath: m_RootOrder
       value: 41
@@ -2047,10 +2059,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 4677996955870473947, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
+    - target: {fileID: 4677996955993479378, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
+    - target: {fileID: 4677996956113454829, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
+    - target: {fileID: 4677996956282004631, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
+    - target: {fileID: 4677996956290319983, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
+    - target: {fileID: 4677996956303328454, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
     - target: {fileID: 4677996956433300378, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
       propertyPath: m_Volume
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 4677996956433300378, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
+    - target: {fileID: 4677996956454715075, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
+    - target: {fileID: 4677996956822428229, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cffafb69bdb1114abf1e73893cfe02e, type: 3}
 --- !u!1 &140170386 stripped
@@ -5758,6 +5806,10 @@ PrefabInstance:
       propertyPath: cameraShakeManager
       value: 
       objectReference: {fileID: 497502830}
+    - target: {fileID: 6692256194045475043, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 47ada0880177e6648b50ba2036598c40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
 --- !u!4 &517163387 stripped
