@@ -7,7 +7,7 @@ public class CheckPointSystemHeart : MonoBehaviour
     public static int checkPointNumberHeart;
 
     [SerializeField] Transform[] checkPoints;
-    [SerializeField] Transform player;
+    [SerializeField] GameObject player;
 
     private void Awake()
     {
@@ -17,6 +17,11 @@ public class CheckPointSystemHeart : MonoBehaviour
     private void Start()
     {
         //player.position = checkPoints[checkPointNumber].position;
-        player.SetPositionAndRotation(checkPoints[checkPointNumberHeart].position, checkPoints[checkPointNumberHeart].rotation);
+        player.transform.SetPositionAndRotation(checkPoints[checkPointNumberHeart].position, checkPoints[checkPointNumberHeart].rotation);
+
+        if(checkPointNumberHeart != 0)
+        {
+            player.GetComponent<SlideV2>().enabled = false;
+        }
     }
 }

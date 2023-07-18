@@ -12527,7 +12527,7 @@ MonoBehaviour:
   checkPoints:
   - {fileID: 239031314}
   - {fileID: 106138157}
-  player: {fileID: 1517692081411481509}
+  player: {fileID: 2180934385333962015}
 --- !u!4 &459894384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2168668038091127481, guid: 0426e17befe81dc4c9b7a721c8b56b8b, type: 3}
