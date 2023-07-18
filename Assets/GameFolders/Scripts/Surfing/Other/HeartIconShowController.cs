@@ -51,6 +51,47 @@ public class HeartIconShowController : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (nowHealth < 0)
+        {
+            nowHealth = 0;
+
+            heartPulseShowController.deadControl = true;
+
+            if (death != null)
+            {
+                death.health = -1;
+
+                Invoke("reloadThisScene", waitTimeForReloadThisScene);
+            }
+        }
+
+
+        if (nowHealth <= 0)
+        {
+            nowHealth = 0;
+            healthCountText.SetText(nowHealth.ToString());
+
+            surfingAlyuvarAudioSource.clip = heartPulseStop;
+            surfingAlyuvarAudioSource.loop = true;
+            surfingAlyuvarAudioSource.Play();
+
+            heartIconImage.color = new Color(0, 0, 0);
+        }
+        else if (nowHealth <= maxHealthForDanger)
+        {
+            nowHealth = 0;
+            healthCountText.SetText(nowHealth.ToString());
+
+            surfingAlyuvarAudioSource.clip = heartPulseDanger;
+            surfingAlyuvarAudioSource.loop = true;
+            surfingAlyuvarAudioSource.Play();
+        }
+
+        healthCountText.SetText(nowHealth.ToString());
+    }
+
     private void reloadThisScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -101,6 +142,8 @@ public class HeartIconShowController : MonoBehaviour
         surfingAlyuvarAudioSource.Stop();
 
         healthCountText.SetText(nowHealth.ToString());
+
+
     }
 
 
