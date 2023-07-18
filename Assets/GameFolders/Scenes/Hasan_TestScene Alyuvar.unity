@@ -1330,6 +1330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartIconImageRectTransform: {fileID: 687424910}
+  death: {fileID: 0}
+  waitTimeForReloadThisScene: 0
   healthCountText: {fileID: 612394401}
   surfingAlyuvarAudioSource: {fileID: 1986916219}
   heartPulseDanger: {fileID: 8300000, guid: 5e69149918bb43943bfbe3c68a00ca4b, type: 3}
@@ -4030,14 +4032,14 @@ MonoBehaviour:
   speed: 20
   maxSpeed: 200
   speedAcceleration: 0
-  rotationSpeed: 2000
-  horizontalSpeed: 2
-  verticalSpeed: 2
-  heightSpeed: 20
-  alyuvarRotationMaxiumValueX: 25
-  alyuvarRotationMaxiumValueY: 15
-  alyuvarRotationMaxiumValueZ: 20
-  maxDistanceFromPathPoint: 2
+  rotationSpeed: 0
+  horizontalSpeed: 0
+  verticalSpeed: 0
+  heightSpeed: 0
+  alyuvarRotationMaxiumValueX: 0
+  alyuvarRotationMaxiumValueY: 0
+  alyuvarRotationMaxiumValueZ: 0
+  maxDistanceFromPathPoint: 0
   turnNormalRotationSpeed: 10
   stopPointForFightBoss: 3765
   stopPointForCreateAlyuvar: 3300

@@ -13,7 +13,8 @@ public class MainMenuController : MonoBehaviour
 
     public void goFirstScene()
     {
-        SceneManager.LoadScene("Vein_Scene");
+        //SceneManager.LoadScene("Vein_Scene");
+        SceneManager.LoadScene(1);
     }
 
     public void continueScene()

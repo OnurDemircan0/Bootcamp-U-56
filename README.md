@@ -33,6 +33,10 @@ adındaki robotumuz, hastalığa neden olan virüsleri damar yolu üzerinden çe
 * Gençler
 * Yetişkinler
 
+## Jüri NOT
+
+MadBOT Oyunu Steamde satışa sunulacaktır
+
 # Sprint 1
 * Sprint İçinde Tamamlanması Tahmin Edilen Puan: 110
 * Puan Tamamlama Mantığı: 3 Sprint içinde toplam tamamlanması gereken puan 400 olduğundan. Ve 3 Sprint içindeki ilk Sprintimiz olması nedeniyle  sağlam bir temel ile başlamak için ne çok yüksek ne de çok az bir puan olduğunu düşünmekteyiz. 
