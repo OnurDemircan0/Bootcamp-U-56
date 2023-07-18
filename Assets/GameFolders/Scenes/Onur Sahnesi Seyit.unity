@@ -6295,8 +6295,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 37, y: -37}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 78, y: -78}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &574679568
 SpriteRenderer:
@@ -6655,7 +6655,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -15286,7 +15286,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -16, y: -16}
-  m_SizeDelta: {x: 35, y: 35}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1077417948
 MonoBehaviour:
@@ -15684,7 +15684,7 @@ RectTransform:
   m_GameObject: {fileID: 1146641189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 574679567}
@@ -15692,8 +15692,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 4}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: 72.6, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1146641191
 MonoBehaviour:
@@ -15742,12 +15742,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 31.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 20
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -17426,7 +17426,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -6, y: 0}
-  m_SizeDelta: {x: 230.4, y: 57.6}
+  m_SizeDelta: {x: 373.8, y: 143.52}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1313184769
 MonoBehaviour:
@@ -20439,8 +20439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 76, y: -12}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchoredPosition: {x: 166, y: -18}
+  m_SizeDelta: {x: 172.4, y: 120}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1611396583
 MonoBehaviour:
@@ -25386,8 +25386,8 @@ MonoBehaviour:
   maxHealthForDanger: 20
   nowHealth: 100
   changeSizeSpeedForPulse: 500
-  minChangeSizeValue: 50
-  maxChangeSizeValue: 58
+  minChangeSizeValue: 120
+  maxChangeSizeValue: 136
   maxWaitTimeEachPulse: 1.5
 --- !u!114 &2032438105
 MonoBehaviour:
@@ -25404,8 +25404,8 @@ MonoBehaviour:
   heartPulseImageRectTransform: {fileID: 1313184768}
   pulseShowSpeed: 30
   firstPositionX: -6
-  lastPositionX: -40
-  deadFirstPositionX: -137
+  lastPositionX: -58
+  deadFirstPositionX: -221
   onePulseSizeX: -17
   deadControl: 0
 --- !u!114 &2032438107
