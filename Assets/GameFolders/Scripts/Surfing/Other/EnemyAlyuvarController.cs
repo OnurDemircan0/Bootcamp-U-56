@@ -45,6 +45,13 @@ public class EnemyAlyuvarController : MonoBehaviour
         //Destroy(gameObject, 20);
 
         bossEnemyVirusTransformForward = enemyAlyuvarForwardDirection.transform.forward;
+
+        //Debug.Log("Name: " + gameObject.name);
+
+        if (gameObject.name.Contains("Clone") && gameObject.name.Contains("Enemy Alyuvar"))
+        {
+            Destroy(gameObject, 10);
+        }
     }
 
 
