@@ -11,6 +11,7 @@ public class CheckPointHeart : MonoBehaviour
         {
             CheckPointSystemHeart.checkPointNumberHeart = checkPointNumberSelf;
             PlayerPrefs.SetInt("CheckPointNumberHeart", checkPointNumberSelf);
+            PlayerPrefs.Save();
         }
     }
 }

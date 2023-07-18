@@ -11,6 +11,7 @@ public class CheckPoint2 : MonoBehaviour
         {
             CheckPointSystem.checkPointNumber = checkPointNumberSelf;
             PlayerPrefs.SetInt("CheckPointNumber", checkPointNumberSelf);
+            PlayerPrefs.Save();
         }
     }
 }

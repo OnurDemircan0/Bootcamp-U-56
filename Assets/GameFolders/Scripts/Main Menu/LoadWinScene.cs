@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class VirusCount : MonoBehaviour
+public class LoadWinScene : MonoBehaviour
 {
-    public static int virusCount;
-
     private void Start()
     {
-        virusCount = 0;
+        SceneManager.LoadScene(5);
     }
 }

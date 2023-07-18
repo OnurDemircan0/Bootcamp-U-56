@@ -41,7 +41,7 @@ public class MainVirusArea : MonoBehaviour
                 nextVirusCount = 49;
                 break;
         }
-        Debug.Log("Virus Count: " + VirusCount.virusCount + " , NextVirusCount: " + nextVirusCount);
+        
         if(VirusCount.virusCount >= nextVirusCount && PlayerCheckingArea.playerDetectedMainVirusArea)
         {
             _animator.SetTrigger("NextStage");
