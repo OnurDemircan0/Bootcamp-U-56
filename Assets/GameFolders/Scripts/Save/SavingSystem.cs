@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SavingSystem : MonoBehaviour
 {
-    private int lastBuildIndex = 0;
+    private int lastBuildIndex = 1;
 
     private void Awake()
     {
