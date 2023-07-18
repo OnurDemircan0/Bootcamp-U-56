@@ -254,7 +254,17 @@ public class Death : MonoBehaviour
 
     void ResetLevel()
     {
-        SceneManager.LoadScene(scene);
+        if(scene.Equals("") == false)
+        {
+            //Debug.Log("1");
+            SceneManager.LoadScene(scene);
+        }
+        else
+        {
+            //Debug.Log("2");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        
     }
 
 
