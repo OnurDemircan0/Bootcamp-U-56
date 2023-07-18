@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
@@ -27,19 +28,41 @@ public class Pause : MonoBehaviour
             {
                 Time.timeScale = 0;
                 PauseMenuPaneli.SetActive(true);
+
+                AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+
+
+                foreach(AudioSource a in audioSources)
+                {
+                    a.Stop();
+                }
             }
             else
             {
                 Time.timeScale = 1;
                 PauseMenuPaneli.SetActive(false);
+
+                AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+
+
+                foreach (AudioSource a in audioSources)
+                {
+                    a.Stop();
+                }
             }
         }
     }
 
     public void DevamEt()
     {
-        Time.timeScale = 1;
         PaneliAcKapat = false;
         PauseMenuPaneli.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+
+    public void goMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
