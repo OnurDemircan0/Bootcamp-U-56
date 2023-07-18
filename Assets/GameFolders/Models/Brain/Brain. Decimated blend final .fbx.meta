@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 751f2cd3f95ef0a4c89454bf0aeebd90
+guid: 2af91b474a797f047b50d7dfed250383
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Brain
-    second: {fileID: 2100000, guid: b3c9c70713e4caa478c14d6435bed85d, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
