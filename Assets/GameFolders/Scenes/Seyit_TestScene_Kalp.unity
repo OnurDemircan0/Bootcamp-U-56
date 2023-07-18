@@ -5558,7 +5558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 106138157}
   - component: {fileID: 106138158}
-  - component: {fileID: 106138160}
+  - component: {fileID: 106138159}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
@@ -5594,7 +5594,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 23.273228, y: 20, z: 1}
   m_Center: {x: 0.22746372, y: 0.0000013716356, z: -0.00000005964294}
---- !u!114 &106138160
+--- !u!114 &106138159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5603,7 +5603,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 106138156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e736802d516fd142ae900b9c09f5735, type: 3}
+  m_Script: {fileID: 11500000, guid: 5eba9896d5c04124db9fba43ea0e1c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkPointNumberSelf: 1
@@ -11669,7 +11669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 239031314}
   - component: {fileID: 239031317}
-  - component: {fileID: 239031315}
+  - component: {fileID: 239031318}
   m_Layer: 0
   m_Name: CheckPointStarting
   m_TagString: Untagged
@@ -11692,19 +11692,6 @@ Transform:
   m_Father: {fileID: 1574398960}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 23.651, y: 188.696, z: 3.515}
---- !u!114 &239031315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239031313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e736802d516fd142ae900b9c09f5735, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkPointNumberSelf: 0
 --- !u!65 &239031317
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11718,6 +11705,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 23.273228, y: 20, z: 1}
   m_Center: {x: 0.22746372, y: 0.0000013716356, z: -0.00000005964294}
+--- !u!114 &239031318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239031313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba9896d5c04124db9fba43ea0e1c53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPointNumberSelf: 0
 --- !u!1 &262717787 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7801633213753708152, guid: 5bdbd97cead52394d9e289ee06796d8e, type: 3}
@@ -12521,7 +12521,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 424994729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b97818a866c784e882bd8855d20253, type: 3}
+  m_Script: {fileID: 11500000, guid: bc5f1083d6147844aa884d7a96fa9458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkPoints:
