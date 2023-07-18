@@ -30,16 +30,6 @@ public class EndOfTheLevelHeart : MonoBehaviour
         triggerEntered = true;
     }
 
-    private void Start()
-    {
-        stopAllMovement();
-
-        if (!invoked)
-        {
-            Invoke("FadeEffectON", 1.2f);
-            invoked = true;
-        }
-    }
 
     private void Update()
     {
