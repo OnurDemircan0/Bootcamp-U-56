@@ -27,7 +27,7 @@ public class ColliderDetectControllerForDecreaseHealth : MonoBehaviour
     {
         heartIconShowController.decreaseHealth(decreaseHealthCount);
         
-        death.health -= decreaseHealthCount;
+        death.TakeHit(Mathf.RoundToInt(decreaseHealthCount));
 
         if(death.health == 0)
         {
