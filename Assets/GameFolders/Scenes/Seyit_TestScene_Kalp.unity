@@ -24315,6 +24315,7 @@ GameObject:
   - component: {fileID: 739132301}
   - component: {fileID: 739132300}
   - component: {fileID: 739132299}
+  - component: {fileID: 739132304}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -24338,7 +24339,7 @@ MonoBehaviour:
   death: {fileID: 0}
   waitTimeForReloadThisScene: 0
   healthCountText: {fileID: 1211135067}
-  surfingAlyuvarAudioSource: {fileID: 0}
+  surfingAlyuvarAudioSource: {fileID: 4895342686783505904}
   heartPulseDanger: {fileID: 8300000, guid: 5e69149918bb43943bfbe3c68a00ca4b, type: 3}
   heartPulseStop: {fileID: 8300000, guid: 7a804ae44ab4e214584b8aa9184d71dd, type: 3}
   maxHealthForDanger: 20
@@ -24441,6 +24442,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 64
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &739132304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739132298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a9be2fb7a014354ba3d8a69e54b1d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  death: {fileID: 1073670718}
+  heartIconShowController: {fileID: 739132299}
 --- !u!1 &746260375 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8150625136323352209, guid: 5b41327adea252f4f813e45eae1f868d, type: 3}
@@ -59792,6 +59807,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b31de2d09b719a40bc0f433d356a902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &4895342686783505904 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6692256194045475043, guid: 5977422c9d2b56140a6c608407c85f46, type: 3}
+  m_PrefabInstance: {fileID: 2247414624367770913}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4939399496574821958
 Transform:
   m_ObjectHideFlags: 0
