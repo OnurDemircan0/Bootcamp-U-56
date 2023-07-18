@@ -10,7 +10,15 @@ public class PlayerCheckingArea : MonoBehaviour
     {
         playerDetectedMainVirusArea = false;
     }
-
+    /*
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerDetectedMainVirusArea = true;
+        }
+    }*/
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))

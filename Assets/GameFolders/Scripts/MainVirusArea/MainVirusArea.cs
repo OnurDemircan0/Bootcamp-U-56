@@ -18,14 +18,6 @@ public class MainVirusArea : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Virus Count: " + VirusCount.virusCount + " , NextVirusCount: " + nextVirusCount);
-        if(VirusCount.virusCount == nextVirusCount && PlayerCheckingArea.playerDetectedMainVirusArea)
-        {
-            _animator.SetTrigger("NextStage");
-            stage++;
-        }
-
-
         switch (stage)
         {
             case 0:
@@ -49,5 +41,14 @@ public class MainVirusArea : MonoBehaviour
                 nextVirusCount = 49;
                 break;
         }
+        Debug.Log("Virus Count: " + VirusCount.virusCount + " , NextVirusCount: " + nextVirusCount);
+        if(VirusCount.virusCount >= nextVirusCount && PlayerCheckingArea.playerDetectedMainVirusArea)
+        {
+            _animator.SetTrigger("NextStage");
+            stage++;
+        }
+
+
+        
     }
 }

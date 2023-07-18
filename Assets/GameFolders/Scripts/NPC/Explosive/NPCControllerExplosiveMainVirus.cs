@@ -9,7 +9,6 @@ public class NPCControllerExplosiveMainVirus : MonoBehaviour
 
     GameObject Player;
     Animator animator;
-    private bool isDead;
     private bool attack;
     private float explosionDistance;
 
@@ -24,14 +23,8 @@ public class NPCControllerExplosiveMainVirus : MonoBehaviour
         
         Player = GameObject.FindWithTag("Player");
 
-        isDead = false;
         attack = false;
         explosionDistance = transform.GetChild(0).gameObject.transform.localScale.x / 20.0f;
-    }
-
-    private void OnEnable()
-    {
-        isDead = false;
     }
 
     // Update is called once per frame
@@ -40,7 +33,7 @@ public class NPCControllerExplosiveMainVirus : MonoBehaviour
         distance =Vector3.Distance(transform.position, Player.transform.position);
         explosionDistance = transform.GetChild(0).gameObject.transform.localScale.x / 20.0f;
 
-        if (!attack && !isDead)
+        if (!attack)
         {
             if (distance <= explosionDistance)
             {
@@ -48,6 +41,7 @@ public class NPCControllerExplosiveMainVirus : MonoBehaviour
                 _agent.ResetPath();
                 animator.SetBool("Attack", true);
                 attack = true;
+                VirusCount.virusCount++;
                 Invoke(nameof(DisableObject), 2);
             }
             else
@@ -63,7 +57,6 @@ public class NPCControllerExplosiveMainVirus : MonoBehaviour
 
     private void DisableObject()
     {
-        VirusCount.virusCount++;
         gameObject.SetActive(false);
     }
 

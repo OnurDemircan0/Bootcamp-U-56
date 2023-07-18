@@ -235,11 +235,11 @@ public class EnemyInVeinController : MonoBehaviour
             {
                 if (createWithInstantiate)
                 {
-                    Instantiate(explosion2, transform.position, Quaternion.identity);
+                    //Instantiate(explosion2, transform.position, Quaternion.identity);
                 }
                 else
                 {
-                    explosion2.SetActive(true);
+                    //explosion2.SetActive(true);
                 }
                 gameObject.transform.localScale = new Vector3(0, 0, 0);
 
