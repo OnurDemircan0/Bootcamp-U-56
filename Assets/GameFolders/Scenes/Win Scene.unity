@@ -183,7 +183,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: HASTAYI KURTARDIN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -768,11 +768,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u>Product Owner</u>\nONUR DEM\u0130RCAN\n\n<u>SCRUM MASTER</u>\nSEY\u0130T
+  m_text: "<u>PRODUCT OWNER</u>\nONUR DEM\u0130RCAN\n\n<u>SCRUM MASTER</u>\nSEY\u0130T
     AHMET DEM\u0130R\n\n<u>DEVELOPERS</u>\nHASAN AKAY\n\u0130LKAY G\xD6K\nMEL\u0130KE
     NERG\u0130Z KAYA"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1022,7 +1022,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: MEDBOT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
